@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A56443010891A28716AADAE /* libPods-Taxi_Khu_Hoi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E987D8C3263BA38C5014EF0 /* libPods-Taxi_Khu_Hoi.a */; };
 		B2A4E6461F95B5FB008B7596 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6451F95B5FB008B7596 /* AppDelegate.m */; };
 		B2A4E6491F95B5FB008B7596 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6481F95B5FB008B7596 /* ViewController.m */; };
 		B2A4E64C1F95B5FB008B7596 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2A4E64A1F95B5FB008B7596 /* Main.storyboard */; };
 		B2A4E64E1F95B5FB008B7596 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2A4E64D1F95B5FB008B7596 /* Assets.xcassets */; };
 		B2A4E6511F95B5FB008B7596 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2A4E64F1F95B5FB008B7596 /* LaunchScreen.storyboard */; };
 		B2A4E6541F95B5FB008B7596 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6531F95B5FB008B7596 /* main.m */; };
+		B2A4E65C1F95B6A7008B7596 /* UserRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E65B1F95B6A7008B7596 /* UserRegister.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E987D8C3263BA38C5014EF0 /* libPods-Taxi_Khu_Hoi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Taxi_Khu_Hoi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BEF74DB582DF70352ADCC86 /* Pods-Taxi_Khu_Hoi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taxi_Khu_Hoi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi.debug.xcconfig"; sourceTree = "<group>"; };
+		9D282F293B38826D6A6A8B83 /* Pods-Taxi_Khu_Hoi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taxi_Khu_Hoi.release.xcconfig"; path = "Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi.release.xcconfig"; sourceTree = "<group>"; };
 		B2A4E6411F95B5FB008B7596 /* Taxi_Khu_Hoi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taxi_Khu_Hoi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2A4E6441F95B5FB008B7596 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B2A4E6451F95B5FB008B7596 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -26,6 +31,8 @@
 		B2A4E6501F95B5FB008B7596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B2A4E6521F95B5FB008B7596 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2A4E6531F95B5FB008B7596 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B2A4E65A1F95B6A7008B7596 /* UserRegister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserRegister.h; sourceTree = "<group>"; };
+		B2A4E65B1F95B6A7008B7596 /* UserRegister.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserRegister.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +40,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A56443010891A28716AADAE /* libPods-Taxi_Khu_Hoi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4176757786BA09CF4B6A25BC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7BEF74DB582DF70352ADCC86 /* Pods-Taxi_Khu_Hoi.debug.xcconfig */,
+				9D282F293B38826D6A6A8B83 /* Pods-Taxi_Khu_Hoi.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B2A4E6381F95B5FB008B7596 = {
 			isa = PBXGroup;
 			children = (
 				B2A4E6431F95B5FB008B7596 /* Taxi_Khu_Hoi */,
 				B2A4E6421F95B5FB008B7596 /* Products */,
+				4176757786BA09CF4B6A25BC /* Pods */,
+				C4FED5DA6A9A26AD556EE2C2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +81,7 @@
 				B2A4E6451F95B5FB008B7596 /* AppDelegate.m */,
 				B2A4E6471F95B5FB008B7596 /* ViewController.h */,
 				B2A4E6481F95B5FB008B7596 /* ViewController.m */,
+				B2A4E65D1F95C892008B7596 /* Controller */,
 				B2A4E64A1F95B5FB008B7596 /* Main.storyboard */,
 				B2A4E64D1F95B5FB008B7596 /* Assets.xcassets */,
 				B2A4E64F1F95B5FB008B7596 /* LaunchScreen.storyboard */,
@@ -71,6 +91,23 @@
 			path = Taxi_Khu_Hoi;
 			sourceTree = "<group>";
 		};
+		B2A4E65D1F95C892008B7596 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B2A4E65A1F95B6A7008B7596 /* UserRegister.h */,
+				B2A4E65B1F95B6A7008B7596 /* UserRegister.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C4FED5DA6A9A26AD556EE2C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2E987D8C3263BA38C5014EF0 /* libPods-Taxi_Khu_Hoi.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -78,9 +115,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B2A4E6571F95B5FB008B7596 /* Build configuration list for PBXNativeTarget "Taxi_Khu_Hoi" */;
 			buildPhases = (
+				645EE25F02F881272F329FFF /* [CP] Check Pods Manifest.lock */,
 				B2A4E63D1F95B5FB008B7596 /* Sources */,
 				B2A4E63E1F95B5FB008B7596 /* Frameworks */,
 				B2A4E63F1F95B5FB008B7596 /* Resources */,
+				1255490A2A01E8D0CB62ED99 /* [CP] Embed Pods Frameworks */,
+				E0451A65C9EBE4F24B776073 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -137,12 +177,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1255490A2A01E8D0CB62ED99 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		645EE25F02F881272F329FFF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Taxi_Khu_Hoi-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0451A65C9EBE4F24B776073 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi-resources.sh",
+				"${PODS_ROOT}/XLForm/XLForm/XLForm.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B2A4E63D1F95B5FB008B7596 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				B2A4E6491F95B5FB008B7596 /* ViewController.m in Sources */,
+				B2A4E65C1F95B6A7008B7596 /* UserRegister.m in Sources */,
 				B2A4E6541F95B5FB008B7596 /* main.m in Sources */,
 				B2A4E6461F95B5FB008B7596 /* AppDelegate.m in Sources */,
 			);
@@ -276,11 +371,13 @@
 		};
 		B2A4E6581F95B5FB008B7596 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BEF74DB582DF70352ADCC86 /* Pods-Taxi_Khu_Hoi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 988D2L6XZT;
 				INFOPLIST_FILE = Taxi_Khu_Hoi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Hung.Taxi-Khu-Hoi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -290,11 +387,13 @@
 		};
 		B2A4E6591F95B5FB008B7596 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D282F293B38826D6A6A8B83 /* Pods-Taxi_Khu_Hoi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 988D2L6XZT;
 				INFOPLIST_FILE = Taxi_Khu_Hoi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Hung.Taxi-Khu-Hoi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
