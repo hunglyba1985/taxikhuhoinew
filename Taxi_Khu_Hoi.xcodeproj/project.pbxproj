@@ -15,6 +15,8 @@
 		B2A4E6511F95B5FB008B7596 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2A4E64F1F95B5FB008B7596 /* LaunchScreen.storyboard */; };
 		B2A4E6541F95B5FB008B7596 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6531F95B5FB008B7596 /* main.m */; };
 		B2A4E65C1F95B6A7008B7596 /* UserRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E65B1F95B6A7008B7596 /* UserRegister.m */; };
+		B2A4E6601F95F727008B7596 /* DriverRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E65F1F95F727008B7596 /* DriverRegister.m */; };
+		B2A4E6631F95FCAD008B7596 /* VerifyCode.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6621F95FCAD008B7596 /* VerifyCode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,10 @@
 		B2A4E6531F95B5FB008B7596 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B2A4E65A1F95B6A7008B7596 /* UserRegister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserRegister.h; sourceTree = "<group>"; };
 		B2A4E65B1F95B6A7008B7596 /* UserRegister.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserRegister.m; sourceTree = "<group>"; };
+		B2A4E65E1F95F727008B7596 /* DriverRegister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DriverRegister.h; sourceTree = "<group>"; };
+		B2A4E65F1F95F727008B7596 /* DriverRegister.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DriverRegister.m; sourceTree = "<group>"; };
+		B2A4E6611F95FCAD008B7596 /* VerifyCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyCode.h; sourceTree = "<group>"; };
+		B2A4E6621F95FCAD008B7596 /* VerifyCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerifyCode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,10 @@
 			children = (
 				B2A4E65A1F95B6A7008B7596 /* UserRegister.h */,
 				B2A4E65B1F95B6A7008B7596 /* UserRegister.m */,
+				B2A4E65E1F95F727008B7596 /* DriverRegister.h */,
+				B2A4E65F1F95F727008B7596 /* DriverRegister.m */,
+				B2A4E6611F95FCAD008B7596 /* VerifyCode.h */,
+				B2A4E6621F95FCAD008B7596 /* VerifyCode.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -238,6 +248,8 @@
 			files = (
 				B2A4E6491F95B5FB008B7596 /* ViewController.m in Sources */,
 				B2A4E65C1F95B6A7008B7596 /* UserRegister.m in Sources */,
+				B2A4E6601F95F727008B7596 /* DriverRegister.m in Sources */,
+				B2A4E6631F95FCAD008B7596 /* VerifyCode.m in Sources */,
 				B2A4E6541F95B5FB008B7596 /* main.m in Sources */,
 				B2A4E6461F95B5FB008B7596 /* AppDelegate.m in Sources */,
 			);

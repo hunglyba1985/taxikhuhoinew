@@ -1,5 +1,5 @@
 //
-//  UserRegister.h
+//  VerifyCode.h
 //  Taxi_Khu_Hoi
 //
 //  Created by Hung_mobilefolk on 10/17/17.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "XLFormViewController.h"
 
-@interface UserRegister : XLFormViewController
+@interface VerifyCode : XLFormViewController
 
 @end

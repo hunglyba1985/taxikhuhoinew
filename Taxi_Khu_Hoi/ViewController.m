@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "UserRegister.h"
+#import "DriverRegister.h"
 
 @interface ViewController ()
 
@@ -17,6 +19,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] init];
+    item.title = @"";
+    self.navigationItem.backBarButtonItem = item;
+}
+
+- (IBAction)userRegister:(id)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UserRegister *userRegister = [storyboard  instantiateViewControllerWithIdentifier:@"UserRegister"];
+    [self.navigationController pushViewController:userRegister animated:true] ;
+    
+}
+
+- (IBAction)driverRegister:(id)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    DriverRegister *driverRegister = [storyboard  instantiateViewControllerWithIdentifier:@"DriverRegister"];
+    [self.navigationController pushViewController:driverRegister animated:true] ;
+    
 }
 
 

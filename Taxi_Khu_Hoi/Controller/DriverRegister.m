@@ -1,25 +1,24 @@
 //
-//  UserRegister.m
+//  DriverRegister.m
 //  Taxi_Khu_Hoi
 //
 //  Created by Hung_mobilefolk on 10/17/17.
 //  Copyright © 2017 Mobilefolk. All rights reserved.
 //
 
-#import "UserRegister.h"
+#import "DriverRegister.h"
 #import "XLForm.h"
-#import "VerifyCode.h"
 
+NSString *const kBrandName = @"name";
+NSString *const kCarNumber = @"number";
+NSString *const kRegisterButton = @"button";
+NSString *const kImage = @"image";
 
-NSString *const kName = @"name";
-NSString *const kNumber = @"number";
-NSString *const kButton = @"button";
-
-@interface UserRegister ()
+@interface DriverRegister ()
 
 @end
 
-@implementation UserRegister
+@implementation DriverRegister
 
 -(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,14 +51,18 @@ NSString *const kButton = @"button";
     section.footerTitle = @"We can add more text here to infor user";
     [form addFormSection:section];
     
+    // Image
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kImage rowType:XLFormRowDescriptorTypeImage title:@"Image"];
+    row.value = [UIImage imageNamed:@"default_avatar"];
+    [section addFormRow:row];
     
     // Name
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:kName rowType:XLFormRowDescriptorTypeText title:@"Name:"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kBrandName rowType:XLFormRowDescriptorTypeText title:@"Brand Name:"];
     row.required = YES;
     [section addFormRow:row];
     
     // Number
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:kNumber rowType:XLFormRowDescriptorTypePhone title:@"Phone number:"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kCarNumber rowType:XLFormRowDescriptorTypePhone title:@"Car number:"];
     [row.cellConfigAtConfigure setObject:@"Required..." forKey:@"textField.placeholder"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.required = YES;
@@ -72,7 +75,7 @@ NSString *const kButton = @"button";
     [form addFormSection:section];
     
     // Button
-    XLFormRowDescriptor * buttonRow = [XLFormRowDescriptor formRowDescriptorWithTag:kButton rowType:XLFormRowDescriptorTypeButton title:@"Register"];
+    XLFormRowDescriptor * buttonRow = [XLFormRowDescriptor formRowDescriptorWithTag:kRegisterButton rowType:XLFormRowDescriptorTypeButton title:@"Register"];
     buttonRow.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:buttonRow];
     
@@ -88,69 +91,15 @@ NSString *const kButton = @"button";
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = @"User register";
+    self.title = @"Driver register";
     
-    //set null titl back button
-    
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] init];
-    item.title = @"";
-    self.navigationItem.backBarButtonItem = item;
 }
 
 -(void)didTouchButton:(UIButton*) button
 {
     NSLog(@"Register click");
-    BOOL validate =  [self validateForm];
-    if(validate) {
-        [self showVerifyView];
-    }
-    
     
 }
-
--(void) showVerifyView
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    VerifyCode *verifyCode = [storyboard  instantiateViewControllerWithIdentifier:@"VerifyCode"];
-    [self.navigationController pushViewController:verifyCode animated:true] ;
-}
-
-
-
-
-#pragma mark - actions
--(BOOL)validateForm
-{
-     __block BOOL validate = true;
-    
-    NSArray * array = [self formValidationErrors];
-    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XLFormValidationStatus * validationStatus = [[obj userInfo] objectForKey:XLValidationStatusErrorKey];
-        if ([validationStatus.rowDescriptor.tag isEqualToString:kNumber]){
-            validate = false;
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
-        }
-    }];
-    
-    return validate;
-}
-
-#pragma mark - Helper
-
--(void)animateCell:(UITableViewCell *)cell
-{
-    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
-    animation.keyPath = @"position.x";
-    animation.values =  @[ @0, @20, @-20, @10, @0];
-    animation.keyTimes = @[@0, @(1 / 6.0), @(3 / 6.0), @(5 / 6.0), @1];
-    animation.duration = 0.3;
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    animation.additive = YES;
-    
-    [cell.layer addAnimation:animation forKey:@"shake"];
-}
-
 
 
 - (void)didReceiveMemoryWarning {
