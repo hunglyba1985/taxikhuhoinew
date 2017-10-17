@@ -17,6 +17,8 @@
 		B2A4E65C1F95B6A7008B7596 /* UserRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E65B1F95B6A7008B7596 /* UserRegister.m */; };
 		B2A4E6601F95F727008B7596 /* DriverRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E65F1F95F727008B7596 /* DriverRegister.m */; };
 		B2A4E6631F95FCAD008B7596 /* VerifyCode.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6621F95FCAD008B7596 /* VerifyCode.m */; };
+		B2A4E66D1F961170008B7596 /* ImageCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E66B1F961170008B7596 /* ImageCustomCell.m */; };
+		B2A4E66E1F961170008B7596 /* ImageCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2A4E66C1F961170008B7596 /* ImageCustomCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,9 @@
 		B2A4E65F1F95F727008B7596 /* DriverRegister.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DriverRegister.m; sourceTree = "<group>"; };
 		B2A4E6611F95FCAD008B7596 /* VerifyCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyCode.h; sourceTree = "<group>"; };
 		B2A4E6621F95FCAD008B7596 /* VerifyCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerifyCode.m; sourceTree = "<group>"; };
+		B2A4E66A1F961170008B7596 /* ImageCustomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCustomCell.h; sourceTree = "<group>"; };
+		B2A4E66B1F961170008B7596 /* ImageCustomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCustomCell.m; sourceTree = "<group>"; };
+		B2A4E66C1F961170008B7596 /* ImageCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCustomCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +92,7 @@
 				B2A4E6451F95B5FB008B7596 /* AppDelegate.m */,
 				B2A4E6471F95B5FB008B7596 /* ViewController.h */,
 				B2A4E6481F95B5FB008B7596 /* ViewController.m */,
+				B2A4E6671F9610A8008B7596 /* CustomView */,
 				B2A4E65D1F95C892008B7596 /* Controller */,
 				B2A4E64A1F95B5FB008B7596 /* Main.storyboard */,
 				B2A4E64D1F95B5FB008B7596 /* Assets.xcassets */,
@@ -108,6 +114,17 @@
 				B2A4E6621F95FCAD008B7596 /* VerifyCode.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		B2A4E6671F9610A8008B7596 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				B2A4E66A1F961170008B7596 /* ImageCustomCell.h */,
+				B2A4E66B1F961170008B7596 /* ImageCustomCell.m */,
+				B2A4E66C1F961170008B7596 /* ImageCustomCell.xib */,
+			);
+			name = CustomView;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		C4FED5DA6A9A26AD556EE2C2 /* Frameworks */ = {
@@ -181,6 +198,7 @@
 			files = (
 				B2A4E6511F95B5FB008B7596 /* LaunchScreen.storyboard in Resources */,
 				B2A4E64E1F95B5FB008B7596 /* Assets.xcassets in Resources */,
+				B2A4E66E1F961170008B7596 /* ImageCustomCell.xib in Resources */,
 				B2A4E64C1F95B5FB008B7596 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2A4E66D1F961170008B7596 /* ImageCustomCell.m in Sources */,
 				B2A4E6491F95B5FB008B7596 /* ViewController.m in Sources */,
 				B2A4E65C1F95B6A7008B7596 /* UserRegister.m in Sources */,
 				B2A4E6601F95F727008B7596 /* DriverRegister.m in Sources */,

@@ -8,11 +8,14 @@
 
 #import "DriverRegister.h"
 #import "XLForm.h"
+#import "ImageCustomCell.h"
+
 
 NSString *const kBrandName = @"name";
 NSString *const kCarNumber = @"number";
 NSString *const kRegisterButton = @"button";
 NSString *const kImage = @"image";
+NSString *const kCustomeImage = @"customImage";
 
 @interface DriverRegister ()
 
@@ -51,10 +54,15 @@ NSString *const kImage = @"image";
     section.footerTitle = @"We can add more text here to infor user";
     [form addFormSection:section];
     
-    // Image
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:kImage rowType:XLFormRowDescriptorTypeImage title:@"Image"];
-    row.value = [UIImage imageNamed:@"default_avatar"];
+    // Custom image
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kCustomeImage rowType:ImageCustomCellWithNib title:@"Custom image here"];
     [section addFormRow:row];
+    
+    
+//    // Image
+//    row = [XLFormRowDescriptor formRowDescriptorWithTag:kImage rowType:XLFormRowDescriptorTypeImage title:@"Image"];
+//    row.value = [UIImage imageNamed:@"default_avatar"];
+//    [section addFormRow:row];
     
     // Name
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kBrandName rowType:XLFormRowDescriptorTypeText title:@"Brand Name:"];
@@ -82,6 +90,17 @@ NSString *const kImage = @"image";
     self.form = form;
     
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // change cell height of a particular cell
+    if ([[self.form formRowAtIndex:indexPath].tag isEqualToString:kCustomeImage]){
+        return 150;
+    }
+    
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
