@@ -76,12 +76,7 @@
         NSLog(@"add post trip button");
         CGPoint buttonPosition = CGPointMake(self.view.frame.size.width/2 - 25, self.view.frame.size.height -100);
         postTripButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonPosition.x, buttonPosition.y, 50, 50)];
-        postTripButton.layer.cornerRadius = 25;
-        postTripButton.backgroundColor = [UIColor whiteColor];
-        [postTripButton setTitle:@"+" forState:UIControlStateNormal];
-        [postTripButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
-        postTripButton.layer.borderColor = [UIColor grayColor].CGColor;
-        postTripButton.layer.borderWidth = 1;
+        [postTripButton setBackgroundImage:[UIImage imageNamed:@"add_green"] forState:UIControlStateNormal];
         [postTripButton addTarget:self action:@selector(showPostTripView) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:postTripButton];
     }
