@@ -7,5 +7,7 @@ target 'Taxi_Khu_Hoi' do
 
   # Pods for Taxi_Khu_Hoi
   pod 'XLForm'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
 
 end

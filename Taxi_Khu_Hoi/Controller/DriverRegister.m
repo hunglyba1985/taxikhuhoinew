@@ -9,6 +9,7 @@
 #import "DriverRegister.h"
 #import "XLForm.h"
 #import "ImageCustomCell.h"
+#import "MainViewController.h"
 
 
 NSString *const kBrandName = @"name";
@@ -84,7 +85,7 @@ NSString *const kCustomeImage = @"customImage";
     
     // Button
     XLFormRowDescriptor * buttonRow = [XLFormRowDescriptor formRowDescriptorWithTag:kRegisterButton rowType:XLFormRowDescriptorTypeButton title:@"Register"];
-    buttonRow.action.formSelector = @selector(didTouchButton:);
+    buttonRow.action.formSelector = @selector(verifyClick:);
     [section addFormRow:buttonRow];
     
     self.form = form;
@@ -111,14 +112,23 @@ NSString *const kCustomeImage = @"customImage";
 {
     [super viewWillAppear:animated];
     self.title = @"Driver register";
+    self.navigationController.navigationBarHidden = false;
+    //set null title back button
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] init];
+    item.title = @"";
+    self.navigationItem.backBarButtonItem = item;
+}
+
+-(void)verifyClick:(UIButton*) button
+{
+    NSLog(@"verify click");
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+    [self.navigationController pushViewController:mainView animated:true];
     
 }
 
--(void)didTouchButton:(UIButton*) button
-{
-    NSLog(@"Register click");
-    
-}
+
 
 
 - (void)didReceiveMemoryWarning {

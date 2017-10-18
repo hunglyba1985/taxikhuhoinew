@@ -89,9 +89,9 @@ NSString *const kButton = @"button";
 {
     [super viewWillAppear:animated];
     self.title = @"User register";
-    
-    //set null titl back button
-    
+    self.navigationController.navigationBarHidden = false;
+
+    //set null title back button
     UIBarButtonItem *item = [[UIBarButtonItem alloc] init];
     item.title = @"";
     self.navigationItem.backBarButtonItem = item;

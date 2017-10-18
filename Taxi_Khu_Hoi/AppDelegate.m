@@ -9,6 +9,10 @@
 #import "AppDelegate.h"
 #import "XLFormViewController.h"
 
+@import GoogleMaps;
+@import GooglePlaces;
+
+
 
 @interface AppDelegate ()
 
@@ -20,10 +24,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [XLFormViewController.cellClassesForRowDescriptorTypes setObject:@"ImageCustomCell" forKey:@"XLFormRowDescriptorYourCustomType"];
-
+    [self setupGoogleMap];
+    [[LocationMode shareInstance] checkLocationAuthorizationStatus];
+    
     
     return YES;
 }
+
+-(void) setupGoogleMap
+{
+    [GMSServices provideAPIKey:@"AIzaSyCOtIdprF-Sb0VP-s1dH7MPeNkmHt6NmCU"];
+    [GMSPlacesClient provideAPIKey:@"AIzaSyCOtIdprF-Sb0VP-s1dH7MPeNkmHt6NmCU"];
+
+}
+
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

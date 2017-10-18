@@ -19,6 +19,10 @@
 		B2A4E6631F95FCAD008B7596 /* VerifyCode.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6621F95FCAD008B7596 /* VerifyCode.m */; };
 		B2A4E66D1F961170008B7596 /* ImageCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E66B1F961170008B7596 /* ImageCustomCell.m */; };
 		B2A4E66E1F961170008B7596 /* ImageCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2A4E66C1F961170008B7596 /* ImageCustomCell.xib */; };
+		B2A4E6711F961FB9008B7596 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6701F961FB9008B7596 /* MainViewController.m */; };
+		B2A4E6741F9702B7008B7596 /* LocationMode.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6731F9702B7008B7596 /* LocationMode.m */; };
+		B2A4E6771F970E5E008B7596 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A4E6761F970E4F008B7596 /* CoreLocation.framework */; };
+		B2A4E67C1F9718DE008B7596 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A4E67B1F9718D2008B7596 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +48,14 @@
 		B2A4E66A1F961170008B7596 /* ImageCustomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCustomCell.h; sourceTree = "<group>"; };
 		B2A4E66B1F961170008B7596 /* ImageCustomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCustomCell.m; sourceTree = "<group>"; };
 		B2A4E66C1F961170008B7596 /* ImageCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCustomCell.xib; sourceTree = "<group>"; };
+		B2A4E66F1F961FB9008B7596 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		B2A4E6701F961FB9008B7596 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		B2A4E6721F9702B7008B7596 /* LocationMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationMode.h; sourceTree = "<group>"; };
+		B2A4E6731F9702B7008B7596 /* LocationMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationMode.m; sourceTree = "<group>"; };
+		B2A4E6761F970E4F008B7596 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B2A4E6791F971259008B7596 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		B2A4E67A1F971468008B7596 /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
+		B2A4E67B1F9718D2008B7596 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +63,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2A4E67C1F9718DE008B7596 /* CoreData.framework in Frameworks */,
+				B2A4E6771F970E5E008B7596 /* CoreLocation.framework in Frameworks */,
 				9A56443010891A28716AADAE /* libPods-Taxi_Khu_Hoi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,15 +104,17 @@
 			children = (
 				B2A4E6441F95B5FB008B7596 /* AppDelegate.h */,
 				B2A4E6451F95B5FB008B7596 /* AppDelegate.m */,
+				B2A4E64A1F95B5FB008B7596 /* Main.storyboard */,
 				B2A4E6471F95B5FB008B7596 /* ViewController.h */,
 				B2A4E6481F95B5FB008B7596 /* ViewController.m */,
-				B2A4E6671F9610A8008B7596 /* CustomView */,
-				B2A4E65D1F95C892008B7596 /* Controller */,
-				B2A4E64A1F95B5FB008B7596 /* Main.storyboard */,
 				B2A4E64D1F95B5FB008B7596 /* Assets.xcassets */,
 				B2A4E64F1F95B5FB008B7596 /* LaunchScreen.storyboard */,
 				B2A4E6521F95B5FB008B7596 /* Info.plist */,
+				B2A4E6791F971259008B7596 /* PrefixHeader.pch */,
 				B2A4E6531F95B5FB008B7596 /* main.m */,
+				B2A4E6751F9702C0008B7596 /* Model */,
+				B2A4E6671F9610A8008B7596 /* CustomView */,
+				B2A4E65D1F95C892008B7596 /* Controller */,
 			);
 			path = Taxi_Khu_Hoi;
 			sourceTree = "<group>";
@@ -112,6 +128,8 @@
 				B2A4E65F1F95F727008B7596 /* DriverRegister.m */,
 				B2A4E6611F95FCAD008B7596 /* VerifyCode.h */,
 				B2A4E6621F95FCAD008B7596 /* VerifyCode.m */,
+				B2A4E66F1F961FB9008B7596 /* MainViewController.h */,
+				B2A4E6701F961FB9008B7596 /* MainViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -127,9 +145,21 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
+		B2A4E6751F9702C0008B7596 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B2A4E67A1F971468008B7596 /* Define.h */,
+				B2A4E6721F9702B7008B7596 /* LocationMode.h */,
+				B2A4E6731F9702B7008B7596 /* LocationMode.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C4FED5DA6A9A26AD556EE2C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2A4E67B1F9718D2008B7596 /* CoreData.framework */,
+				B2A4E6761F970E4F008B7596 /* CoreLocation.framework */,
 				2E987D8C3263BA38C5014EF0 /* libPods-Taxi_Khu_Hoi.a */,
 			);
 			name = Frameworks;
@@ -246,6 +276,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 				"${PODS_ROOT}/XLForm/XLForm/XLForm.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -267,7 +299,9 @@
 				B2A4E66D1F961170008B7596 /* ImageCustomCell.m in Sources */,
 				B2A4E6491F95B5FB008B7596 /* ViewController.m in Sources */,
 				B2A4E65C1F95B6A7008B7596 /* UserRegister.m in Sources */,
+				B2A4E6711F961FB9008B7596 /* MainViewController.m in Sources */,
 				B2A4E6601F95F727008B7596 /* DriverRegister.m in Sources */,
+				B2A4E6741F9702B7008B7596 /* LocationMode.m in Sources */,
 				B2A4E6631F95FCAD008B7596 /* VerifyCode.m in Sources */,
 				B2A4E6541F95B5FB008B7596 /* main.m in Sources */,
 				B2A4E6461F95B5FB008B7596 /* AppDelegate.m in Sources */,
@@ -407,10 +441,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 988D2L6XZT;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = Taxi_Khu_Hoi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Hung.Taxi-Khu-Hoi";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lightstudio.khuhoi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -423,10 +459,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 988D2L6XZT;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = Taxi_Khu_Hoi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Hung.Taxi-Khu-Hoi";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lightstudio.khuhoi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

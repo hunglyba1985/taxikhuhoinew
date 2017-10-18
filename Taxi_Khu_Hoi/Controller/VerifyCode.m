@@ -8,6 +8,7 @@
 
 #import "VerifyCode.h"
 #import "XLForm.h"
+#import "MainViewController.h"
 
 
 NSString *const kVerifyButton = @"button";
@@ -62,7 +63,7 @@ NSString *const kVerifyCode = @"verifyCode";
     
     // Button
     XLFormRowDescriptor * buttonRow = [XLFormRowDescriptor formRowDescriptorWithTag:kVerifyButton rowType:XLFormRowDescriptorTypeButton title:@"Verify"];
-    buttonRow.action.formSelector = @selector(didTouchButton:);
+    buttonRow.action.formSelector = @selector(verifyCode);
     [section addFormRow:buttonRow];
     
     self.form = form;
@@ -79,8 +80,23 @@ NSString *const kVerifyCode = @"verifyCode";
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = false;
+
     self.title = @"Verification";
 }
+
+-(void) verifyCode
+{
+    [self showMainView];
+}
+
+-(void) showMainView
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+    [self.navigationController pushViewController:mainView animated:true];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
