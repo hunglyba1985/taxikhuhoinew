@@ -8,12 +8,13 @@
 
 #import "MainViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "PostNewTripController.h"
 
 
 @interface MainViewController ()
 {
     GMSMapView *mapView;
-    
+    UIButton *postTripButton;
 }
 @end
 
@@ -24,17 +25,17 @@
     // Do any additional setup after loading the view.
     
     [self showGoogleMapView];
-    
-    [self addMoreLayerToView];
-    
+
 }
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self addObserverForView];
-    
     self.navigationController.navigationBarHidden = true;
+
+    [self addObserverForView];
+    [self addPostTripButton];
+
 }
 
 -(void) addObserverForView
@@ -57,6 +58,7 @@
     mapView.myLocationEnabled = YES;
     self.view = mapView;
     
+
 }
 
 -(void) addMoreLayerToView
@@ -66,6 +68,32 @@
     
     [self.view addSubview:button];
     
+}
+
+-(void) addPostTripButton
+{
+    if(postTripButton == nil){
+        NSLog(@"add post trip button");
+        CGPoint buttonPosition = CGPointMake(self.view.frame.size.width/2 - 25, self.view.frame.size.height -100);
+        postTripButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonPosition.x, buttonPosition.y, 50, 50)];
+        postTripButton.layer.cornerRadius = 25;
+        postTripButton.backgroundColor = [UIColor whiteColor];
+        [postTripButton setTitle:@"+" forState:UIControlStateNormal];
+        [postTripButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+        postTripButton.layer.borderColor = [UIColor grayColor].CGColor;
+        postTripButton.layer.borderWidth = 1;
+        [postTripButton addTarget:self action:@selector(showPostTripView) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:postTripButton];
+    }
+
+}
+
+-(void)showPostTripView
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PostNewTripController *postTrip = [storyboard instantiateViewControllerWithIdentifier:@"PostNewTripController"];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:postTrip];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 

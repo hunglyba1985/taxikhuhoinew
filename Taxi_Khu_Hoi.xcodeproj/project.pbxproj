@@ -23,6 +23,7 @@
 		B2A4E6741F9702B7008B7596 /* LocationMode.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6731F9702B7008B7596 /* LocationMode.m */; };
 		B2A4E6771F970E5E008B7596 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A4E6761F970E4F008B7596 /* CoreLocation.framework */; };
 		B2A4E67C1F9718DE008B7596 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A4E67B1F9718D2008B7596 /* CoreData.framework */; };
+		B2A4E67F1F975A15008B7596 /* PostNewTripController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E67E1F975A15008B7596 /* PostNewTripController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,8 @@
 		B2A4E6791F971259008B7596 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B2A4E67A1F971468008B7596 /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		B2A4E67B1F9718D2008B7596 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		B2A4E67D1F975A15008B7596 /* PostNewTripController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostNewTripController.h; sourceTree = "<group>"; };
+		B2A4E67E1F975A15008B7596 /* PostNewTripController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostNewTripController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,8 @@
 				B2A4E6621F95FCAD008B7596 /* VerifyCode.m */,
 				B2A4E66F1F961FB9008B7596 /* MainViewController.h */,
 				B2A4E6701F961FB9008B7596 /* MainViewController.m */,
+				B2A4E67D1F975A15008B7596 /* PostNewTripController.h */,
+				B2A4E67E1F975A15008B7596 /* PostNewTripController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -301,6 +306,7 @@
 				B2A4E65C1F95B6A7008B7596 /* UserRegister.m in Sources */,
 				B2A4E6711F961FB9008B7596 /* MainViewController.m in Sources */,
 				B2A4E6601F95F727008B7596 /* DriverRegister.m in Sources */,
+				B2A4E67F1F975A15008B7596 /* PostNewTripController.m in Sources */,
 				B2A4E6741F9702B7008B7596 /* LocationMode.m in Sources */,
 				B2A4E6631F95FCAD008B7596 /* VerifyCode.m in Sources */,
 				B2A4E6541F95B5FB008B7596 /* main.m in Sources */,

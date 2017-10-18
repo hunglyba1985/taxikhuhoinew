@@ -15,6 +15,7 @@
 #import "LocationMode.h"
 #import "XLFormViewController.h"
 #import "Define.h"
+#import "XLForm.h"
 
 
 

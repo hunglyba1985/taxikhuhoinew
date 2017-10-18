@@ -46,10 +46,10 @@ static LocationMode *_shareClient;
         [_locationManager startUpdatingLocation];
     }
     
-    if(!updateCurrentLocationTimer){
-        updateCurrentLocationTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(updateCurrentLocation) userInfo:nil repeats:true];
-        
-    }
+//    if(!updateCurrentLocationTimer){
+//        updateCurrentLocationTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(updateCurrentLocation) userInfo:nil repeats:true];
+//
+//    }
 }
 
 #pragma mark - Public Methods
@@ -91,7 +91,7 @@ static LocationMode *_shareClient;
 #pragma mark - Private Method
 -(void)updateCurrentLocation
 {
-    NSLog(@"update current location run");
+//    NSLog(@"update current location run");
     [_locationManager startUpdatingLocation];
 }
 
