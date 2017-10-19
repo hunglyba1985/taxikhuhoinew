@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IXd-M1-12n">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1611" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IXd-M1-12n">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -42,7 +41,6 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="gXp-jC-X7K"/>
                     </view>
                     <navigationItem key="navigationItem" title="Welcome" id="rIO-ef-jKL"/>
                 </viewController>
@@ -62,7 +60,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="gNf-hc-hAw"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fqn-hd-RI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -81,7 +78,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="wtF-OT-bdZ"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IEv-Db-Y1o" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -100,7 +96,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="bpX-zM-8PA"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cba-Bz-qIH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -119,26 +114,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aHR-cP-bX1">
-                                <rect key="frame" x="0.0" y="0.0" width="204" height="667"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="lGV-i5-gNS" kind="embed" id="ro5-bF-p8i"/>
-                                </connections>
-                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvG-xl-P44" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHR-cP-bX1">
+                                <rect key="frame" x="0.0" y="0.0" width="260" height="667"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="260" id="LnK-nY-g3P"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="lGV-i5-gNS" kind="embed" id="ro5-bF-p8i"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="wvG-xl-P44" firstAttribute="top" secondItem="Ljb-ge-6v9" secondAttribute="top" id="6h0-1z-KN3"/>
-                            <constraint firstItem="wvG-xl-P44" firstAttribute="leading" secondItem="D3g-6R-zWn" secondAttribute="leading" id="Bmf-u1-fcp"/>
-                            <constraint firstItem="Qu5-1K-HEb" firstAttribute="top" secondItem="wvG-xl-P44" secondAttribute="bottom" id="rq4-dr-n5m"/>
-                            <constraint firstItem="wvG-xl-P44" firstAttribute="trailing" secondItem="D3g-6R-zWn" secondAttribute="trailing" id="sIk-Cf-mh5"/>
+                            <constraint firstItem="Qu5-1K-HEb" firstAttribute="top" secondItem="wvG-xl-P44" secondAttribute="bottom" id="8BV-GZ-WTT"/>
+                            <constraint firstItem="aHR-cP-bX1" firstAttribute="top" secondItem="Ljb-ge-6v9" secondAttribute="top" id="8MB-u3-ci7"/>
+                            <constraint firstItem="Qu5-1K-HEb" firstAttribute="top" secondItem="aHR-cP-bX1" secondAttribute="bottom" id="UfC-2v-Neq"/>
+                            <constraint firstItem="aHR-cP-bX1" firstAttribute="leading" secondItem="Ljb-ge-6v9" secondAttribute="leading" id="kbI-6V-yNH"/>
+                            <constraint firstAttribute="trailing" secondItem="wvG-xl-P44" secondAttribute="trailing" id="lXK-2N-ENi"/>
+                            <constraint firstItem="wvG-xl-P44" firstAttribute="leading" secondItem="Ljb-ge-6v9" secondAttribute="leading" id="p5K-3Z-zcA"/>
+                            <constraint firstItem="wvG-xl-P44" firstAttribute="top" secondItem="Ljb-ge-6v9" secondAttribute="top" id="w2K-p9-EHD"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="D3g-6R-zWn"/>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="wvG-xl-P44" id="gCm-km-qbA"/>
@@ -153,11 +152,14 @@
         <scene sceneID="C4E-HD-0DU">
             <objects>
                 <viewController storyboardIdentifier="PostNewTripController" id="4Ak-hA-RO8" customClass="PostNewTripController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qDr-c6-skA"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zis-5s-Tre"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Mza-cg-lYP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="tlZ-7e-Cm2"/>
                     </view>
                     <navigationItem key="navigationItem" title="Post new trip" id="0gs-Vv-0w4"/>
                 </viewController>
@@ -170,7 +172,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IXd-M1-12n" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pvc-wd-MYn">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pvc-wd-MYn">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -187,10 +189,13 @@
         <scene sceneID="PdL-Y5-h3i">
             <objects>
                 <viewController storyboardIdentifier="MenuViewController" id="lGV-i5-gNS" customClass="MenuViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tUY-8a-jOL"/>
+                        <viewControllerLayoutGuide type="bottom" id="Pjx-j8-hhI"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ydh-dt-2aj">
-                        <rect key="frame" x="0.0" y="0.0" width="204" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="260" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.16862745100000001" green="0.73725490199999999" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xaa-Zu-m7W" userLabel="First Responder" sceneMemberID="firstResponder"/>

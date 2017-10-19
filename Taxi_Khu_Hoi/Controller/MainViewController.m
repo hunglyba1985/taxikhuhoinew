@@ -16,6 +16,10 @@
 {
     UIButton *postTripButton;
     UIButton *searchButton;
+    UIButton *menuButton;
+    UIButton *menuBackgroundView;
+    
+    
 }
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIView *menuView;
@@ -46,12 +50,12 @@
     [super viewDidAppear:animated];
     [self addPostTripButton];
     [self addSearchingPlace];
-    
+    [self addMenuButton];
+    [self addMenuBackgroundView];
+
     [self.view addSubview:self.menuView];
     self.menuView.hidden = true;
     
-    NSLog(@"show all views on %@",self.view.subviews);
-
 }
 
 
@@ -71,13 +75,13 @@
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[lat doubleValue]
                                                             longitude:[lon doubleValue]
                                                                  zoom:17];
-//    mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     self.mapView.myLocationEnabled = YES;
     [_mapView setCamera:camera];
 
 
 }
 
+#pragma mark - Add Compoments
 -(void) addSearchingPlace
 {
     if (searchButton == nil) {
@@ -105,31 +109,62 @@
     }
 
 }
+-(void) addMenuButton
+{
+    if (menuButton == nil) {
+        menuButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 30, 35, 35)];
+        [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_icon"] forState:UIControlStateNormal];
+        [menuButton addTarget:self action:@selector(menuClick) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:menuButton];
+    }
+    
+}
+-(void) addMenuBackgroundView
+{
+    if (menuBackgroundView == nil) {
+        menuBackgroundView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        menuBackgroundView.backgroundColor = [UIColor blackColor];
+        menuBackgroundView.alpha = 0.3;
+        [menuBackgroundView addTarget:self action:@selector(clickMenuBackground) forControlEvents:UIControlEventTouchUpInside];
+        menuBackgroundView.hidden = true;
+        [self.view addSubview:menuBackgroundView];
+        
+    }
+}
 
+#pragma mark - Private Method
 -(void)showPostTripView
 {
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    PostNewTripController *postTrip = [storyboard instantiateViewControllerWithIdentifier:@"PostNewTripController"];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:postTrip];
-//    [self presentViewController:nav animated:YES completion:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PostNewTripController *postTrip = [storyboard instantiateViewControllerWithIdentifier:@"PostNewTripController"];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:postTrip];
+    [self presentViewController:nav animated:YES completion:nil];
     
-    NSLog(@"show post trip click");
-    self.menuView.hidden = false;
-
 }
 
 -(void) showSearchView
 {
-    NSLog(@"show searching view");
+//    NSLog(@"show searching view");
     GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
     acController.delegate = self;
     [self presentViewController:acController animated:YES completion:nil];
 }
 
+-(void) menuClick
+{
+    self.menuView.hidden = false;
+    menuBackgroundView.hidden = false;
+}
+-(void)clickMenuBackground
+{
+    NSLog(@"click to menu background");
+    self.menuView.hidden = true;
+    menuBackgroundView.hidden = true;
+}
 
 -(void) resetLocation
 {
-//    NSLog(@"reset location here");
+//  NSLog(@"reset location here");
     CLLocation *currentLocation = [LocationMode shareInstance].location;
     [self setCameraForMap:currentLocation.coordinate];
 }

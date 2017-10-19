@@ -16,6 +16,7 @@
 #import "XLFormViewController.h"
 #import "Define.h"
 #import "XLForm.h"
+#import "ImageCustomCell.h"
 
 
 
