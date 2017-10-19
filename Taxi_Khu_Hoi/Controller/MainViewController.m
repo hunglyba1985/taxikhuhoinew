@@ -9,12 +9,14 @@
 #import "MainViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import "PostNewTripController.h"
+#import <GooglePlaces/GooglePlaces.h>
 
 
-@interface MainViewController ()
+@interface MainViewController () <GMSAutocompleteViewControllerDelegate>
 {
     GMSMapView *mapView;
     UIButton *postTripButton;
+    UIButton *searchButton;
 }
 @end
 
@@ -25,7 +27,6 @@
     // Do any additional setup after loading the view.
     
     [self showGoogleMapView];
-
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -36,8 +37,13 @@
     NSLog(@"view will appear here");
     
     [self addObserverForView];
-    [self addPostTripButton];
+}
 
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self addPostTripButton];
+    [self addSearchingPlace];
 }
 
 
@@ -64,12 +70,18 @@
 
 }
 
--(void) addMoreLayerToView
+-(void) addSearchingPlace
 {
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    button.backgroundColor = [UIColor redColor];
-    
-    [self.view addSubview:button];
+    if (searchButton == nil) {
+        NSLog(@"add searching button");
+        searchButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 64, self.view.frame.size.width - 40, 40)];
+        [searchButton setTitle:@"Where going to?" forState:UIControlStateNormal];
+        searchButton.backgroundColor = [UIColor whiteColor];
+        [searchButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [searchButton addTarget:self action:@selector(showSearchView) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:searchButton];
+    }
+  
     
 }
 
@@ -94,19 +106,70 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
+-(void) showSearchView
+{
+    NSLog(@"show searching view");
+    GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
+    acController.delegate = self;
+    [self presentViewController:acController animated:YES completion:nil];
+}
+
 
 -(void) resetLocation
 {
 //    NSLog(@"reset location here");
     CLLocation *currentLocation = [LocationMode shareInstance].location;
-    
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:currentLocation.coordinate.latitude
-                                                            longitude:currentLocation.coordinate.longitude
+    [self setCameraForMap:currentLocation.coordinate];
+}
+
+-(void) setCameraForMap:(CLLocationCoordinate2D ) coordinate
+{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:coordinate.latitude
+                                                            longitude:coordinate.longitude
                                                                  zoom:17];
     
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = camera.target;
+    marker.snippet = @"Hello World";
+    marker.appearAnimation = kGMSMarkerAnimationPop;
+    marker.map = mapView;
+    
     [mapView setCamera:camera];
+}
+
+-(void) setMarkOnMap:(CLLocationCoordinate2D ) coordinate
+{
     
 }
+
+#pragma mark - GMSAutocompleteViewControllerDelegate
+// Handle the user's selection.
+- (void)viewController:(GMSAutocompleteViewController *)viewController
+didAutocompleteWithPlace:(GMSPlace *)place {
+    NSLog(@"didAutocompleteWithPlace");
+    // Do something with the selected place.
+    NSLog(@"Place name %@", place.name);
+    NSLog(@"Place address %@", place.formattedAddress);
+    NSLog(@"Place attributions %@", place.attributions.string);
+    
+    [self setCameraForMap:place.coordinate];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)viewController:(GMSAutocompleteViewController *)viewController
+didFailAutocompleteWithError:(NSError *)error {
+    // TODO: handle the error.
+    NSLog(@"error: %ld", [error code]);
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+// User canceled the operation.
+- (void)wasCancelled:(GMSAutocompleteViewController *)viewController {
+    NSLog(@"Autocomplete was cancelled.");
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
