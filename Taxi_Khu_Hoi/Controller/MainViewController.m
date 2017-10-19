@@ -14,10 +14,12 @@
 
 @interface MainViewController () <GMSAutocompleteViewControllerDelegate>
 {
-    GMSMapView *mapView;
     UIButton *postTripButton;
     UIButton *searchButton;
 }
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIView *menuView;
+
 @end
 
 @implementation MainViewController
@@ -44,6 +46,12 @@
     [super viewDidAppear:animated];
     [self addPostTripButton];
     [self addSearchingPlace];
+    
+    [self.view addSubview:self.menuView];
+    self.menuView.hidden = true;
+    
+    NSLog(@"show all views on %@",self.view.subviews);
+
 }
 
 
@@ -63,10 +71,10 @@
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[lat doubleValue]
                                                             longitude:[lon doubleValue]
                                                                  zoom:17];
-    mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
-    mapView.myLocationEnabled = YES;
-    self.view = mapView;
-    
+//    mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    self.mapView.myLocationEnabled = YES;
+    [_mapView setCamera:camera];
+
 
 }
 
@@ -100,10 +108,14 @@
 
 -(void)showPostTripView
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    PostNewTripController *postTrip = [storyboard instantiateViewControllerWithIdentifier:@"PostNewTripController"];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:postTrip];
-    [self presentViewController:nav animated:YES completion:nil];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    PostNewTripController *postTrip = [storyboard instantiateViewControllerWithIdentifier:@"PostNewTripController"];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:postTrip];
+//    [self presentViewController:nav animated:YES completion:nil];
+    
+    NSLog(@"show post trip click");
+    self.menuView.hidden = false;
+
 }
 
 -(void) showSearchView
@@ -132,9 +144,9 @@
     marker.position = camera.target;
     marker.snippet = @"Hello World";
     marker.appearAnimation = kGMSMarkerAnimationPop;
-    marker.map = mapView;
+    marker.map = _mapView;
     
-    [mapView setCamera:camera];
+    [_mapView setCamera:camera];
 }
 
 -(void) setMarkOnMap:(CLLocationCoordinate2D ) coordinate
