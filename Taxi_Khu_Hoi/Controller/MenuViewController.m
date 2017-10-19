@@ -9,6 +9,7 @@
 #import "MenuViewController.h"
 
 NSString *const kUserImage = @"userImage";
+NSString *const kUserTrip = @"userTrip";
 
 
 @interface MenuViewController ()
@@ -49,7 +50,7 @@ NSString *const kUserImage = @"userImage";
     [form addFormSection:section];
     
     // Custom image
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:kUserImage rowType:ImageCustomCellWithNib title:@"Custom image here"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kUserImage rowType:UserImageCustomCellWithNib title:@"Custom image here"];
     [section addFormRow:row];
     
     
@@ -72,14 +73,15 @@ NSString *const kUserImage = @"userImage";
 //    [section addFormRow:row];
 //    
 //    
-//    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
-//    section.footerTitle = @"";
-//    [form addFormSection:section];
-//    
-//    // Button
-//    XLFormRowDescriptor * buttonRow = [XLFormRowDescriptor formRowDescriptorWithTag:kRegisterButton rowType:XLFormRowDescriptorTypeButton title:@"Register"];
-//    buttonRow.action.formSelector = @selector(verifyClick:);
-//    [section addFormRow:buttonRow];
+    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
+    section.footerTitle = @"";
+    [form addFormSection:section];
+//
+    // Button
+    XLFormRowDescriptor * buttonRow = [XLFormRowDescriptor formRowDescriptorWithTag:kUserTrip rowType:XLFormRowDescriptorTypeButton title:@"Your Trips"];
+
+    buttonRow.action.formSelector = @selector(userTripClick);
+    [section addFormRow:buttonRow];
     
     self.form = form;
     
@@ -89,7 +91,7 @@ NSString *const kUserImage = @"userImage";
 {
     // change cell height of a particular cell
     if ([[self.form formRowAtIndex:indexPath].tag isEqualToString:kUserImage]){
-        return 150;
+        return 180;
     }
     
     return [super tableView:tableView heightForRowAtIndexPath:indexPath];
@@ -99,6 +101,22 @@ NSString *const kUserImage = @"userImage";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    XLFormRowDescriptor* cell =  [self.form formRowWithTag:kUserImage];
+    cell.value  = [UIImage imageNamed:@"test"];
+    cell.title = @"Antony";
+    [self reloadFormRow:cell];
+    
+}
+
+-(void) userTripClick
+{
+    
 }
 
 - (void)didReceiveMemoryWarning {

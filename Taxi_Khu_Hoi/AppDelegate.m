@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "XLFormViewController.h"
 
+
 @import GoogleMaps;
 @import GooglePlaces;
 
@@ -23,7 +24,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
     [XLFormViewController.cellClassesForRowDescriptorTypes setObject:@"ImageCustomCell" forKey:@"XLFormRowDescriptorYourCustomType"];
+    
+    [XLFormViewController.cellClassesForRowDescriptorTypes setObject:@"UserImageCell" forKey:@"XLFormRowDescriptorYourCustomType"];
+
+    
     [self setupGoogleMap];
     [[LocationMode shareInstance] checkLocationAuthorizationStatus];
     

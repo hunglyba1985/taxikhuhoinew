@@ -112,7 +112,7 @@
 -(void) addMenuButton
 {
     if (menuButton == nil) {
-        menuButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 30, 35, 35)];
+        menuButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 30, 30, 30)];
         [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_icon"] forState:UIControlStateNormal];
         [menuButton addTarget:self action:@selector(menuClick) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:menuButton];

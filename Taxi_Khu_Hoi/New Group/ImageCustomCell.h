@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XLFormDescriptorCell.h"
-#import "XLFormViewController.h"
 
 extern NSString * const ImageCustomCellWithNib;
 

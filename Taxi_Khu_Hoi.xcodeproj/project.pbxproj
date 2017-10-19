@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52CD459F1F98F13800B815DC /* UserImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CD459D1F98F13800B815DC /* UserImageCell.m */; };
+		52CD45A01F98F13800B815DC /* UserImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CD459E1F98F13800B815DC /* UserImageCell.xib */; };
 		9A56443010891A28716AADAE /* libPods-Taxi_Khu_Hoi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E987D8C3263BA38C5014EF0 /* libPods-Taxi_Khu_Hoi.a */; };
 		B22B81601F98B48B0020C27F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22B815F1F98B48B0020C27F /* MenuViewController.m */; };
 		B2A4E6461F95B5FB008B7596 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6451F95B5FB008B7596 /* AppDelegate.m */; };
@@ -29,6 +31,9 @@
 
 /* Begin PBXFileReference section */
 		2E987D8C3263BA38C5014EF0 /* libPods-Taxi_Khu_Hoi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Taxi_Khu_Hoi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52CD459C1F98F13800B815DC /* UserImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserImageCell.h; sourceTree = "<group>"; };
+		52CD459D1F98F13800B815DC /* UserImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserImageCell.m; sourceTree = "<group>"; };
+		52CD459E1F98F13800B815DC /* UserImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserImageCell.xib; sourceTree = "<group>"; };
 		7BEF74DB582DF70352ADCC86 /* Pods-Taxi_Khu_Hoi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taxi_Khu_Hoi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi.debug.xcconfig"; sourceTree = "<group>"; };
 		9D282F293B38826D6A6A8B83 /* Pods-Taxi_Khu_Hoi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taxi_Khu_Hoi.release.xcconfig"; path = "Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi.release.xcconfig"; sourceTree = "<group>"; };
 		B22B815E1F98B48B0020C27F /* MenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -150,6 +155,9 @@
 				B2A4E66A1F961170008B7596 /* ImageCustomCell.h */,
 				B2A4E66B1F961170008B7596 /* ImageCustomCell.m */,
 				B2A4E66C1F961170008B7596 /* ImageCustomCell.xib */,
+				52CD459C1F98F13800B815DC /* UserImageCell.h */,
+				52CD459D1F98F13800B815DC /* UserImageCell.m */,
+				52CD459E1F98F13800B815DC /* UserImageCell.xib */,
 			);
 			name = CustomView;
 			path = "New Group";
@@ -239,6 +247,7 @@
 				B2A4E6511F95B5FB008B7596 /* LaunchScreen.storyboard in Resources */,
 				B2A4E64E1F95B5FB008B7596 /* Assets.xcassets in Resources */,
 				B2A4E66E1F961170008B7596 /* ImageCustomCell.xib in Resources */,
+				52CD45A01F98F13800B815DC /* UserImageCell.xib in Resources */,
 				B2A4E64C1F95B5FB008B7596 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,6 +323,7 @@
 				B2A4E67F1F975A15008B7596 /* PostNewTripController.m in Sources */,
 				B22B81601F98B48B0020C27F /* MenuViewController.m in Sources */,
 				B2A4E6741F9702B7008B7596 /* LocationMode.m in Sources */,
+				52CD459F1F98F13800B815DC /* UserImageCell.m in Sources */,
 				B2A4E6631F95FCAD008B7596 /* VerifyCode.m in Sources */,
 				B2A4E6541F95B5FB008B7596 /* main.m in Sources */,
 				B2A4E6461F95B5FB008B7596 /* AppDelegate.m in Sources */,
