@@ -32,11 +32,14 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = true;
-
+    
+    NSLog(@"view will appear here");
+    
     [self addObserverForView];
     [self addPostTripButton];
 
 }
+
 
 -(void) addObserverForView
 {
