@@ -78,10 +78,30 @@ NSString *const kUserTrip = @"userTrip";
     [form addFormSection:section];
 //
     // Button
-    XLFormRowDescriptor * buttonRow = [XLFormRowDescriptor formRowDescriptorWithTag:kUserTrip rowType:XLFormRowDescriptorTypeButton title:@"Your Trips"];
-
-    buttonRow.action.formSelector = @selector(userTripClick);
-    [section addFormRow:buttonRow];
+    XLFormRowDescriptor * yourTrip = [XLFormRowDescriptor formRowDescriptorWithTag:kUserTrip rowType:XLFormRowDescriptorTypeButton title:@"Your Trips"];
+    [yourTrip.cellConfig setObject:@(NSTextAlignmentNatural) forKey:@"textLabel.textAlignment"];
+    [yourTrip.cellConfig setObject:[UIColor blackColor] forKey:@"textLabel.textColor"];
+    yourTrip.action.formSelector = @selector(userTripClick);
+    [section addFormRow:yourTrip];
+    
+    XLFormRowDescriptor * scheduleButton = [XLFormRowDescriptor formRowDescriptorWithTag:kUserTrip rowType:XLFormRowDescriptorTypeButton title:@"Scheduled"];
+    [scheduleButton.cellConfig setObject:@(NSTextAlignmentNatural) forKey:@"textLabel.textAlignment"];
+    [scheduleButton.cellConfig setObject:[UIColor blackColor] forKey:@"textLabel.textColor"];
+    scheduleButton.action.formSelector = @selector(scheduleClick);
+    [section addFormRow:scheduleButton];
+    
+    XLFormRowDescriptor * helpButton = [XLFormRowDescriptor formRowDescriptorWithTag:kUserTrip rowType:XLFormRowDescriptorTypeButton title:@"Help"];
+    [helpButton.cellConfig setObject:@(NSTextAlignmentNatural) forKey:@"textLabel.textAlignment"];
+    [helpButton.cellConfig setObject:[UIColor blackColor] forKey:@"textLabel.textColor"];
+    helpButton.action.formSelector = @selector(helpClick);
+    [section addFormRow:helpButton];
+    
+    
+    XLFormRowDescriptor * settingButton = [XLFormRowDescriptor formRowDescriptorWithTag:kUserTrip rowType:XLFormRowDescriptorTypeButton title:@"Setting"];
+    [settingButton.cellConfig setObject:@(NSTextAlignmentNatural) forKey:@"textLabel.textAlignment"];
+    [settingButton.cellConfig setObject:[UIColor blackColor] forKey:@"textLabel.textColor"];
+    settingButton.action.formSelector = @selector(settingClick);
+    [section addFormRow:settingButton];
     
     self.form = form;
     
@@ -116,7 +136,44 @@ NSString *const kUserTrip = @"userTrip";
 
 -(void) userTripClick
 {
+    id<MenuViewControllerDelegate> strongDelegate = self.delegate;
     
+    if ([strongDelegate respondsToSelector:@selector(menuViewControllerDidChooseUserHistory)]) {
+        [strongDelegate menuViewControllerDidChooseUserHistory];
+    }
+}
+
+-(void) scheduleClick
+{
+    id<MenuViewControllerDelegate> strongDelegate = self.delegate;
+    
+    if ([strongDelegate respondsToSelector:@selector(menuViewControllerDidChooseSchedule)]) {
+        [strongDelegate menuViewControllerDidChooseSchedule];
+    }
+}
+
+-(void) helpClick
+{
+    id<MenuViewControllerDelegate> strongDelegate = self.delegate;
+    
+    if ([strongDelegate respondsToSelector:@selector(menuViewControllerDidChooseHelp)]) {
+        [strongDelegate menuViewControllerDidChooseHelp];
+    }
+}
+
+-(void) settingClick
+{
+    id<MenuViewControllerDelegate> strongDelegate = self.delegate;
+    
+    if ([strongDelegate respondsToSelector:@selector(menuViewControllerDidChooseSetting)]) {
+        [strongDelegate menuViewControllerDidChooseSetting];
+    }
+}
+
+-(void)didSelectFormRow:(XLFormRowDescriptor *)formRow
+{
+    [super didSelectFormRow:formRow];
+    [self deselectFormRow:formRow];
 }
 
 - (void)didReceiveMemoryWarning {

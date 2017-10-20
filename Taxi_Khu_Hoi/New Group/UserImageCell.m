@@ -24,6 +24,9 @@ NSString * const UserImageCustomCellWithNib = @"UserImageCustomeCellWithNib";
 {
     self.userImage.layer.cornerRadius = 40;
     self.userImage.clipsToBounds = true;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    
 }
 
 -(void) update

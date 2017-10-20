@@ -10,9 +10,16 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "PostNewTripController.h"
 #import <GooglePlaces/GooglePlaces.h>
+#import "MenuViewController.h"
+#import "HistoryViewController.h"
+#import "ScheduleViewController.h"
+#import "HelpViewController.h"
+#import "SettingViewController.h"
 
 
-@interface MainViewController () <GMSAutocompleteViewControllerDelegate>
+
+
+@interface MainViewController () <GMSAutocompleteViewControllerDelegate,MenuViewControllerDelegate>
 {
     UIButton *postTripButton;
     UIButton *searchButton;
@@ -41,8 +48,12 @@
     self.navigationController.navigationBarHidden = true;
     
     NSLog(@"view will appear here");
-    
     [self addObserverForView];
+    
+    //set null title back button
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] init];
+    item.title = @"";
+    self.navigationItem.backBarButtonItem = item;
 }
 
 -(void) viewDidAppear:(BOOL)animated
@@ -157,7 +168,11 @@
 }
 -(void)clickMenuBackground
 {
-    NSLog(@"click to menu background");
+    [self hideMenu];
+}
+
+-(void) hideMenu
+{
     self.menuView.hidden = true;
     menuBackgroundView.hidden = true;
 }
@@ -223,14 +238,62 @@ didFailAutocompleteWithError:(NSError *)error {
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//     Get the new view controller using [segue destinationViewController].
+//     Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"MenuSegue"]) {
+        NSLog(@"run to here right");
+        MenuViewController *menuView = segue.destinationViewController;
+        //        menuView.testLabel.text = @"show fuck here";
+        menuView.delegate = self;
+        
+    }
 }
-*/
+
+#pragma mark - MenuViewController Delegate
+-(void) menuViewControllerDidChooseUserHistory
+{
+    [self hideMenu];
+    HistoryViewController *history = [self.storyboard instantiateViewControllerWithIdentifier:@"HistoryViewController"];
+    [self.navigationController pushViewController:history animated:YES];
+}
+-(void) menuViewControllerDidChooseSchedule
+{
+    [self hideMenu];
+    ScheduleViewController *schedule = [self.storyboard instantiateViewControllerWithIdentifier:@"ScheduleViewController"];
+    [self.navigationController pushViewController:schedule animated:YES];
+}
+
+-(void) menuViewControllerDidChooseHelp
+{
+    [self hideMenu];
+    HelpViewController *help = [self.storyboard instantiateViewControllerWithIdentifier:@"HelpViewController"];
+    [self.navigationController pushViewController:help animated:YES];
+}
+
+-(void) menuViewControllerDidChooseSetting
+{
+    [self hideMenu];
+    SettingViewController *setting = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingViewController"];
+    [self.navigationController pushViewController:setting animated:YES];
+}
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+

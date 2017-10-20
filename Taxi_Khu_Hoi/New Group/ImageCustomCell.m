@@ -23,6 +23,13 @@ NSString * const ImageCustomCellWithNib = @"ImageCustomeCellWithNib";
     [XLFormViewController.cellClassesForRowDescriptorTypes setObject:NSStringFromClass([ImageCustomCell class]) forKey:ImageCustomCellWithNib];
 }
 
+-(void)configure
+{
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+}
+    
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

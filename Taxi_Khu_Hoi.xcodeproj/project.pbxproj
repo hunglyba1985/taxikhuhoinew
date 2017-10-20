@@ -11,6 +11,10 @@
 		52CD45A01F98F13800B815DC /* UserImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CD459E1F98F13800B815DC /* UserImageCell.xib */; };
 		9A56443010891A28716AADAE /* libPods-Taxi_Khu_Hoi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E987D8C3263BA38C5014EF0 /* libPods-Taxi_Khu_Hoi.a */; };
 		B22B81601F98B48B0020C27F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22B815F1F98B48B0020C27F /* MenuViewController.m */; };
+		B22B81631F99B51A0020C27F /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22B81621F99B51A0020C27F /* HistoryViewController.m */; };
+		B22B81661F99B5340020C27F /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22B81651F99B5340020C27F /* ScheduleViewController.m */; };
+		B22B81691F99B5490020C27F /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22B81681F99B5490020C27F /* HelpViewController.m */; };
+		B22B816C1F99B55A0020C27F /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22B816B1F99B55A0020C27F /* SettingViewController.m */; };
 		B2A4E6461F95B5FB008B7596 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6451F95B5FB008B7596 /* AppDelegate.m */; };
 		B2A4E6491F95B5FB008B7596 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E6481F95B5FB008B7596 /* ViewController.m */; };
 		B2A4E64C1F95B5FB008B7596 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2A4E64A1F95B5FB008B7596 /* Main.storyboard */; };
@@ -38,6 +42,14 @@
 		9D282F293B38826D6A6A8B83 /* Pods-Taxi_Khu_Hoi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taxi_Khu_Hoi.release.xcconfig"; path = "Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi.release.xcconfig"; sourceTree = "<group>"; };
 		B22B815E1F98B48B0020C27F /* MenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		B22B815F1F98B48B0020C27F /* MenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		B22B81611F99B51A0020C27F /* HistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		B22B81621F99B51A0020C27F /* HistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		B22B81641F99B5340020C27F /* ScheduleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
+		B22B81651F99B5340020C27F /* ScheduleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
+		B22B81671F99B5490020C27F /* HelpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		B22B81681F99B5490020C27F /* HelpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		B22B816A1F99B55A0020C27F /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		B22B816B1F99B55A0020C27F /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		B2A4E6411F95B5FB008B7596 /* Taxi_Khu_Hoi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taxi_Khu_Hoi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2A4E6441F95B5FB008B7596 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B2A4E6451F95B5FB008B7596 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -90,6 +102,21 @@
 				9D282F293B38826D6A6A8B83 /* Pods-Taxi_Khu_Hoi.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B22B816D1F99B6210020C27F /* Utility Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B22B81611F99B51A0020C27F /* HistoryViewController.h */,
+				B22B81621F99B51A0020C27F /* HistoryViewController.m */,
+				B22B81641F99B5340020C27F /* ScheduleViewController.h */,
+				B22B81651F99B5340020C27F /* ScheduleViewController.m */,
+				B22B81671F99B5490020C27F /* HelpViewController.h */,
+				B22B81681F99B5490020C27F /* HelpViewController.m */,
+				B22B816A1F99B55A0020C27F /* SettingViewController.h */,
+				B22B816B1F99B55A0020C27F /* SettingViewController.m */,
+			);
+			path = "Utility Controller";
 			sourceTree = "<group>";
 		};
 		B2A4E6381F95B5FB008B7596 = {
@@ -145,6 +172,7 @@
 				B2A4E67E1F975A15008B7596 /* PostNewTripController.m */,
 				B22B815E1F98B48B0020C27F /* MenuViewController.h */,
 				B22B815F1F98B48B0020C27F /* MenuViewController.m */,
+				B22B816D1F99B6210020C27F /* Utility Controller */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -320,13 +348,17 @@
 				B2A4E65C1F95B6A7008B7596 /* UserRegister.m in Sources */,
 				B2A4E6711F961FB9008B7596 /* MainViewController.m in Sources */,
 				B2A4E6601F95F727008B7596 /* DriverRegister.m in Sources */,
+				B22B81661F99B5340020C27F /* ScheduleViewController.m in Sources */,
 				B2A4E67F1F975A15008B7596 /* PostNewTripController.m in Sources */,
+				B22B81631F99B51A0020C27F /* HistoryViewController.m in Sources */,
 				B22B81601F98B48B0020C27F /* MenuViewController.m in Sources */,
 				B2A4E6741F9702B7008B7596 /* LocationMode.m in Sources */,
+				B22B81691F99B5490020C27F /* HelpViewController.m in Sources */,
 				52CD459F1F98F13800B815DC /* UserImageCell.m in Sources */,
 				B2A4E6631F95FCAD008B7596 /* VerifyCode.m in Sources */,
 				B2A4E6541F95B5FB008B7596 /* main.m in Sources */,
 				B2A4E6461F95B5FB008B7596 /* AppDelegate.m in Sources */,
+				B22B816C1F99B55A0020C27F /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

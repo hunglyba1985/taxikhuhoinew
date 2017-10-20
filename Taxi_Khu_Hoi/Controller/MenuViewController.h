@@ -8,6 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
+@class MenuViewController;
+
+@protocol MenuViewControllerDelegate <NSObject>
+
+-(void) menuViewControllerDidChooseUserHistory;
+-(void) menuViewControllerDidChooseSchedule;
+-(void) menuViewControllerDidChooseHelp;
+-(void) menuViewControllerDidChooseSetting;
+
+
+
+
+
+
+@end
+
+
 @interface MenuViewController : XLFormViewController
+
+@property (nonatomic, weak) id<MenuViewControllerDelegate> delegate;
+
 
 @end
