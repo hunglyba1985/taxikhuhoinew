@@ -13,7 +13,8 @@
 #define OldLocation                   @"Old Location"
 #define Latitude    @"Latitude"
 #define Longtitude @"Longtitude"
-
+#define AuthVerificationID  @"authVerificationID"
+#define UserNameUpdate @"User name update"
 
 
 #endif /* Define_h */

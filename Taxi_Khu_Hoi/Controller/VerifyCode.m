@@ -9,7 +9,7 @@
 #import "VerifyCode.h"
 #import "XLForm.h"
 #import "MainViewController.h"
-
+#import <FirebaseAuth/FirebaseAuth.h>
 
 NSString *const kVerifyButton = @"button";
 NSString *const kVerifyCode = @"verifyCode";
@@ -92,9 +92,47 @@ NSString *const kVerifyCode = @"verifyCode";
 
 -(void) showMainView
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-    [self.navigationController pushViewController:mainView animated:true];
+
+    
+    NSString *verificationID = [[NSUserDefaults standardUserDefaults] stringForKey:AuthVerificationID];
+    
+    NSDictionary *formValues = self.form.formValues;
+    NSLog(@"verify code is %@",[formValues objectForKey:kVerifyCode]);
+    
+    FIRAuthCredential *credential = [[FIRPhoneAuthProvider provider]
+                                     credentialWithVerificationID:verificationID
+                                     verificationCode:[formValues objectForKey:kVerifyCode]];
+    
+    [[FIRAuth auth] signInWithCredential:credential
+                              completion:^(FIRUser *user, NSError *error) {
+                                  if (error) {
+                                      // ...
+                                      NSLog(@"sign in error %@",error);
+                                      return;
+                                  }
+                                  else
+                                  {
+                                      // User successfully signed in. Get user data from the FIRUser object
+                                      // ...
+                                      NSLog(@"sign in with phone number success with data %@",user);
+                                      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                                      MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+                                      [self.navigationController pushViewController:mainView animated:true];
+                                  }
+                                 
+                              }];
+    
+
+}
+
+-(void) signOutUser
+{
+    NSError *signOutError;
+    BOOL status = [[FIRAuth auth] signOut:&signOutError];
+    if (!status) {
+        NSLog(@"Error signing out: %@", signOutError);
+        return;
+    }
 }
 
 

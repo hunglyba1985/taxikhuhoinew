@@ -190,11 +190,11 @@
                                                             longitude:coordinate.longitude
                                                                  zoom:17];
     
-    GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = camera.target;
-    marker.snippet = @"Hello World";
-    marker.appearAnimation = kGMSMarkerAnimationPop;
-    marker.map = _mapView;
+//    GMSMarker *marker = [[GMSMarker alloc] init];
+//    marker.position = camera.target;
+//    marker.snippet = @"Hello World";
+//    marker.appearAnimation = kGMSMarkerAnimationPop;
+//    marker.map = _mapView;
     
     [_mapView setCamera:camera];
 }

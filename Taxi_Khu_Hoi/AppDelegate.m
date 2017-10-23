@@ -8,14 +8,18 @@
 
 #import "AppDelegate.h"
 #import "XLFormViewController.h"
-
-
+@import Firebase;
+@import FirebaseAuth;
 @import GoogleMaps;
 @import GooglePlaces;
+#import <UserNotifications/UserNotifications.h>
+
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 
+@interface AppDelegate () <UNUserNotificationCenterDelegate>
 
-@interface AppDelegate ()
+@property(strong, nonatomic) FIRAuthStateDidChangeListenerHandle handle;
 
 @end
 
@@ -26,13 +30,19 @@
     // Override point for customization after application launch.
     
     [XLFormViewController.cellClassesForRowDescriptorTypes setObject:@"ImageCustomCell" forKey:@"XLFormRowDescriptorYourCustomType"];
-    
     [XLFormViewController.cellClassesForRowDescriptorTypes setObject:@"UserImageCell" forKey:@"XLFormRowDescriptorYourCustomType"];
 
     
     [self setupGoogleMap];
     [[LocationMode shareInstance] checkLocationAuthorizationStatus];
     
+    // [START initialize_firebase]
+    [FIRApp configure];
+    // [END initialize_firebase]
+    
+    [self registerForRemoteNotifications];
+    
+    [self checkUserSignIn];
     
     return YES;
 }
@@ -41,9 +51,30 @@
 {
     [GMSServices provideAPIKey:@"AIzaSyCOtIdprF-Sb0VP-s1dH7MPeNkmHt6NmCU"];
     [GMSPlacesClient provideAPIKey:@"AIzaSyCOtIdprF-Sb0VP-s1dH7MPeNkmHt6NmCU"];
-
 }
 
+-(void) checkUserSignIn
+{
+//    [[FIRAuth auth]
+//     addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth, FIRUser *_Nullable user) {
+//         // ...
+//         NSLog(@"get current user is %@",user.displayName);
+//
+//     }];
+    
+    if ([FIRAuth auth].currentUser) {
+        // User is signed in.
+        // ...
+        NSLog(@"user signed in-------");
+        NSLog(@"get current user is %@",[FIRAuth auth].currentUser.phoneNumber);
+        
+    } else {
+        // No user is signed in.
+        // ...
+        NSLog(@"no user signed in");
+
+    }
+}
 
 
 
@@ -72,6 +103,101 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+#pragma mark - Push Notification
+- (void)registerForRemoteNotifications {
+    
+        if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")){
+            NSLog(@"register remote notification -----------  ");
+            UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+            center.delegate = self;
+            [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+                if(!error){
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [[UIApplication sharedApplication] registerForRemoteNotifications];
+                    });
+                }
+            }];
+        }
+        else {
+            // Code for old versions
+            UIUserNotificationType UserNotificationTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+            
+            UserNotificationTypes |= UIUserNotificationActivationModeBackground;
+            UserNotificationTypes |= UIUserNotificationActivationModeForeground;
+            
+            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UserNotificationTypes categories:nil];
+            
+            [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        }
+ 
+    
+}
+
+#pragma mark - UNUserNotificationCenterDelegate
+//Called when a notification is delivered to a foreground app.
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
+    NSLog(@"User Info : %@",notification.request.content.userInfo);
+    completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
+}
+
+//Called to let your app know which action was selected by the user for a given notification.
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
+    NSLog(@"didReceiveNotificationResponse User Info : %@",response.notification.request.content.userInfo);
+    
+    completionHandler();
+}
+
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    NSLog(@"did register notification %@",deviceToken);
+    
+    // Pass device token to auth.
+    [[FIRAuth auth] setAPNSToken:deviceToken type:FIRAuthAPNSTokenTypeSandbox];
+    // Further handling of the device token if needed by the app.
+}
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    // Pass notification to auth and check if they can handle it.
+    
+    NSLog(@"didReceiveRemoteNotification with info in the old way: %@",notification);
+    NSDictionary *info = [notification objectForKey:@"aps"];
+    
+    if ([info[@"type"] isEqualToString:@"test"]) {
+        //        NSLog(@"type test post notificaiton -------");
+        //
+        //        if (!self.justOneTime) {
+        //            [[[UIAlertView alloc] initWithTitle:@"fucking show" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        //            self.justOneTime = true;
+        //        }
+        
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"Test" object:nil userInfo:nil];
+        
+        NSLog(@"get push notification write on to prepare for open app");
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"free_trial_credit.plist"];
+        
+        [notification writeToFile:filePath atomically:YES];
+        completionHandler(UIBackgroundFetchResultNoData);
+    }
+    
+    
+    if ([[FIRAuth auth] canHandleNotification:notification]) {
+        completionHandler(UIBackgroundFetchResultNoData);
+        return;
+    }
+    //     This notification is not auth related, developer should handle it.
+}
+
+
+
+
 
 
 @end

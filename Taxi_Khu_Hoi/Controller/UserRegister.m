@@ -9,6 +9,7 @@
 #import "UserRegister.h"
 #import "XLForm.h"
 #import "VerifyCode.h"
+#import <FirebaseAuth/FirebaseAuth.h>
 
 
 NSString *const kName = @"name";
@@ -110,9 +111,38 @@ NSString *const kButton = @"button";
 
 -(void) showVerifyView
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    VerifyCode *verifyCode = [storyboard  instantiateViewControllerWithIdentifier:@"VerifyCode"];
-    [self.navigationController pushViewController:verifyCode animated:true] ;
+
+    
+    NSDictionary *formValue = self.formValues;
+    NSLog(@"form value is %@",formValue);
+    NSString *phoneNumber = [formValue objectForKey:kNumber];
+    phoneNumber = [NSString stringWithFormat:@"+84%@",phoneNumber];
+    
+    NSLog(@"actually phone number is %@",phoneNumber);
+    
+    [[FIRPhoneAuthProvider provider] verifyPhoneNumber:phoneNumber
+                                            UIDelegate:nil
+                                            completion:^(NSString * _Nullable verificationID, NSError * _Nullable error) {
+                                                if (error) {
+//                                                    [self showMessagePrompt:error.localizedDescription];
+                                                    NSLog(@"error is %@",error.localizedDescription);
+                                                    return;
+                                                }
+                                                else
+                                                {  // Sign in using the verificationID and the code sent to the user
+                                                    // ...
+                                                    NSLog(@"vefiry phone success ======== with verification id is %@",verificationID);
+                                                    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+                                                    [userDefault setObject:verificationID forKey:AuthVerificationID];
+                                                    
+                                                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                                                    VerifyCode *verifyCode = [storyboard  instantiateViewControllerWithIdentifier:@"VerifyCode"];
+                                                    [self.navigationController pushViewController:verifyCode animated:true] ;
+                                            }
+                                              
+                                            }];
+   
+    
 }
 
 

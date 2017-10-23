@@ -11,4 +11,6 @@
 
 @interface VerifyCode : XLFormViewController
 
+-(void) signOutUser;
+
 @end

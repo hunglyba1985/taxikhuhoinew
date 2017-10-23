@@ -10,6 +10,7 @@
 		52CD459F1F98F13800B815DC /* UserImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CD459D1F98F13800B815DC /* UserImageCell.m */; };
 		52CD45A01F98F13800B815DC /* UserImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CD459E1F98F13800B815DC /* UserImageCell.xib */; };
 		9A56443010891A28716AADAE /* libPods-Taxi_Khu_Hoi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E987D8C3263BA38C5014EF0 /* libPods-Taxi_Khu_Hoi.a */; };
+		B21A1D3F1F9DA7B100444293 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B21A1D3E1F9DA7B000444293 /* GoogleService-Info.plist */; };
 		B22B81601F98B48B0020C27F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22B815F1F98B48B0020C27F /* MenuViewController.m */; };
 		B22B81631F99B51A0020C27F /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22B81621F99B51A0020C27F /* HistoryViewController.m */; };
 		B22B81661F99B5340020C27F /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22B81651F99B5340020C27F /* ScheduleViewController.m */; };
@@ -40,6 +41,8 @@
 		52CD459E1F98F13800B815DC /* UserImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserImageCell.xib; sourceTree = "<group>"; };
 		7BEF74DB582DF70352ADCC86 /* Pods-Taxi_Khu_Hoi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taxi_Khu_Hoi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi.debug.xcconfig"; sourceTree = "<group>"; };
 		9D282F293B38826D6A6A8B83 /* Pods-Taxi_Khu_Hoi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taxi_Khu_Hoi.release.xcconfig"; path = "Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi.release.xcconfig"; sourceTree = "<group>"; };
+		B21A1D3E1F9DA7B000444293 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B21A1D401F9DA8E200444293 /* Taxi_Khu_Hoi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Taxi_Khu_Hoi.entitlements; sourceTree = "<group>"; };
 		B22B815E1F98B48B0020C27F /* MenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		B22B815F1F98B48B0020C27F /* MenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		B22B81611F99B51A0020C27F /* HistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
@@ -140,6 +143,7 @@
 		B2A4E6431F95B5FB008B7596 /* Taxi_Khu_Hoi */ = {
 			isa = PBXGroup;
 			children = (
+				B21A1D401F9DA8E200444293 /* Taxi_Khu_Hoi.entitlements */,
 				B2A4E6441F95B5FB008B7596 /* AppDelegate.h */,
 				B2A4E6451F95B5FB008B7596 /* AppDelegate.m */,
 				B2A4E64A1F95B5FB008B7596 /* Main.storyboard */,
@@ -149,6 +153,7 @@
 				B2A4E64F1F95B5FB008B7596 /* LaunchScreen.storyboard */,
 				B2A4E6521F95B5FB008B7596 /* Info.plist */,
 				B2A4E6791F971259008B7596 /* PrefixHeader.pch */,
+				B21A1D3E1F9DA7B000444293 /* GoogleService-Info.plist */,
 				B2A4E6531F95B5FB008B7596 /* main.m */,
 				B2A4E6751F9702C0008B7596 /* Model */,
 				B2A4E6671F9610A8008B7596 /* CustomView */,
@@ -246,6 +251,14 @@
 					B2A4E6401F95B5FB008B7596 = {
 						CreatedOnToolsVersion = 9.0.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -277,6 +290,7 @@
 				B2A4E66E1F961170008B7596 /* ImageCustomCell.xib in Resources */,
 				52CD45A01F98F13800B815DC /* UserImageCell.xib in Resources */,
 				B2A4E64C1F95B5FB008B7596 /* Main.storyboard in Resources */,
+				B21A1D3F1F9DA7B100444293 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +507,7 @@
 			baseConfigurationReference = 7BEF74DB582DF70352ADCC86 /* Pods-Taxi_Khu_Hoi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Taxi_Khu_Hoi/Taxi_Khu_Hoi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 988D2L6XZT;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -511,6 +526,7 @@
 			baseConfigurationReference = 9D282F293B38826D6A6A8B83 /* Pods-Taxi_Khu_Hoi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Taxi_Khu_Hoi/Taxi_Khu_Hoi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 988D2L6XZT;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
