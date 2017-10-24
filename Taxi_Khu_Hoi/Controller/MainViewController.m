@@ -40,6 +40,7 @@
     // Do any additional setup after loading the view.
     
     [self showGoogleMapView];
+    [self updateUserName];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -67,6 +68,23 @@
     [self.view addSubview:self.menuView];
     self.menuView.hidden = true;
     
+}
+
+#pragma mark - Just for testing, have to find another way to do that
+-(void) updateUserName
+{
+    FIRUserProfileChangeRequest *changeRequest = [[FIRAuth auth].currentUser profileChangeRequest];
+    changeRequest.displayName = @"Ly Ba Hung";
+    [changeRequest commitChangesWithCompletion:^(NSError *_Nullable error) {
+        // ...
+        if (error) {
+            NSLog(@"have error when update user data, Firebase User");
+        }
+        else
+        {
+            NSLog(@"update user success");
+        }
+    }];
 }
 
 

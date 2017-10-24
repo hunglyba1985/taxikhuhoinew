@@ -13,6 +13,9 @@
 @import GoogleMaps;
 @import GooglePlaces;
 #import <UserNotifications/UserNotifications.h>
+#import "MainViewController.h"
+#import "ViewController.h"
+
 
 #define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -55,25 +58,24 @@
 
 -(void) checkUserSignIn
 {
-//    [[FIRAuth auth]
-//     addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth, FIRUser *_Nullable user) {
-//         // ...
-//         NSLog(@"get current user is %@",user.displayName);
-//
-//     }];
-    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
     if ([FIRAuth auth].currentUser) {
         // User is signed in.
         // ...
         NSLog(@"user signed in-------");
         NSLog(@"get current user is %@",[FIRAuth auth].currentUser.phoneNumber);
-        
+        MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+        self.window.rootViewController  = mainView;
     } else {
         // No user is signed in.
         // ...
         NSLog(@"no user signed in");
-
+        ViewController *welcomeView = [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+        self.window.rootViewController = welcomeView;
     }
+    [self.window makeKeyAndVisible];
+
 }
 
 

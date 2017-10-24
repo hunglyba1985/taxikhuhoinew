@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		52CD459F1F98F13800B815DC /* UserImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CD459D1F98F13800B815DC /* UserImageCell.m */; };
 		52CD45A01F98F13800B815DC /* UserImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CD459E1F98F13800B815DC /* UserImageCell.xib */; };
+		52CD45A51F9F792800B815DC /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CD45A41F9F792800B815DC /* ProfileViewController.m */; };
 		9A56443010891A28716AADAE /* libPods-Taxi_Khu_Hoi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E987D8C3263BA38C5014EF0 /* libPods-Taxi_Khu_Hoi.a */; };
 		B21A1D3F1F9DA7B100444293 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B21A1D3E1F9DA7B000444293 /* GoogleService-Info.plist */; };
 		B22B81601F98B48B0020C27F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22B815F1F98B48B0020C27F /* MenuViewController.m */; };
@@ -39,6 +40,8 @@
 		52CD459C1F98F13800B815DC /* UserImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserImageCell.h; sourceTree = "<group>"; };
 		52CD459D1F98F13800B815DC /* UserImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserImageCell.m; sourceTree = "<group>"; };
 		52CD459E1F98F13800B815DC /* UserImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserImageCell.xib; sourceTree = "<group>"; };
+		52CD45A31F9F792800B815DC /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		52CD45A41F9F792800B815DC /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		7BEF74DB582DF70352ADCC86 /* Pods-Taxi_Khu_Hoi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taxi_Khu_Hoi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi.debug.xcconfig"; sourceTree = "<group>"; };
 		9D282F293B38826D6A6A8B83 /* Pods-Taxi_Khu_Hoi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taxi_Khu_Hoi.release.xcconfig"; path = "Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi.release.xcconfig"; sourceTree = "<group>"; };
 		B21A1D3E1F9DA7B000444293 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -118,6 +121,8 @@
 				B22B81681F99B5490020C27F /* HelpViewController.m */,
 				B22B816A1F99B55A0020C27F /* SettingViewController.h */,
 				B22B816B1F99B55A0020C27F /* SettingViewController.m */,
+				52CD45A31F9F792800B815DC /* ProfileViewController.h */,
+				52CD45A41F9F792800B815DC /* ProfileViewController.m */,
 			);
 			path = "Utility Controller";
 			sourceTree = "<group>";
@@ -327,7 +332,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E0451A65C9EBE4F24B776073 /* [CP] Copy Pods Resources */ = {
@@ -366,6 +371,7 @@
 				B2A4E67F1F975A15008B7596 /* PostNewTripController.m in Sources */,
 				B22B81631F99B51A0020C27F /* HistoryViewController.m in Sources */,
 				B22B81601F98B48B0020C27F /* MenuViewController.m in Sources */,
+				52CD45A51F9F792800B815DC /* ProfileViewController.m in Sources */,
 				B2A4E6741F9702B7008B7596 /* LocationMode.m in Sources */,
 				B22B81691F99B5490020C27F /* HelpViewController.m in Sources */,
 				52CD459F1F98F13800B815DC /* UserImageCell.m in Sources */,

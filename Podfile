@@ -9,8 +9,11 @@ target 'Taxi_Khu_Hoi' do
   pod 'XLForm'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
+  pod 'Firebase/Firestore'
+
 end
