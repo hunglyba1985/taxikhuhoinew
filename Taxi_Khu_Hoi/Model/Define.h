@@ -40,6 +40,8 @@
 #define UserLongtitude @"longtitude"
 #define UserLatitude @"latitude"
 
+#define TypeUser @"type user"
+#define TypeDriver @"type driver"
 
 
 

@@ -21,8 +21,13 @@
 #import "XLFormViewController.h"
 #import "UserImageCell.h"
 #import <FirebaseAuth/FirebaseAuth.h>
+
 @import Firebase;
 @import FirebaseAuth;
+@import FirebaseFirestore;
+#import "Location.h"
+@import FirebaseDatabase;
+@import FirebaseCore;
 
 
 #endif /* PrefixHeader_pch */

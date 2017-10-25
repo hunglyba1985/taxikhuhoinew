@@ -26,7 +26,7 @@ static LocationMode *_shareClient;
     if (self) {
         
         [self setupGetCurrentLocation];
-        
+
     }
     
     return self;
@@ -34,6 +34,7 @@ static LocationMode *_shareClient;
 
 -(void) setupGetCurrentLocation
 {
+
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
     _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
@@ -102,6 +103,15 @@ static LocationMode *_shareClient;
     _location = [locations lastObject];
     [self notifiLocationAndSaveToNextTime];
     
+    FIRUser *user = [FIRAuth auth].currentUser;
+    if (user) {
+        
+        Location *currentLocation = [[Location alloc] initWithUserId:user.uid andUserType:TypeUser andLongtitude:[NSString stringWithFormat:@"%f",_location.coordinate.longitude] andLatitude:[NSString stringWithFormat:@"%f",_location.coordinate.latitude]];
+        [self updateLocationToFirebase:currentLocation];
+        
+    }
+
+    
     
 }
 
@@ -149,4 +159,47 @@ static LocationMode *_shareClient;
     [[NSUserDefaults standardUserDefaults] setObject:userLocation forKey:OldLocation];
 }
 
+-(void) updateLocationToFirebase:(Location *) currentLocation
+{
+//    NSLog(@"update current location to firebase");
+    FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+    FIRCollectionReference* db= [defaultFirestore collectionWithPath:LocationCollectionData];
+    FIRUser *user = [FIRAuth auth].currentUser;
+    [[db documentWithPath:user.uid] setData:[currentLocation convertToData] completion:^(NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error adding document: %@", error);
+        } else {
+            NSLog(@"Document added with ID");
+        }
+    }];
+    
+}
+
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

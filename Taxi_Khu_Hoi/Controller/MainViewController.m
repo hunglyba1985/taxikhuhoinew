@@ -40,6 +40,7 @@
     // Do any additional setup after loading the view.
     
     [self showGoogleMapView];
+    [self getLocationOfAllUsers];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -145,6 +146,24 @@
     }
 }
 
+#pragma mark - Get Data From Firebase
+-(void) getLocationOfAllUsers
+{
+    FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+    FIRCollectionReference* db= [defaultFirestore collectionWithPath:LocationCollectionData];
+    [db getDocumentsWithCompletion:^(FIRQuerySnapshot * _Nullable snapshot, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error getting documents: %@", error);
+        } else {
+            for (FIRDocumentSnapshot *document in snapshot.documents) {
+                NSLog(@"current uer location %@ => %@", document.documentID, document.data);
+            }
+        }
+    }];
+    
+}
+
+
 #pragma mark - Private Method
 -(void)showPostTripView
 {
@@ -182,28 +201,29 @@
 -(void) resetLocation
 {
 //  NSLog(@"reset location here");
-    CLLocation *currentLocation = [LocationMode shareInstance].location;
-    [self setCameraForMap:currentLocation.coordinate];
+//    CLLocation *currentLocation = [LocationMode shareInstance].location;
+//    [self setCameraForMap:currentLocation.coordinate];
 }
+
+
+
 
 -(void) setCameraForMap:(CLLocationCoordinate2D ) coordinate
 {
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:coordinate.latitude
                                                             longitude:coordinate.longitude
                                                                  zoom:17];
-    
-//    GMSMarker *marker = [[GMSMarker alloc] init];
-//    marker.position = camera.target;
-//    marker.snippet = @"Hello World";
-//    marker.appearAnimation = kGMSMarkerAnimationPop;
-//    marker.map = _mapView;
-    
+
     [_mapView setCamera:camera];
 }
 
 -(void) setMarkOnMap:(CLLocationCoordinate2D ) coordinate
 {
-    
+        GMSMarker *marker = [[GMSMarker alloc] init];
+        marker.position = coordinate;
+//        marker.snippet = @"Hello World";
+        marker.appearAnimation = kGMSMarkerAnimationPop;
+        marker.map = _mapView;
 }
 
 #pragma mark - GMSAutocompleteViewControllerDelegate
@@ -217,7 +237,7 @@ didAutocompleteWithPlace:(GMSPlace *)place {
     NSLog(@"Place attributions %@", place.attributions.string);
     
     [self setCameraForMap:place.coordinate];
-    
+    [self setMarkOnMap:place.coordinate];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+
 @interface LocationMode : NSObject <CLLocationManagerDelegate>
 {
     NSTimer *updateCurrentLocationTimer;
@@ -19,6 +20,7 @@
 @property (readonly, nonatomic) CLLocationDegrees longitude;
 @property (readonly, nonatomic) CLLocationDegrees latitude;
 @property (readonly, nonatomic) CLPlacemark *placemark;
+
 
 
 +(LocationMode *) shareInstance;
