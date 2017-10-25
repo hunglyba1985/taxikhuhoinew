@@ -114,6 +114,8 @@ NSString *const kVerifyCode = @"verifyCode";
                                   {
                                       // User successfully signed in. Get user data from the FIRUser object
                                       // ...
+                                      
+                                      [self updateUserName];
                                       NSLog(@"sign in with phone number success with data %@",user);
                                       UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                                       MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
@@ -125,6 +127,21 @@ NSString *const kVerifyCode = @"verifyCode";
 
 }
 
+-(void) updateUserName
+{
+    FIRUserProfileChangeRequest *changeRequest = [[FIRAuth auth].currentUser profileChangeRequest];
+    changeRequest.displayName = [[NSUserDefaults standardUserDefaults] objectForKey:UserNameUpdate];
+    [changeRequest commitChangesWithCompletion:^(NSError *_Nullable error) {
+        // ...
+        if (error) {
+            NSLog(@"have error when update user data, Firebase User");
+        }
+        else
+        {
+            NSLog(@"update user success");
+        }
+    }];
+}
 
 
 -(void) signOutUser

@@ -134,6 +134,8 @@ NSString *const kButton = @"button";
                                                     NSLog(@"vefiry phone success ======== with verification id is %@",verificationID);
                                                     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
                                                     [userDefault setObject:verificationID forKey:AuthVerificationID];
+                                                    // save user name to update later, this logic seems still need to improve
+                                                    [userDefault setObject:[formValue objectForKey:kName] forKey:UserNameUpdate];
                                                     
                                                     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                                                     VerifyCode *verifyCode = [storyboard  instantiateViewControllerWithIdentifier:@"VerifyCode"];
