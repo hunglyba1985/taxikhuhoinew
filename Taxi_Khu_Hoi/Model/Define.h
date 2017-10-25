@@ -13,8 +13,18 @@
 #define OldLocation                   @"Old Location"
 #define Latitude    @"Latitude"
 #define Longtitude @"Longtitude"
+
 #define AuthVerificationID  @"authVerificationID"
 #define UserNameUpdate @"User name update"
+
+
+// Model define
+#define UserCollectionData @"users"
+#define DriverCollectionData @"drivers"
+#define LocationCollectionData @"locations"
+#define EventCollectionData @"events"
+
+
 
 
 #endif /* Define_h */

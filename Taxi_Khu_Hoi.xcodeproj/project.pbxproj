@@ -10,6 +10,10 @@
 		52CD459F1F98F13800B815DC /* UserImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CD459D1F98F13800B815DC /* UserImageCell.m */; };
 		52CD45A01F98F13800B815DC /* UserImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CD459E1F98F13800B815DC /* UserImageCell.xib */; };
 		52CD45A51F9F792800B815DC /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CD45A41F9F792800B815DC /* ProfileViewController.m */; };
+		52CD45A81FA0065900B815DC /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CD45A71FA0065900B815DC /* User.m */; };
+		52CD45AB1FA0066C00B815DC /* Driver.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CD45AA1FA0066C00B815DC /* Driver.m */; };
+		52CD45AE1FA0069800B815DC /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CD45AD1FA0069800B815DC /* Location.m */; };
+		52CD45B11FA006AB00B815DC /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CD45B01FA006AB00B815DC /* Event.m */; };
 		9A56443010891A28716AADAE /* libPods-Taxi_Khu_Hoi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E987D8C3263BA38C5014EF0 /* libPods-Taxi_Khu_Hoi.a */; };
 		B21A1D3F1F9DA7B100444293 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B21A1D3E1F9DA7B000444293 /* GoogleService-Info.plist */; };
 		B22B81601F98B48B0020C27F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22B815F1F98B48B0020C27F /* MenuViewController.m */; };
@@ -42,6 +46,14 @@
 		52CD459E1F98F13800B815DC /* UserImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserImageCell.xib; sourceTree = "<group>"; };
 		52CD45A31F9F792800B815DC /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		52CD45A41F9F792800B815DC /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		52CD45A61FA0065900B815DC /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		52CD45A71FA0065900B815DC /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		52CD45A91FA0066C00B815DC /* Driver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Driver.h; sourceTree = "<group>"; };
+		52CD45AA1FA0066C00B815DC /* Driver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Driver.m; sourceTree = "<group>"; };
+		52CD45AC1FA0069800B815DC /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		52CD45AD1FA0069800B815DC /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		52CD45AF1FA006AB00B815DC /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		52CD45B01FA006AB00B815DC /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		7BEF74DB582DF70352ADCC86 /* Pods-Taxi_Khu_Hoi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taxi_Khu_Hoi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi.debug.xcconfig"; sourceTree = "<group>"; };
 		9D282F293B38826D6A6A8B83 /* Pods-Taxi_Khu_Hoi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taxi_Khu_Hoi.release.xcconfig"; path = "Pods/Target Support Files/Pods-Taxi_Khu_Hoi/Pods-Taxi_Khu_Hoi.release.xcconfig"; sourceTree = "<group>"; };
 		B21A1D3E1F9DA7B000444293 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -207,6 +219,14 @@
 				B2A4E67A1F971468008B7596 /* Define.h */,
 				B2A4E6721F9702B7008B7596 /* LocationMode.h */,
 				B2A4E6731F9702B7008B7596 /* LocationMode.m */,
+				52CD45A61FA0065900B815DC /* User.h */,
+				52CD45A71FA0065900B815DC /* User.m */,
+				52CD45A91FA0066C00B815DC /* Driver.h */,
+				52CD45AA1FA0066C00B815DC /* Driver.m */,
+				52CD45AC1FA0069800B815DC /* Location.h */,
+				52CD45AD1FA0069800B815DC /* Location.m */,
+				52CD45AF1FA006AB00B815DC /* Event.h */,
+				52CD45B01FA006AB00B815DC /* Event.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -364,12 +384,16 @@
 			files = (
 				B2A4E66D1F961170008B7596 /* ImageCustomCell.m in Sources */,
 				B2A4E6491F95B5FB008B7596 /* ViewController.m in Sources */,
+				52CD45A81FA0065900B815DC /* User.m in Sources */,
 				B2A4E65C1F95B6A7008B7596 /* UserRegister.m in Sources */,
 				B2A4E6711F961FB9008B7596 /* MainViewController.m in Sources */,
 				B2A4E6601F95F727008B7596 /* DriverRegister.m in Sources */,
+				52CD45B11FA006AB00B815DC /* Event.m in Sources */,
+				52CD45AE1FA0069800B815DC /* Location.m in Sources */,
 				B22B81661F99B5340020C27F /* ScheduleViewController.m in Sources */,
 				B2A4E67F1F975A15008B7596 /* PostNewTripController.m in Sources */,
 				B22B81631F99B51A0020C27F /* HistoryViewController.m in Sources */,
+				52CD45AB1FA0066C00B815DC /* Driver.m in Sources */,
 				B22B81601F98B48B0020C27F /* MenuViewController.m in Sources */,
 				52CD45A51F9F792800B815DC /* ProfileViewController.m in Sources */,
 				B2A4E6741F9702B7008B7596 /* LocationMode.m in Sources */,
