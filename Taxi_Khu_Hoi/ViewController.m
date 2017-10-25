@@ -27,6 +27,8 @@
     UIBarButtonItem *item = [[UIBarButtonItem alloc] init];
     item.title = @"";
     self.navigationItem.backBarButtonItem = item;
+    self.navigationItem.hidesBackButton = true;
+    
 }
 
 - (IBAction)userRegister:(id)sender {

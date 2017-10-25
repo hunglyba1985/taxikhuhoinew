@@ -176,6 +176,7 @@ NSString *const kUserTrip = @"userTrip";
 
 -(void) settingClick
 {
+    NSLog(@"setting click");
     id<MenuViewControllerDelegate> strongDelegate = self.delegate;
     
     if ([strongDelegate respondsToSelector:@selector(menuViewControllerDidChooseSetting)]) {

@@ -48,7 +48,7 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = true;
     
-    NSLog(@"view will appear here");
+//    NSLog(@"view will appear here");
     [self addObserverForView];
     
     //set null title back button

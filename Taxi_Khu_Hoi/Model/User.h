@@ -15,6 +15,7 @@
 @property(strong, nonatomic) NSString *imageUrl;
 @property(strong, nonatomic) NSString *hometown;
 
+
 -(instancetype) initWithData:(NSDictionary*) data;
 
 -(instancetype) initWithName:(NSString*) name

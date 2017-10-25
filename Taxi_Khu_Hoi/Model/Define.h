@@ -25,6 +25,23 @@
 #define EventCollectionData @"events"
 
 
+// Model object
+#define UserId    @"userId"
+#define UserType  @"userType"
+#define UserName  @"name"
+#define UserPhone @"phone"
+#define UserImage @"image_url"
+#define UserHometown @"hometown"
+
+#define TaxiBrand @"taxi_brand"
+#define CarNumber @"car_number"
+#define CarName   @"car_name"
+
+#define UserLongtitude @"longtitude"
+#define UserLatitude @"latitude"
+
+
+
 
 
 #endif /* Define_h */

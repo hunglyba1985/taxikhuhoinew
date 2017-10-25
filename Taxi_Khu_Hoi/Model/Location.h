@@ -10,4 +10,21 @@
 
 @interface Location : NSObject
 
+@property(strong, nonatomic) NSString *userId;
+@property(strong, nonatomic) NSString *userType;
+@property(strong, nonatomic) NSString *longtitude;
+@property(strong, nonatomic) NSString *lattitude;
+
+
+
+-(instancetype) initWithData:(NSDictionary*) data;
+
+-(instancetype) initWithUserId:(NSString*) userId
+                   andUserType:(NSString*) userType
+                 andLongtitude:(NSString *) longtitude
+                   andLatitude:(NSString*) latitude;
+
+
+-(NSDictionary *) convertToData;
+
 @end

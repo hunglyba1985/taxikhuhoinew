@@ -66,13 +66,15 @@
         NSLog(@"user signed in-------");
         NSLog(@"get current user is %@",[FIRAuth auth].currentUser.phoneNumber);
         MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-        self.window.rootViewController  = mainView;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainView];
+        self.window.rootViewController  = nav;
     } else {
         // No user is signed in.
         // ...
         NSLog(@"no user signed in");
         ViewController *welcomeView = [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
-        self.window.rootViewController = welcomeView;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:welcomeView];
+        self.window.rootViewController = nav;
     }
     [self.window makeKeyAndVisible];
 

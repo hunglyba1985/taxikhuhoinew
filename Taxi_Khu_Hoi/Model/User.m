@@ -9,12 +9,6 @@
 #import "User.h"
 
 
-#define UserName  @"name"
-#define UserPhone @"phone"
-#define UserImage @"image_url"
-#define UserHometown @"hometown"
-
-
 @implementation User
 
 
