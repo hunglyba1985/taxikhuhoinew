@@ -25,7 +25,9 @@
     UIButton *searchButton;
     UIButton *menuButton;
     UIButton *menuBackgroundView;
-    
+    NSMutableArray *listUserLocation;
+    NSMutableArray *listUserId;
+    NSMutableArray *listMarkers;
     
 }
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
@@ -38,7 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    listMarkers = [NSMutableArray new];
     [self showGoogleMapView];
     [self getLocationOfAllUsers];
 }
@@ -69,9 +71,6 @@
     self.menuView.hidden = true;
     
 }
-
-
-
 
 -(void) addObserverForView
 {
@@ -158,34 +157,63 @@
 //        } else {
 //            for (FIRDocumentSnapshot *document in snapshot.documents) {
 //                NSLog(@"current uer location %@ => %@", document.documentID, document.data);
-//                
+//                [listUserId addObject:document.documentID];
 //                NSDictionary *locationData = document.data;
-//             
+//                [listUserLocation addObject:locationData];
 //                CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[locationData objectForKey:UserLatitude] floatValue], [[locationData objectForKey:UserLongtitude] floatValue]);
 //                [self setMarkOnMap:coordinate];
-//
-//                
 //            }
 //        }
 //    }];
     
+    listUserId = [NSMutableArray new];
+    listUserLocation = [NSMutableArray new];
+    
     [db addSnapshotListener:^(FIRQuerySnapshot * _Nullable snapshot, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"Error getting documents: %@", error);
-        } else {
-            [_mapView clear];
+            if (snapshot == nil) {
+                NSLog(@"Error fetching documents: %@", error);
+                return;
+            }else
+            {
+                for (FIRDocumentChange *diff in snapshot.documentChanges) {
+                    if (diff.type == FIRDocumentChangeTypeAdded) {
+                        NSLog(@"New location: %@", diff.document.data);
 
-            for (FIRDocumentSnapshot *document in snapshot.documents) {
-                NSLog(@"current uer location %@ => %@", document.documentID, document.data);
-                
-                NSDictionary *locationData = document.data;
-                
-                CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[locationData objectForKey:UserLatitude] floatValue], [[locationData objectForKey:UserLongtitude] floatValue]);
-                [self setMarkOnMap:coordinate];
-                
-                
+                        NSDictionary *locationData = diff.document.data;
+                        [listUserId addObject:diff.document.documentID];
+                        
+                        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[locationData objectForKey:UserLatitude] floatValue], [[locationData objectForKey:UserLongtitude] floatValue]);
+                        [self setMarkOnMap:coordinate];
+                        
+                    }
+                    if (diff.type == FIRDocumentChangeTypeModified) {
+                        NSLog(@"Modified location: %@", diff.document.data);
+                        NSInteger oldUserIdIndex = [listUserId indexOfObject:diff.document.documentID];
+//                        NSDictionary *oldLocation = [listUserLocation objectAtIndex:oldUserIdIndex];
+//                        NSLog(@"old location is %@",oldLocation);
+//                        CLLocationCoordinate2D oldCoordinate = CLLocationCoordinate2DMake([[oldLocation objectForKey:UserLatitude] floatValue], [[oldLocation objectForKey:UserLongtitude] floatValue]);
+//                        [self removerMarkOnMap:oldCoordinate];
+                        
+                        GMSMarker *marker = [listMarkers objectAtIndex:oldUserIdIndex];
+                        marker.map = nil;
+                        
+                        NSDictionary *newLocationData = diff.document.data;
+                        NSLog(@"new location is %@",newLocationData);
+                        CLLocationCoordinate2D newCoordinate = CLLocationCoordinate2DMake([[newLocationData objectForKey:UserLatitude] floatValue], [[newLocationData objectForKey:UserLongtitude] floatValue]);
+                        [self replaceMarkerWithNewCoordinate:newCoordinate atIndex:oldUserIdIndex];
+                        
+                    }
+                    if (diff.type == FIRDocumentChangeTypeRemoved) {
+                        NSLog(@"Removed location: %@", diff.document.data);
+                        NSInteger oldUserIdIndex = [listUserId indexOfObject:diff.document.documentID];
+                        NSDictionary *oldLocation = [listUserLocation objectAtIndex:oldUserIdIndex];
+                        CLLocationCoordinate2D oldCoordinate = CLLocationCoordinate2DMake([[oldLocation objectForKey:UserLatitude] floatValue], [[oldLocation objectForKey:UserLongtitude] floatValue]);
+                        [self removerMarkOnMap:oldCoordinate];
+                        
+                        [listUserId removeObjectAtIndex:oldUserIdIndex];
+                    }
+                }
             }
-        }
     }];
     
 }
@@ -233,8 +261,6 @@
 }
 
 
-
-
 -(void) setCameraForMap:(CLLocationCoordinate2D ) coordinate
 {
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:coordinate.latitude
@@ -252,6 +278,31 @@
 //        marker.snippet = @"Hello World";
         marker.appearAnimation = kGMSMarkerAnimationPop;
         marker.map = _mapView;
+    [listMarkers addObject:marker];
+}
+
+-(void) replaceMarkerWithNewCoordinate:(CLLocationCoordinate2D) coordinate atIndex:(NSInteger) index
+{
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = coordinate;
+    //        marker.snippet = @"Hello World";
+    marker.appearAnimation = kGMSMarkerAnimationPop;
+    marker.map = _mapView;
+    [listMarkers replaceObjectAtIndex:index withObject:marker];
+    
+}
+
+-(void) removerMarkOnMap:(CLLocationCoordinate2D) coordinate
+{
+    
+    NSLog(@"remover old mark on map");
+    GMSMarker *marker = [GMSMarker markerWithPosition:coordinate];
+    marker.map = _mapView;
+    marker.map = nil;
+}
+
+-(void) changeLocationOfMarker:(GMSMarker*) marker toNewLocation:(CLLocationCoordinate2D) coordinate
+{
 }
 
 #pragma mark - GMSAutocompleteViewControllerDelegate

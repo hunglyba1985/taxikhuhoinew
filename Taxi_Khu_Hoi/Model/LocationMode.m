@@ -105,13 +105,11 @@ static LocationMode *_shareClient;
     
     FIRUser *user = [FIRAuth auth].currentUser;
     if (user) {
-        
         Location *currentLocation = [[Location alloc] initWithUserId:user.uid andUserType:TypeUser andLongtitude:[NSString stringWithFormat:@"%f",_location.coordinate.longitude] andLatitude:[NSString stringWithFormat:@"%f",_location.coordinate.latitude]];
         [self updateLocationToFirebase:currentLocation];
-        
     }
-
     
+    [_locationManager stopUpdatingLocation];
     
 }
 
