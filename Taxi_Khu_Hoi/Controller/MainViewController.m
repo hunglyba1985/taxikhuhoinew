@@ -88,7 +88,7 @@
     NSNumber *lon = [oldLocation objectForKey:Longtitude];
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[lat doubleValue]
                                                             longitude:[lon doubleValue]
-                                                                 zoom:17];
+                                                                 zoom:15];
     self.mapView.myLocationEnabled = YES;
     [_mapView setCamera:camera];
 
@@ -157,6 +157,13 @@
         } else {
             for (FIRDocumentSnapshot *document in snapshot.documents) {
                 NSLog(@"current uer location %@ => %@", document.documentID, document.data);
+                
+                NSDictionary *locationData = document.data;
+             
+                CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[locationData objectForKey:UserLatitude] floatValue], [[locationData objectForKey:UserLongtitude] floatValue]);
+                [self setMarkOnMap:coordinate];
+
+                
             }
         }
     }];
@@ -212,13 +219,14 @@
 {
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:coordinate.latitude
                                                             longitude:coordinate.longitude
-                                                                 zoom:17];
+                                                                 zoom:15];
 
     [_mapView setCamera:camera];
 }
 
 -(void) setMarkOnMap:(CLLocationCoordinate2D ) coordinate
 {
+    NSLog(@"set mark on map");
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = coordinate;
 //        marker.snippet = @"Hello World";
