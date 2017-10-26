@@ -151,18 +151,38 @@
 {
     FIRFirestore *defaultFirestore = [FIRFirestore firestore];
     FIRCollectionReference* db= [defaultFirestore collectionWithPath:LocationCollectionData];
-    [db getDocumentsWithCompletion:^(FIRQuerySnapshot * _Nullable snapshot, NSError * _Nullable error) {
+    
+//    [db getDocumentsWithCompletion:^(FIRQuerySnapshot * _Nullable snapshot, NSError * _Nullable error) {
+//        if (error != nil) {
+//            NSLog(@"Error getting documents: %@", error);
+//        } else {
+//            for (FIRDocumentSnapshot *document in snapshot.documents) {
+//                NSLog(@"current uer location %@ => %@", document.documentID, document.data);
+//                
+//                NSDictionary *locationData = document.data;
+//             
+//                CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[locationData objectForKey:UserLatitude] floatValue], [[locationData objectForKey:UserLongtitude] floatValue]);
+//                [self setMarkOnMap:coordinate];
+//
+//                
+//            }
+//        }
+//    }];
+    
+    [db addSnapshotListener:^(FIRQuerySnapshot * _Nullable snapshot, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error getting documents: %@", error);
         } else {
+            [_mapView clear];
+
             for (FIRDocumentSnapshot *document in snapshot.documents) {
                 NSLog(@"current uer location %@ => %@", document.documentID, document.data);
                 
                 NSDictionary *locationData = document.data;
-             
+                
                 CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[locationData objectForKey:UserLatitude] floatValue], [[locationData objectForKey:UserLongtitude] floatValue]);
                 [self setMarkOnMap:coordinate];
-
+                
                 
             }
         }
