@@ -301,10 +301,6 @@
     marker.map = nil;
 }
 
--(void) changeLocationOfMarker:(GMSMarker*) marker toNewLocation:(CLLocationCoordinate2D) coordinate
-{
-}
-
 #pragma mark - GMSAutocompleteViewControllerDelegate
 // Handle the user's selection.
 - (void)viewController:(GMSAutocompleteViewController *)viewController

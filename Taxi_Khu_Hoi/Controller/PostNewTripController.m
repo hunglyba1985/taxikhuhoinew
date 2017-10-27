@@ -7,8 +7,11 @@
 //
 
 #import "PostNewTripController.h"
+#import "SelectLocationCell.h"
 
-NSString *const kLocation = @"location";
+
+NSString *const kDestination = @"destination";
+NSString *const kFrom = @"from";
 NSString *const kTime = @"time";
 NSString *const kPrice = @"price";
 NSString *const kPostButton = @"postButton";
@@ -58,9 +61,16 @@ NSString *const kNote = @"note";
 //    row.required = YES;
     [section addFormRow:row];
     
+    // From
+//    row = [XLFormRowDescriptor formRowDescriptorWithTag:kFrom rowType:XLFormRowDescriptorTypeText title:@"From:"];
+//    row.required = YES;
+//    [section addFormRow:row];
     
-    // Location
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:kLocation rowType:XLFormRowDescriptorTypeText title:@"Location:"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kFrom rowType:SelectLocationCellWithNib title:@"From:"];
+    [section addFormRow:row];
+    
+    // Destination
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kDestination rowType:XLFormRowDescriptorTypeText title:@"Destination:"];
     row.required = YES;
     [section addFormRow:row];
     
@@ -93,6 +103,16 @@ NSString *const kNote = @"note";
     
     self.form = form;
     
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // change cell height of a particular cell
+    if ([[self.form formRowAtIndex:indexPath].tag isEqualToString:kFrom]){
+        return 50;
+    }
+    
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (void)viewDidLoad {

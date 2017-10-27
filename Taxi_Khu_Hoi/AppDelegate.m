@@ -17,6 +17,7 @@
 #import "ViewController.h"
 
 
+
 #define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 
@@ -34,6 +35,7 @@
     
     [XLFormViewController.cellClassesForRowDescriptorTypes setObject:@"ImageCustomCell" forKey:@"XLFormRowDescriptorYourCustomType"];
     [XLFormViewController.cellClassesForRowDescriptorTypes setObject:@"UserImageCell" forKey:@"XLFormRowDescriptorYourCustomType"];
+    [XLFormViewController.cellClassesForRowDescriptorTypes setObject:@"SelectLocationCell" forKey:@"XLFormRowDescriptorYourCustomType"];
 
     
     [self setupGoogleMap];

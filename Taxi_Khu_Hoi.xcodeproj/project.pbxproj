@@ -37,6 +37,8 @@
 		B2A4E6771F970E5E008B7596 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A4E6761F970E4F008B7596 /* CoreLocation.framework */; };
 		B2A4E67C1F9718DE008B7596 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A4E67B1F9718D2008B7596 /* CoreData.framework */; };
 		B2A4E67F1F975A15008B7596 /* PostNewTripController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E67E1F975A15008B7596 /* PostNewTripController.m */; };
+		B2E554231FA3218400516A3F /* SelectLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E554211FA3218400516A3F /* SelectLocationCell.m */; };
+		B2E554241FA3218400516A3F /* SelectLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2E554221FA3218400516A3F /* SelectLocationCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +99,9 @@
 		B2A4E67B1F9718D2008B7596 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B2A4E67D1F975A15008B7596 /* PostNewTripController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostNewTripController.h; sourceTree = "<group>"; };
 		B2A4E67E1F975A15008B7596 /* PostNewTripController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostNewTripController.m; sourceTree = "<group>"; };
+		B2E554201FA3218400516A3F /* SelectLocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectLocationCell.h; sourceTree = "<group>"; };
+		B2E554211FA3218400516A3F /* SelectLocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectLocationCell.m; sourceTree = "<group>"; };
+		B2E554221FA3218400516A3F /* SelectLocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectLocationCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +213,9 @@
 				52CD459C1F98F13800B815DC /* UserImageCell.h */,
 				52CD459D1F98F13800B815DC /* UserImageCell.m */,
 				52CD459E1F98F13800B815DC /* UserImageCell.xib */,
+				B2E554201FA3218400516A3F /* SelectLocationCell.h */,
+				B2E554211FA3218400516A3F /* SelectLocationCell.m */,
+				B2E554221FA3218400516A3F /* SelectLocationCell.xib */,
 			);
 			name = CustomView;
 			path = "New Group";
@@ -313,6 +321,7 @@
 				B2A4E6511F95B5FB008B7596 /* LaunchScreen.storyboard in Resources */,
 				B2A4E64E1F95B5FB008B7596 /* Assets.xcassets in Resources */,
 				B2A4E66E1F961170008B7596 /* ImageCustomCell.xib in Resources */,
+				B2E554241FA3218400516A3F /* SelectLocationCell.xib in Resources */,
 				52CD45A01F98F13800B815DC /* UserImageCell.xib in Resources */,
 				B2A4E64C1F95B5FB008B7596 /* Main.storyboard in Resources */,
 				B21A1D3F1F9DA7B100444293 /* GoogleService-Info.plist in Resources */,
@@ -352,7 +361,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E0451A65C9EBE4F24B776073 /* [CP] Copy Pods Resources */ = {
@@ -365,6 +374,7 @@
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 				"${PODS_ROOT}/XLForm/XLForm/XLForm.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/gRPC/gRPCCertificates.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -392,6 +402,7 @@
 				52CD45AE1FA0069800B815DC /* Location.m in Sources */,
 				B22B81661F99B5340020C27F /* ScheduleViewController.m in Sources */,
 				B2A4E67F1F975A15008B7596 /* PostNewTripController.m in Sources */,
+				B2E554231FA3218400516A3F /* SelectLocationCell.m in Sources */,
 				B22B81631F99B51A0020C27F /* HistoryViewController.m in Sources */,
 				52CD45AB1FA0066C00B815DC /* Driver.m in Sources */,
 				B22B81601F98B48B0020C27F /* MenuViewController.m in Sources */,
