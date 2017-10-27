@@ -9,23 +9,25 @@
 #ifndef Define_h
 #define Define_h
 
+// Location function
 #define NotifyGetLocation             @"Notify Get Location"
 #define OldLocation                   @"Old Location"
 #define Latitude    @"Latitude"
 #define Longtitude @"Longtitude"
 
+// User register
 #define AuthVerificationID  @"authVerificationID"
 #define UserNameUpdate @"User name update"
 
 
-// Model define
+// Firebase model define
 #define UserCollectionData @"users"
 #define DriverCollectionData @"drivers"
 #define LocationCollectionData @"locations"
 #define EventCollectionData @"events"
 
 
-// Model object
+// Client Model object
 #define UserId    @"userId"
 #define UserType  @"userType"
 #define UserName  @"name"
@@ -46,7 +48,32 @@
 
 #define UserData @"userData"
 
-
+// Client Model object event
+#define UserDestination @"destination"
+#define UserStartTime @"startTime"
+#define UserPrice @"price"
+#define UserFrom @"from"
 
 
 #endif /* Define_h */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

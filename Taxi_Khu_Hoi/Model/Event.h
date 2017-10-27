@@ -10,4 +10,29 @@
 
 @interface Event : NSObject
 
+@property (strong, nonatomic) NSString *userId;
+@property (strong, nonatomic) NSString *userType;
+@property (strong, nonatomic) NSString *destination;
+@property (strong, nonatomic) NSString *from;
+@property (strong, nonatomic) NSString *startTime;
+@property (strong, nonatomic) NSString *price;
+
+
+
+
+-(instancetype) initWithData:(NSDictionary*) data;
+
+-(instancetype) initWithUserId:(NSString*) userId
+                   andUserType:(NSString*) userType
+                   destination:(NSString *) destination
+                     startTime:(NSString*) startTime
+                         price:(NSString*) price
+                          from:(NSString*) from;
+
+
+-(NSDictionary *) convertToData;
+
+
+
+
 @end
