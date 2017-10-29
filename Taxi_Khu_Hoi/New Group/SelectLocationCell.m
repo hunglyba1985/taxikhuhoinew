@@ -45,7 +45,12 @@ NSString * const SelectLocationCellWithNib = @"SelectLocationCellWithNib";
 - (IBAction)cellSelected:(id)sender {
     
     NSLog(@"select cell click");
+    GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
+    filter.type = kGMSPlacesAutocompleteTypeFilterRegion;
+    filter.country = @"VN";
+    
     GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
+    acController.autocompleteFilter = filter;
     acController.delegate = self;
     [self.formViewController  presentViewController:acController animated:YES completion:nil];
 }

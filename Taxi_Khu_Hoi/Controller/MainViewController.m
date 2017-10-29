@@ -232,7 +232,13 @@
 -(void) showSearchView
 {
 //    NSLog(@"show searching view");
+    GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
+    filter.type = kGMSPlacesAutocompleteTypeFilterNoFilter;
+    filter.country = @"VN";
+    
+
     GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
+    acController.autocompleteFilter = filter;
     acController.delegate = self;
     [self presentViewController:acController animated:YES completion:nil];
 }
