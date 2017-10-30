@@ -70,8 +70,7 @@ NSString *const kNote = @"note";
     [section addFormRow:row];
     
     // Destination
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:kDestination rowType:XLFormRowDescriptorTypeText title:@"Destination:"];
-    row.required = YES;
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kDestination rowType:SelectLocationCellWithNib title:@"Destination:"];
     [section addFormRow:row];
     
     // Time
@@ -125,6 +124,19 @@ NSString *const kNote = @"note";
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = false;
     
+    [self addCloseButton];
+    
+}
+
+-(void) addCloseButton
+{
+    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [closeButton setBackgroundImage:[UIImage imageNamed:@"close_icon"] forState:UIControlStateNormal];
+    [closeButton addTarget:self action:@selector(closeClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+    self.navigationItem.rightBarButtonItem = item;
+
+    
 }
 
 -(void) postNewTrip
@@ -132,6 +144,12 @@ NSString *const kNote = @"note";
     [self dismissViewControllerAnimated:true completion:nil];
     
 }
+
+-(void) closeClick
+{
+    [self dismissViewControllerAnimated:true completion:nil];
+}
+
 
 
 
