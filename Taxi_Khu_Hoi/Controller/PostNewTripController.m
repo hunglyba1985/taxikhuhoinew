@@ -141,8 +141,15 @@ NSString *const kNote = @"note";
 
 -(void) postNewTrip
 {
-    [self dismissViewControllerAnimated:true completion:nil];
-    
+    FIRUser *user = [FIRAuth auth].currentUser;
+    NSDictionary *formValue = self.form.formValues;
+    NSDate *startTime = [formValue objectForKey:kTime];
+    NSTimeInterval timeStampe = [startTime timeIntervalSince1970];
+    NSString *starTimeStr = [NSString stringWithFormat:@"%f",timeStampe];
+    NSLog(@"start time in string is %@",starTimeStr);
+    Event *newEvent = [[Event alloc] initWithUserId:user.uid andUserType:UserType destination:[formValue objectForKey:kDestination] startTime:starTimeStr price:[formValue objectForKey:kPrice] from:[formValue objectForKey:kFrom] note:[formValue objectForKey:kNote]];
+    [self postEventToFirebase:newEvent inStartTime:starTimeStr];
+
 }
 
 -(void) closeClick
@@ -150,7 +157,19 @@ NSString *const kNote = @"note";
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
-
+-(void) postEventToFirebase:(Event*) event inStartTime:(NSString *) startTimeStr
+{
+    FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+    FIRCollectionReference* db= [defaultFirestore collectionWithPath:EventCollectionData];
+    [[db documentWithPath:startTimeStr] setData:[event convertToData] completion:^(NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error adding document: %@", error);
+        } else {
+            NSLog(@"Document added with ID");
+            [self dismissViewControllerAnimated:true completion:nil];
+        }
+    }];
+}
 
 
 - (void)didReceiveMemoryWarning {

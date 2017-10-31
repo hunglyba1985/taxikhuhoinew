@@ -262,8 +262,8 @@
 -(void) resetLocation
 {
 //  NSLog(@"reset location here");
-//    CLLocation *currentLocation = [LocationMode shareInstance].location;
-//    [self setCameraForMap:currentLocation.coordinate];
+    CLLocation *currentLocation = [LocationMode shareInstance].location;
+    [self setCameraForMap:currentLocation.coordinate];
 }
 
 

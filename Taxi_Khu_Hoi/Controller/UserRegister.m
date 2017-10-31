@@ -112,7 +112,6 @@ NSString *const kButton = @"button";
 -(void) showVerifyView
 {
 
-    
     NSDictionary *formValue = self.formValues;
     NSLog(@"form value is %@",formValue);
     NSString *phoneNumber = [formValue objectForKey:kNumber];
@@ -126,6 +125,11 @@ NSString *const kButton = @"button";
                                                 if (error) {
 //                                                    [self showMessagePrompt:error.localizedDescription];
                                                     NSLog(@"error is %@",error.localizedDescription);
+                                                    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"Error happen" message:@"Your number is not right, you can try another number" preferredStyle:UIAlertControllerStyleAlert];
+                                                    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+                                                    [alertView addAction:cancel];
+                                                    [self presentViewController:alertView animated:YES completion:nil];
+                                                    
                                                     return;
                                                 }
                                                 else

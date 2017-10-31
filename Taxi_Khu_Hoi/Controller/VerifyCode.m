@@ -92,8 +92,6 @@ NSString *const kVerifyCode = @"verifyCode";
 
 -(void) showMainView
 {
-
-    
     NSString *verificationID = [[NSUserDefaults standardUserDefaults] stringForKey:AuthVerificationID];
     
     NSDictionary *formValues = self.form.formValues;

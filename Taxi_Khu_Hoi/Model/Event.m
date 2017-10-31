@@ -19,6 +19,7 @@
         self.startTime = [data objectForKey:UserStartTime];
         self.price = [data objectForKey:UserPrice];
         self.from = [data objectForKey:UserFrom];
+        self.note = [data objectForKey:UserNote];
     }
     return self;
     
@@ -30,6 +31,7 @@
                      startTime:(NSString*) startTime
                          price:(NSString*) price
                           from:(NSString *) from
+                          note:(NSString *) note
 {
     self = [super init];
     if (self) {
@@ -39,6 +41,7 @@
         self.startTime = startTime;
         self.price = price;
         self.from = from;
+        self.note = note;
     }
     return self;
 }
@@ -50,7 +53,8 @@
                           UserDestination:self.destination,
                           UserStartTime:self.startTime,
                           UserPrice:self.price,
-                          UserFrom:self.from
+                          UserFrom:self.from,
+                          UserNote:self.note
                           };
     return dic;
 

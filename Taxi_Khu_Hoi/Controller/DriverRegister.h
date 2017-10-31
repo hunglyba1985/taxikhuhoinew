@@ -11,4 +11,8 @@
 
 @interface DriverRegister : XLFormViewController
 
+-(void) setForUserProfile;
+-(void) setForDriverProfile;
+
+
 @end

@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSString *from;
 @property (strong, nonatomic) NSString *startTime;
 @property (strong, nonatomic) NSString *price;
+@property (strong, nonatomic) NSString *note;
 
 
 
@@ -27,7 +28,8 @@
                    destination:(NSString *) destination
                      startTime:(NSString*) startTime
                          price:(NSString*) price
-                          from:(NSString*) from;
+                          from:(NSString*) from
+                          note:(NSString*) note;
 
 
 -(NSDictionary *) convertToData;

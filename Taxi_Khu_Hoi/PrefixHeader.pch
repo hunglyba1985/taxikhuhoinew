@@ -30,4 +30,10 @@
 @import FirebaseCore;
 
 
+#import "Event.h"
+#import "Location.h"
+#import "User.h"
+#import "Driver.h"
+
+
 #endif /* PrefixHeader_pch */

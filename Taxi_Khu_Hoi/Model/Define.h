@@ -53,7 +53,7 @@
 #define UserStartTime @"startTime"
 #define UserPrice @"price"
 #define UserFrom @"from"
-
+#define UserNote @"note"
 
 #endif /* Define_h */
 

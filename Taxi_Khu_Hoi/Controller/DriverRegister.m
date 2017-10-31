@@ -11,14 +11,21 @@
 #import "MainViewController.h"
 
 
-NSString *const kBrandName = @"name";
-NSString *const kCarNumber = @"number";
+NSString *const kTaxiBrand = @"taxi brand";
+NSString *const kCarNumber = @"car number";
 NSString *const kRegisterButton = @"button";
 NSString *const kImage = @"image";
 NSString *const kCustomeImage = @"customImage";
+NSString *const kUserFullName = @"user full name";
 
 @interface DriverRegister ()
+{
+    XLFormDescriptor * form;
+    XLFormSectionDescriptor * section1;
+    XLFormSectionDescriptor * section2;
 
+    XLFormRowDescriptor * row;
+}
 @end
 
 @implementation DriverRegister
@@ -44,48 +51,27 @@ NSString *const kCustomeImage = @"customImage";
 
 -(void)initializeForm
 {
-    XLFormDescriptor * form;
-    XLFormSectionDescriptor * section;
-    XLFormRowDescriptor * row;
+   
     
     form = [XLFormDescriptor formDescriptor];
     
-    section = [XLFormSectionDescriptor formSectionWithTitle:@"Please set information below to register"];
-    section.footerTitle = @"We can add more text here to infor user";
-    [form addFormSection:section];
+    section1 = [XLFormSectionDescriptor formSectionWithTitle:@"Please set information below to register"];
+    section1.footerTitle = @"We can add more text here to infor user";
+    [form addFormSection:section1];
     
     // Custom image
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kCustomeImage rowType:ImageCustomCellWithNib title:@"Custom image here"];
-    [section addFormRow:row];
+    [section1 addFormRow:row];
     
     
-//    // Image
-//    row = [XLFormRowDescriptor formRowDescriptorWithTag:kImage rowType:XLFormRowDescriptorTypeImage title:@"Image"];
-//    row.value = [UIImage imageNamed:@"default_avatar"];
-//    [section addFormRow:row];
-    
-    // Name
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:kBrandName rowType:XLFormRowDescriptorTypeText title:@"Brand Name:"];
-    row.required = YES;
-    [section addFormRow:row];
-    
-    // Number
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:kCarNumber rowType:XLFormRowDescriptorTypePhone title:@"Car number:"];
-    [row.cellConfigAtConfigure setObject:@"Required..." forKey:@"textField.placeholder"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:@"Wrong number" regex:@"[0-9]{10}"]];
-    [section addFormRow:row];
-    
-    
-    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
-    section.footerTitle = @"";
-    [form addFormSection:section];
+    section2 = [XLFormSectionDescriptor formSectionWithTitle:@""];
+    section2.footerTitle = @"";
+    [form addFormSection:section2];
     
     // Button
     XLFormRowDescriptor * buttonRow = [XLFormRowDescriptor formRowDescriptorWithTag:kRegisterButton rowType:XLFormRowDescriptorTypeButton title:@"Register"];
     buttonRow.action.formSelector = @selector(verifyClick:);
-    [section addFormRow:buttonRow];
+    [section2 addFormRow:buttonRow];
     
     self.form = form;
     
@@ -105,12 +91,45 @@ NSString *const kCustomeImage = @"customImage";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
 }
+
+-(void) setForUserProfile
+{
+    // User real name
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kUserFullName rowType:XLFormRowDescriptorTypeText title:@"Full Name:"];
+    row.required = YES;
+    [section1 addFormRow:row];
+}
+    
+-(void) setForDriverProfile
+{
+    // User real name
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kUserFullName rowType:XLFormRowDescriptorTypeText title:@"Full Name:"];
+    row.required = YES;
+    [section1 addFormRow:row];
+    
+    // Taxi brand
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kTaxiBrand rowType:XLFormRowDescriptorTypeText title:@"Taxi brand:"];
+    row.required = YES;
+    [section1 addFormRow:row];
+    
+    // Number
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kCarNumber rowType:XLFormRowDescriptorTypePhone title:@"Car number:"];
+    [row.cellConfigAtConfigure setObject:@"Required..." forKey:@"textField.placeholder"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:@"Wrong number" regex:@"[0-9]{10}"]];
+    [section1 addFormRow:row];
+    
+    [self.tableView reloadData];
+}
+    
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = @"Driver register";
+    self.title = @"Complete your profile";
     self.navigationController.navigationBarHidden = false;
     //set null title back button
     UIBarButtonItem *item = [[UIBarButtonItem alloc] init];
