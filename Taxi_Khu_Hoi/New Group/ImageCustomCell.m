@@ -74,8 +74,8 @@ NSString * const ImageCustomCellWithNib = @"ImageCustomeCellWithNib";
 
 - (void)showImage:(UIImage *)image
 {
-
     [self.imageButton setBackgroundImage:image forState:UIControlStateNormal];
+    self.rowDescriptor.value = image;
     self.infoLabel.hidden = true;
     
 }

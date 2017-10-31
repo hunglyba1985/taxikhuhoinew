@@ -14,9 +14,11 @@
 NSString *const kTaxiBrand = @"taxi brand";
 NSString *const kCarNumber = @"car number";
 NSString *const kRegisterButton = @"button";
-NSString *const kImage = @"image";
+
 NSString *const kCustomeImage = @"customImage";
 NSString *const kUserFullName = @"user full name";
+NSString *const kUserHometown = @"user hometown";
+NSString *const kCarName = @"car name";
 
 @interface DriverRegister ()
 {
@@ -98,7 +100,9 @@ NSString *const kUserFullName = @"user full name";
 {
     // User real name
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kUserFullName rowType:XLFormRowDescriptorTypeText title:@"Full Name:"];
-    row.required = YES;
+    [section1 addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kUserHometown rowType:XLFormRowDescriptorTypeText title:@"Hometown:"];
     [section1 addFormRow:row];
 }
     
@@ -111,6 +115,11 @@ NSString *const kUserFullName = @"user full name";
     
     // Taxi brand
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kTaxiBrand rowType:XLFormRowDescriptorTypeText title:@"Taxi brand:"];
+    row.required = YES;
+    [section1 addFormRow:row];
+    
+    // Car name
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kCarName rowType:XLFormRowDescriptorTypeText title:@"Car name:"];
     row.required = YES;
     [section1 addFormRow:row];
     
@@ -139,12 +148,115 @@ NSString *const kUserFullName = @"user full name";
 
 -(void)verifyClick:(UIButton*) button
 {
-    NSLog(@"verify click");
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-    [self.navigationController pushViewController:mainView animated:true];
+    NSDictionary *formValues = self.form.formValues;
+    UIImage * userImage  = [formValues objectForKey:kCustomeImage];
+    NSLog(@"user image is class %@",[userImage class]);
+    [self sendImageToFirebaseStore:userImage];
+    
+    
+    
+    
+    
+//    NSDictionary *formValues = self.form.formValues;
+//    NSString *userPhone = [[NSUserDefaults standardUserDefaults] objectForKey:UserPhone];
+//    if ([self.userRegistedType isEqualToString:TypeUser]) {
+//        User *newUser = [[User alloc] initWithName:[formValues objectForKey:kUserFullName] andPhoneNumber:userPhone andImageUrl:@"" andHometown:[formValues objectForKey:kUserHometown]];
+//
+//
+//    }else{
+//
+//    }
+//
+//
+//    NSLog(@"verify click");
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+//    [self.navigationController pushViewController:mainView animated:true];
     
 }
+
+-(void) sendImageToFirebaseStore:(UIImage *) image
+{
+    NSLog(@"start send image to firebase");
+    NSData *imageData = UIImageJPEGRepresentation(image,0.8);
+    FIRUser *user = [FIRAuth auth].currentUser;
+    FIRStorage *storage = [FIRStorage storage];
+    FIRStorageReference *storageRef = [storage reference];
+    NSString *imagePath = [NSString stringWithFormat:@"%@/iamges/%@.jpg",UserCollectionData,user.uid];
+    FIRStorageReference *userImage = [storageRef child:imagePath];
+    
+    // Create the file metadata
+    FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
+    metadata.contentType = @"image/jpeg";
+    
+    FIRStorageUploadTask *uploadTask = [userImage putData:imageData
+                                                 metadata:metadata
+                                               completion:^(FIRStorageMetadata *metadata,
+                                                            NSError *error) {
+                                                   if (error != nil) {
+                                                       // Uh-oh, an error occurred!
+                                                   } else {
+                                                       // Metadata contains file metadata such as size, content-type, and download URL.
+                                                       NSURL *downloadURL = metadata.downloadURL;
+                                                       NSLog(@"down load url%@",downloadURL);
+                                                   }
+                                               }];
+    
+    // Listen for state changes, errors, and completion of the upload.
+    [uploadTask observeStatus:FIRStorageTaskStatusResume handler:^(FIRStorageTaskSnapshot *snapshot) {
+        // Upload resumed, also fires when the upload starts
+    }];
+    
+    [uploadTask observeStatus:FIRStorageTaskStatusPause handler:^(FIRStorageTaskSnapshot *snapshot) {
+        // Upload paused
+    }];
+    
+    [uploadTask observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot *snapshot) {
+        // Upload reported progress
+        double percentComplete = 100.0 * (snapshot.progress.completedUnitCount) / (snapshot.progress.totalUnitCount);
+        NSLog(@"Upload completed progress %f",percentComplete);
+    }];
+    
+    [uploadTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot *snapshot) {
+        // Upload completed successfully
+        NSLog(@"Upload completed successfully");
+    }];
+    
+    // Errors only occur in the "Failure" case
+    [uploadTask observeStatus:FIRStorageTaskStatusFailure handler:^(FIRStorageTaskSnapshot *snapshot) {
+        if (snapshot.error != nil) {
+            NSLog(@"Upload failure");
+            switch (snapshot.error.code) {
+                case FIRStorageErrorCodeObjectNotFound:
+                    // File doesn't exist
+                    break;
+                    
+                case FIRStorageErrorCodeUnauthorized:
+                    // User doesn't have permission to access file
+                    break;
+                    
+                case FIRStorageErrorCodeCancelled:
+                    // User canceled the upload
+                    break;
+                    
+                    /* ... */
+                    
+                case FIRStorageErrorCodeUnknown:
+                    // Unknown error occurred, inspect the server response
+                    break;
+            }
+        }
+    }];
+
+    
+}
+
+-(void) uploadUserProfileToFirebase
+{
+    
+}
+
+
 
 
 

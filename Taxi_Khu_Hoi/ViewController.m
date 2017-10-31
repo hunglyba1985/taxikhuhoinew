@@ -35,15 +35,16 @@
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UserRegister *userRegister = [storyboard  instantiateViewControllerWithIdentifier:@"UserRegister"];
+    userRegister.userRegistedType = TypeUser;
     [self.navigationController pushViewController:userRegister animated:true] ;
     
 }
 
 - (IBAction)driverRegister:(id)sender {
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    DriverRegister *driverRegister = [storyboard  instantiateViewControllerWithIdentifier:@"DriverRegister"];
-    [self.navigationController pushViewController:driverRegister animated:true] ;
+    UserRegister *userRegister = [storyboard  instantiateViewControllerWithIdentifier:@"UserRegister"];
+    userRegister.userRegistedType = TypeDriver;
+    [self.navigationController pushViewController:userRegister animated:true] ;
     
 }
 

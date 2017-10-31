@@ -28,6 +28,8 @@
 #import "Location.h"
 @import FirebaseDatabase;
 @import FirebaseCore;
+@import FirebaseStorage;
+
 
 
 #import "Event.h"

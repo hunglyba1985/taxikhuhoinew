@@ -15,5 +15,6 @@ target 'Taxi_Khu_Hoi' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
 
 end

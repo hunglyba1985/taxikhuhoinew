@@ -11,4 +11,7 @@
 
 @interface UserRegister : XLFormViewController
 
+@property (nonatomic,strong) NSString *userRegistedType;
+
+
 @end

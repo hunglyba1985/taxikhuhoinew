@@ -11,6 +11,8 @@
 
 @interface VerifyCode : XLFormViewController
 
+@property (nonatomic,strong) NSString *userRegistedType;
+
 -(void) signOutUser;
 
 @end

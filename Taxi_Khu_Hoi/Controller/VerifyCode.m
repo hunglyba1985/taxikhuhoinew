@@ -10,6 +10,8 @@
 #import "XLForm.h"
 #import "MainViewController.h"
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "DriverRegister.h"
+
 
 NSString *const kVerifyButton = @"button";
 NSString *const kVerifyCode = @"verifyCode";
@@ -106,18 +108,31 @@ NSString *const kVerifyCode = @"verifyCode";
                                   if (error) {
                                       // ...
                                       NSLog(@"sign in error %@",error);
+                                      UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"Error happen" message:@"Your number is not right, you can try another number" preferredStyle:UIAlertControllerStyleAlert];
+                                      UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+                                      [alertView addAction:cancel];
+                                      [self presentViewController:alertView animated:YES completion:nil];
                                       return;
                                   }
                                   else
                                   {
                                       // User successfully signed in. Get user data from the FIRUser object
                                       // ...
+//                                      [self updateUserName];
+//                                      NSLog(@"sign in with phone number success with data %@",user);
+//                                      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//                                      MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+//                                      [self.navigationController pushViewController:mainView animated:true];
                                       
-                                      [self updateUserName];
-                                      NSLog(@"sign in with phone number success with data %@",user);
-                                      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                                      MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-                                      [self.navigationController pushViewController:mainView animated:true];
+                                      DriverRegister *userProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"DriverRegister"];
+                                      userProfile.userRegistedType = self.userRegistedType;
+                                      if ([self.userRegistedType isEqualToString:TypeUser]) {
+                                          [userProfile setForUserProfile];
+                                      }else{
+                                          [userProfile setForDriverProfile];
+                                      }
+                                      [self.navigationController pushViewController:userProfile animated:YES];
+                                      
                                   }
                                  
                               }];

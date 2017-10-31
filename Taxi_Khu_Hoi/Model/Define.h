@@ -19,7 +19,6 @@
 #define AuthVerificationID  @"authVerificationID"
 #define UserNameUpdate @"User name update"
 
-
 // Firebase model define
 #define UserCollectionData @"users"
 #define DriverCollectionData @"drivers"
@@ -42,6 +41,7 @@
 #define UserLongtitude @"longtitude"
 #define UserLatitude @"latitude"
 
+
 #define TypeUser @"type user"
 #define TypeDriver @"type driver"
 
@@ -54,6 +54,13 @@
 #define UserPrice @"price"
 #define UserFrom @"from"
 #define UserNote @"note"
+
+
+typedef NS_ENUM(NSUInteger, UserRegistedType) {
+    kUser,
+    kDriver,
+};
+
 
 #endif /* Define_h */
 

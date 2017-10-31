@@ -11,6 +11,8 @@
 
 @interface DriverRegister : XLFormViewController
 
+@property (nonatomic,strong) NSString *userRegistedType;
+
 -(void) setForUserProfile;
 -(void) setForDriverProfile;
 
