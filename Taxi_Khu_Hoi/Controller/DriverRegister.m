@@ -25,8 +25,9 @@ NSString *const kCarName = @"car name";
     XLFormDescriptor * form;
     XLFormSectionDescriptor * section1;
     XLFormSectionDescriptor * section2;
-
     XLFormRowDescriptor * row;
+    UIImage *userProfileImage;
+    NSString *userImageUrl;
 }
 @end
 
@@ -149,21 +150,9 @@ NSString *const kCarName = @"car name";
 -(void)verifyClick:(UIButton*) button
 {
     NSDictionary *formValues = self.form.formValues;
-    UIImage * userImage  = [formValues objectForKey:kCustomeImage];
-    NSLog(@"user image is class %@",[userImage class]);
-    [self sendImageToFirebaseStore:userImage];
+    userProfileImage  = [formValues objectForKey:kCustomeImage];
+    [self sendImageToFirebaseStore:userProfileImage];
     
-    
-    
-    
-    
-
-//
-//
-//    NSLog(@"verify click");
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-//    [self.navigationController pushViewController:mainView animated:true];
     
 }
 
@@ -187,10 +176,26 @@ NSString *const kCarName = @"car name";
                                                             NSError *error) {
                                                    if (error != nil) {
                                                        // Uh-oh, an error occurred!
+                                                       if ([self.userRegistedType isEqualToString:TypeUser]) {
+                                                           UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"Error happen" message:@"Can't upload your image" preferredStyle:UIAlertControllerStyleAlert];
+                                                           UIAlertAction *try = [UIAlertAction actionWithTitle:@"Try again" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                                               [self sendImageToFirebaseStore:userProfileImage];
+                                                           }];
+                                                           UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                                               [self uploadUserProfileToFirebaseWithImageUrl:@""];
+                                                           }];
+                                                           [alertView addAction:try];
+                                                           [alertView addAction:continueAction];
+                                                           [self presentViewController:alertView animated:YES completion:nil];
+                                                       }
+                                                       
+                                                       
                                                    } else {
                                                        // Metadata contains file metadata such as size, content-type, and download URL.
                                                        NSURL *downloadURL = metadata.downloadURL;
                                                        NSLog(@"down load url%@",downloadURL);
+                                                       userImageUrl = [downloadURL absoluteString];
+                                                       [self uploadUserProfileToFirebaseWithImageUrl:[downloadURL absoluteString]];
                                                    }
                                                }];
     
@@ -209,53 +214,82 @@ NSString *const kCarName = @"car name";
 //        NSLog(@"Upload completed progress %f",percentComplete);
 //    }];
 //
-//    [uploadTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot *snapshot) {
-//        // Upload completed successfully
-//        NSLog(@"Upload completed successfully");
-//    }];
+        [uploadTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot *snapshot) {
+            // Upload completed successfully
+            NSLog(@"Upload completed successfully");
+        }];
 //
-//    // Errors only occur in the "Failure" case
-//    [uploadTask observeStatus:FIRStorageTaskStatusFailure handler:^(FIRStorageTaskSnapshot *snapshot) {
-//        if (snapshot.error != nil) {
-//            NSLog(@"Upload failure");
-//            switch (snapshot.error.code) {
-//                case FIRStorageErrorCodeObjectNotFound:
-//                    // File doesn't exist
-//                    break;
-//
-//                case FIRStorageErrorCodeUnauthorized:
-//                    // User doesn't have permission to access file
-//                    break;
-//
-//                case FIRStorageErrorCodeCancelled:
-//                    // User canceled the upload
-//                    break;
-//
-//                    /* ... */
-//
-//                case FIRStorageErrorCodeUnknown:
-//                    // Unknown error occurred, inspect the server response
-//                    break;
-//            }
-//        }
-//    }];
+        // Errors only occur in the "Failure" case
+        [uploadTask observeStatus:FIRStorageTaskStatusFailure handler:^(FIRStorageTaskSnapshot *snapshot) {
+            if (snapshot.error != nil) {
+                NSLog(@"Upload failure");
+                switch (snapshot.error.code) {
+                    case FIRStorageErrorCodeObjectNotFound:
+                        // File doesn't exist
+                        break;
+
+                    case FIRStorageErrorCodeUnauthorized:
+                        // User doesn't have permission to access file
+                        break;
+
+                    case FIRStorageErrorCodeCancelled:
+                        // User canceled the upload
+                        break;
+
+                        /* ... */
+
+                    case FIRStorageErrorCodeUnknown:
+                        // Unknown error occurred, inspect the server response
+                        break;
+                }
+            }
+        }];
 
     
 }
 
--(void) uploadUserProfileToFirebase:(NSString *) userImageUrl
+-(void) uploadUserProfileToFirebaseWithImageUrl:(NSString *) userImageUrlstr
 {
         NSDictionary *formValues = self.form.formValues;
         NSString *userPhone = [[NSUserDefaults standardUserDefaults] objectForKey:UserPhone];
+        FIRUser *user = [FIRAuth auth].currentUser;
+
         if ([self.userRegistedType isEqualToString:TypeUser]) {
-            User *newUser = [[User alloc] initWithName:[formValues objectForKey:kUserFullName] andPhoneNumber:userPhone andImageUrl:userImageUrl andHometown:[formValues objectForKey:kUserHometown]];
+            User *newUser = [[User alloc] initWithName:[formValues objectForKey:kUserFullName] andPhoneNumber:userPhone andImageUrl:userImageUrl andHometown:[formValues objectForKey:kUserHometown] andUserId:user.uid];
     
-    
+            FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+            FIRCollectionReference* db= [defaultFirestore collectionWithPath:UserCollectionData];
+            [[db documentWithPath:user.uid] setData:[newUser convertToData] completion:^(NSError * _Nullable error) {
+                if (error != nil) {
+                    NSLog(@"Error adding document: %@", error);
+                    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"Error happen" message:@"Can't upload your profile" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *try = [UIAlertAction actionWithTitle:@"Try again" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [self uploadUserProfileToFirebaseWithImageUrl:userImageUrl];
+                    }];
+                  
+                    [alertView addAction:try];
+                    [self presentViewController:alertView animated:YES completion:nil];
+                } else {
+                    NSLog(@"Document added with ID");
+                    [self showTheMainView];
+                }
+            }];
+            
         }else{
+            
+            
     
         }
 }
 
+-(void) showTheMainView
+{
+//        NSLog(@"verify click");
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+        [self.navigationController pushViewController:mainView animated:true];
+
+}
 
 
 

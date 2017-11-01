@@ -20,7 +20,7 @@
         self.phoneNumber = [data objectForKey:UserPhone];
         self.imageUrl = [data objectForKey:UserImage];
         self.hometown = [data objectForKey:UserHometown];
-    
+        self.userId = [data objectForKey:UserId];
     }
     return self;
 }
@@ -29,6 +29,7 @@
               andPhoneNumber:(NSString*) phone
                  andImageUrl:(NSString *) urlImg
                  andHometown:(NSString*) hometown
+                   andUserId:(NSString *)userId
 {
     self = [super init];
     if (self) {
@@ -36,13 +37,14 @@
         self.phoneNumber = phone;
         self.imageUrl = urlImg;
         self.hometown = hometown;
+        self.userId = userId;
     }
     return self;
 }
 
 -(NSDictionary *) convertToData
 {
-    NSDictionary *dic = @{UserName:self.name,UserPhone:self.phoneNumber,UserImage:self.imageUrl,UserHometown:self.hometown};
+    NSDictionary *dic = @{UserName:self.name,UserPhone:self.phoneNumber,UserImage:self.imageUrl,UserHometown:self.hometown,UserId:self.userId};
     return dic;
 }
 
