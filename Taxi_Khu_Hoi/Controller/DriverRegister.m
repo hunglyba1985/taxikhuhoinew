@@ -157,15 +157,7 @@ NSString *const kCarName = @"car name";
     
     
     
-//    NSDictionary *formValues = self.form.formValues;
-//    NSString *userPhone = [[NSUserDefaults standardUserDefaults] objectForKey:UserPhone];
-//    if ([self.userRegistedType isEqualToString:TypeUser]) {
-//        User *newUser = [[User alloc] initWithName:[formValues objectForKey:kUserFullName] andPhoneNumber:userPhone andImageUrl:@"" andHometown:[formValues objectForKey:kUserHometown]];
-//
-//
-//    }else{
-//
-//    }
+
 //
 //
 //    NSLog(@"verify click");
@@ -202,58 +194,66 @@ NSString *const kCarName = @"car name";
                                                    }
                                                }];
     
-    // Listen for state changes, errors, and completion of the upload.
-    [uploadTask observeStatus:FIRStorageTaskStatusResume handler:^(FIRStorageTaskSnapshot *snapshot) {
-        // Upload resumed, also fires when the upload starts
-    }];
-    
-    [uploadTask observeStatus:FIRStorageTaskStatusPause handler:^(FIRStorageTaskSnapshot *snapshot) {
-        // Upload paused
-    }];
-    
-    [uploadTask observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot *snapshot) {
-        // Upload reported progress
-        double percentComplete = 100.0 * (snapshot.progress.completedUnitCount) / (snapshot.progress.totalUnitCount);
-        NSLog(@"Upload completed progress %f",percentComplete);
-    }];
-    
-    [uploadTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot *snapshot) {
-        // Upload completed successfully
-        NSLog(@"Upload completed successfully");
-    }];
-    
-    // Errors only occur in the "Failure" case
-    [uploadTask observeStatus:FIRStorageTaskStatusFailure handler:^(FIRStorageTaskSnapshot *snapshot) {
-        if (snapshot.error != nil) {
-            NSLog(@"Upload failure");
-            switch (snapshot.error.code) {
-                case FIRStorageErrorCodeObjectNotFound:
-                    // File doesn't exist
-                    break;
-                    
-                case FIRStorageErrorCodeUnauthorized:
-                    // User doesn't have permission to access file
-                    break;
-                    
-                case FIRStorageErrorCodeCancelled:
-                    // User canceled the upload
-                    break;
-                    
-                    /* ... */
-                    
-                case FIRStorageErrorCodeUnknown:
-                    // Unknown error occurred, inspect the server response
-                    break;
-            }
-        }
-    }];
+//    // Listen for state changes, errors, and completion of the upload.
+//    [uploadTask observeStatus:FIRStorageTaskStatusResume handler:^(FIRStorageTaskSnapshot *snapshot) {
+//        // Upload resumed, also fires when the upload starts
+//    }];
+//
+//    [uploadTask observeStatus:FIRStorageTaskStatusPause handler:^(FIRStorageTaskSnapshot *snapshot) {
+//        // Upload paused
+//    }];
+//
+//    [uploadTask observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot *snapshot) {
+//        // Upload reported progress
+//        double percentComplete = 100.0 * (snapshot.progress.completedUnitCount) / (snapshot.progress.totalUnitCount);
+//        NSLog(@"Upload completed progress %f",percentComplete);
+//    }];
+//
+//    [uploadTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot *snapshot) {
+//        // Upload completed successfully
+//        NSLog(@"Upload completed successfully");
+//    }];
+//
+//    // Errors only occur in the "Failure" case
+//    [uploadTask observeStatus:FIRStorageTaskStatusFailure handler:^(FIRStorageTaskSnapshot *snapshot) {
+//        if (snapshot.error != nil) {
+//            NSLog(@"Upload failure");
+//            switch (snapshot.error.code) {
+//                case FIRStorageErrorCodeObjectNotFound:
+//                    // File doesn't exist
+//                    break;
+//
+//                case FIRStorageErrorCodeUnauthorized:
+//                    // User doesn't have permission to access file
+//                    break;
+//
+//                case FIRStorageErrorCodeCancelled:
+//                    // User canceled the upload
+//                    break;
+//
+//                    /* ... */
+//
+//                case FIRStorageErrorCodeUnknown:
+//                    // Unknown error occurred, inspect the server response
+//                    break;
+//            }
+//        }
+//    }];
 
     
 }
 
--(void) uploadUserProfileToFirebase
+-(void) uploadUserProfileToFirebase:(NSString *) userImageUrl
 {
+        NSDictionary *formValues = self.form.formValues;
+        NSString *userPhone = [[NSUserDefaults standardUserDefaults] objectForKey:UserPhone];
+        if ([self.userRegistedType isEqualToString:TypeUser]) {
+            User *newUser = [[User alloc] initWithName:[formValues objectForKey:kUserFullName] andPhoneNumber:userPhone andImageUrl:userImageUrl andHometown:[formValues objectForKey:kUserHometown]];
     
+    
+        }else{
+    
+        }
 }
 
 

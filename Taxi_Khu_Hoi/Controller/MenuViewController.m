@@ -127,22 +127,39 @@ NSString *const kUserTrip = @"userTrip";
 {
     [super viewDidAppear:animated];
     
-    XLFormRowDescriptor* cell =  [self.form formRowWithTag:kUserImage];
-    cell.value  = [UIImage imageNamed:@"test"];
+ 
     
+}
+
+-(void) setProfileUser
+{
+    XLFormRowDescriptor* cell =  [self.form formRowWithTag:kUserImage];
+    //    cell.value  = [UIImage imageNamed:@"test"];
     FIRUser *user = [FIRAuth auth].currentUser;
     if (user) {
-        // The user's ID, unique to the Firebase project.
-        // Do NOT use this value to authenticate with your backend server,
-        // if you have one. Use getTokenWithCompletion:completion: instead.
-//        NSString *uid = user.uid;
-//        NSString *email = user.email;
-//        NSURL *photoURL = user.photoURL;
         cell.title = user.displayName;
-
         // ...
     }
-
+    
+    FIRStorage *storage = [FIRStorage storage];
+    FIRStorageReference *storageRef = [storage reference];
+    NSString *imagePath = [NSString stringWithFormat:@"%@/iamges/%@.jpg",UserCollectionData,user.uid];
+    FIRStorageReference *userImage = [storageRef child:imagePath];
+    
+    // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+    [userImage dataWithMaxSize:1 * 1024 * 1024 completion:^(NSData *data, NSError *error){
+        if (error != nil) {
+            // Uh-oh, an error occurred!
+            NSLog(@"error when download image");
+        } else {
+            // Data for "images/island.jpg" is returned
+            NSLog(@"success get image from firebase");
+            UIImage *image = [UIImage imageWithData:data];
+            
+            cell.value = image;
+        }
+    }];
+    
     [self reloadFormRow:cell];
     
 }
