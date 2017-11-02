@@ -33,6 +33,7 @@
 #define UserPhone @"phone"
 #define UserImage @"image_url"
 #define UserHometown @"hometown"
+#define UserNameId @"nameId"
 
 #define TaxiBrand @"taxi_brand"
 #define CarNumber @"car_number"

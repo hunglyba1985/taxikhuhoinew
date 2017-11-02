@@ -15,6 +15,7 @@
 @property(strong, nonatomic) NSString *imageUrl;
 @property(strong, nonatomic) NSString *hometown;
 @property(strong, nonatomic) NSString *userId;
+@property(strong, nonatomic) NSString *userNameId;
 
 
 -(instancetype) initWithData:(NSDictionary*) data;
@@ -23,7 +24,8 @@
               andPhoneNumber:(NSString*) phone
                  andImageUrl:(NSString *) urlImg
                  andHometown:(NSString*) hometown
-                   andUserId:(NSString*) userId;
+                   andUserId:(NSString*) userId
+               andUserNameId:(NSString*) userNameId;
 
 
 -(NSDictionary *) convertToData;

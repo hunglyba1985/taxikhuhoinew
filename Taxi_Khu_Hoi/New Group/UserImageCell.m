@@ -53,17 +53,6 @@ NSString * const UserImageCustomCellWithNib = @"UserImageCustomeCellWithNib";
     //    cell.value  = [UIImage imageNamed:@"test"];
     
     FIRUser *user = [FIRAuth auth].currentUser;
-    if (user) {
-        // The user's ID, unique to the Firebase project.
-        // Do NOT use this value to authenticate with your backend server,
-        // if you have one. Use getTokenWithCompletion:completion: instead.
-        //        NSString *uid = user.uid;
-        //        NSString *email = user.email;
-        //        NSURL *photoURL = user.photoURL;
-        self.userName.text = user.displayName;
-        
-        // ...
-    }
     
     FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *storageRef = [storage reference];
@@ -83,6 +72,18 @@ NSString * const UserImageCustomCellWithNib = @"UserImageCustomeCellWithNib";
         }
     }];
     
+    
+    FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+    FIRDocumentReference *docRef= [[defaultFirestore collectionWithPath:UserCollectionData] documentWithPath:user.uid];
+    [docRef getDocumentWithCompletion:^(FIRDocumentSnapshot *snapshot, NSError *error) {
+        if (snapshot != nil) {
+            NSLog(@"Document data: %@", snapshot.data);
+        } else {
+            NSLog(@"Document does not exist");
+        }
+    }];
+
+
     
 }
 
