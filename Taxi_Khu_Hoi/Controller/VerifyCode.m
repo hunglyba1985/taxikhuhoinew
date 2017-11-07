@@ -118,27 +118,48 @@ NSString *const kVerifyCode = @"verifyCode";
                                   {
                                       // User successfully signed in. Get user data from the FIRUser object
                                       // ...
-//                                      [self updateUserName];
-//                                      NSLog(@"sign in with phone number success with data %@",user);
-//                                      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//                                      MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-//                                      [self.navigationController pushViewController:mainView animated:true];
+                                      [self updateUserName];
+
                                       
-                                      DriverRegister *userProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"DriverRegister"];
-                                      userProfile.userRegistedType = self.userRegistedType;
-                                      if ([self.userRegistedType isEqualToString:TypeUser]) {
-                                          [userProfile setForUserProfile];
-                                      }else{
-                                          [userProfile setForDriverProfile];
-                                      }
-                                      [self.navigationController pushViewController:userProfile animated:YES];
+                                      FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+                                      FIRDocumentReference *docRef= [[defaultFirestore collectionWithPath:UserCollectionData] documentWithPath:user.uid];
+                                      [docRef getDocumentWithCompletion:^(FIRDocumentSnapshot *snapshot, NSError *error) {
+                                          if (snapshot != nil) {
+                                              NSLog(@"Document data: %@", snapshot.data);
+                                              [self goToMainView];
+                                          } else {
+                                              NSLog(@"Document does not exist");
+                                              [self letUserSetProfile];
+                                          }
+                                      }];
+                                      
+                                    
                                       
                                   }
                                  
                               }];
-    
-
 }
+
+-(void) letUserSetProfile
+{
+    DriverRegister *userProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"DriverRegister"];
+    userProfile.userRegistedType = self.userRegistedType;
+    if ([self.userRegistedType isEqualToString:TypeUser]) {
+        [userProfile setForUserProfile];
+    }else{
+        [userProfile setForDriverProfile];
+    }
+    [self.navigationController pushViewController:userProfile animated:YES];
+}
+
+-(void) goToMainView
+{
+      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+      MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+      [self.navigationController pushViewController:mainView animated:true];
+}
+
+
 
 -(void) updateUserName
 {
