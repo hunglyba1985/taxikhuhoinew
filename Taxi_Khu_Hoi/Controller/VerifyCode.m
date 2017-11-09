@@ -126,6 +126,7 @@ NSString *const kVerifyCode = @"verifyCode";
                                       [docRef getDocumentWithCompletion:^(FIRDocumentSnapshot *snapshot, NSError *error) {
                                           if (snapshot != nil) {
                                               NSLog(@"Document data: %@", snapshot.data);
+                                              [self updateUserName];
                                               [self goToMainView];
                                           } else {
                                               NSLog(@"Document does not exist");

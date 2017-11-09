@@ -60,6 +60,19 @@
 
 }
 
+-(void) postEventToFirebaseAtTime:(NSString *) startTime
+{
+//    FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+//    FIRCollectionReference* db= [defaultFirestore collectionWithPath:EventCollectionData];
+//    [[db documentWithPath:startTime] setData:[self convertToData] completion:^(NSError * _Nullable error) {
+//        if (error != nil) {
+//            NSLog(@"Error adding document: %@", error);
+//        } else {
+//            NSLog(@"Document added with ID");
+//            [self dismissViewControllerAnimated:true completion:nil];
+//        }
+//    }];
+}
 
 
 @end

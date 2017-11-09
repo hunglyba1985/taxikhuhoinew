@@ -28,10 +28,11 @@
     NSMutableArray *listUserLocation;
     NSMutableArray *listUserId;
     NSMutableArray *listMarkers;
-    
+    NSString *currentLocatinInfo;
 }
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIView *menuView;
+@property (strong,nonatomic) GMSPlacesClient *currentPlaceInfo;
 
 @end
 
@@ -69,7 +70,7 @@
 
     [self.view addSubview:self.menuView];
     self.menuView.hidden = true;
-    
+    self.currentPlaceInfo = [GMSPlacesClient sharedClient];
 }
 
 -(void) addObserverForView
@@ -264,6 +265,7 @@
 //  NSLog(@"reset location here");
     CLLocation *currentLocation = [LocationMode shareInstance].location;
     [self setCameraForMap:currentLocation.coordinate];
+    [self getCurrentLocaitonInfo];
 }
 
 
@@ -306,6 +308,30 @@
     marker.map = _mapView;
     marker.map = nil;
 }
+-(void) getCurrentLocaitonInfo
+{
+    [self.currentPlaceInfo currentPlaceWithCallback:^(GMSPlaceLikelihoodList *likelihoodList, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Current Place error %@", [error localizedDescription]);
+            return;
+        }
+        
+        GMSPlaceLikelihood *likelihood = [likelihoodList.likelihoods firstObject];
+        GMSPlace* place = likelihood.place;
+        NSLog(@"Current Place address %@", place.formattedAddress);
+        currentLocatinInfo = place.formattedAddress;
+        [[NSUserDefaults standardUserDefaults] setObject:place.formattedAddress forKey:CurrentLocationInfo];
+        
+//        for (GMSPlaceLikelihood *likelihood in likelihoodList.likelihoods) {
+//            GMSPlace* place = likelihood.place;
+//            NSLog(@"Current Place name %@ at likelihood %g", place.name, likelihood.likelihood);
+//            NSLog(@"Current Place address %@", place.formattedAddress);
+//            NSLog(@"Current Place attributions %@", place.attributions);
+//            NSLog(@"Current PlaceID %@", place.placeID);
+//        }
+        
+    }];
+}
 
 #pragma mark - GMSAutocompleteViewControllerDelegate
 // Handle the user's selection.
@@ -320,6 +346,15 @@ didAutocompleteWithPlace:(GMSPlace *)place {
     [self setCameraForMap:place.coordinate];
     [self setMarkOnMap:place.coordinate];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void) postSearchingTripToFirebaseWithDestination:(NSString*) destination
+{
+    FIRUser *user = [FIRAuth auth].currentUser;
+    NSTimeInterval timeStampe = [[NSDate date] timeIntervalSince1970];
+    NSString *starTimeStr = [NSString stringWithFormat:@"%f",timeStampe];
+    NSLog(@"start time in string is %@",starTimeStr);
+    Event *newEvent = [[Event alloc] initWithUserId:user.uid andUserType:UserType destination:destination startTime:starTimeStr price:@"" from:currentLocatinInfo note:@""];
 }
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController

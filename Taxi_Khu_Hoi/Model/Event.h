@@ -34,6 +34,7 @@
 
 -(NSDictionary *) convertToData;
 
+-(void) postEventToFirebaseAtTime:(NSString *) startTime;
 
 
 

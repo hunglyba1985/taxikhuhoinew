@@ -14,6 +14,8 @@
 #define OldLocation                   @"Old Location"
 #define Latitude    @"Latitude"
 #define Longtitude @"Longtitude"
+#define CurrentLocationInfo  @"current location info"
+
 
 // User register
 #define AuthVerificationID  @"authVerificationID"

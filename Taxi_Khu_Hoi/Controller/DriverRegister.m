@@ -255,7 +255,7 @@ NSString *const kCarName = @"car name";
         FIRUser *user = [FIRAuth auth].currentUser;
 
         if ([self.userRegistedType isEqualToString:TypeUser]) {
-            User *newUser = [[User alloc] initWithName:[formValues objectForKey:kUserFullName] andPhoneNumber:userPhone andImageUrl:userImageUrl andHometown:[formValues objectForKey:kUserHometown] andUserId:user.uid andUserNameId:[[NSUserDefaults standardUserDefaults] objectForKey:UserNameUpdate]];
+            User *newUser = [[User alloc] initWithName:[formValues objectForKey:kUserFullName] andPhoneNumber:userPhone andImageUrl:userImageUrl andHometown:[formValues objectForKey:kUserHometown] andUserId:user.uid andUserNameId:[[NSUserDefaults standardUserDefaults] objectForKey:UserNameUpdate] andUserType:self.userRegistedType];
     
             FIRFirestore *defaultFirestore = [FIRFirestore firestore];
             FIRCollectionReference* db= [defaultFirestore collectionWithPath:UserCollectionData];
