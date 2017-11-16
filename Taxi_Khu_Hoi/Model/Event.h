@@ -17,6 +17,8 @@
 @property (strong, nonatomic) NSString *startTime;
 @property (strong, nonatomic) NSString *price;
 @property (strong, nonatomic) NSString *note;
+@property (strong, nonatomic) NSString *searchKeyDestination;
+@property (strong, nonatomic) NSString *searchKeyFrom;
 
 
 
@@ -29,7 +31,9 @@
                      startTime:(NSString*) startTime
                          price:(NSString*) price
                           from:(NSString*) from
-                          note:(NSString*) note;
+                          note:(NSString*) note
+                 searchKeyFrom:(NSString*) searchKeyFrom
+          searchKeyDestination:(NSString*) searchKeyDestination;
 
 
 -(NSDictionary *) convertToData;

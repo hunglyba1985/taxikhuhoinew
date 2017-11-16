@@ -147,8 +147,13 @@ NSString *const kNote = @"note";
     NSTimeInterval timeStampe = [startTime timeIntervalSince1970];
     NSString *starTimeStr = [NSString stringWithFormat:@"%f",timeStampe];
     NSLog(@"start time in string is %@",starTimeStr);
-    Event *newEvent = [[Event alloc] initWithUserId:user.uid andUserType:UserType destination:[formValue objectForKey:kDestination] startTime:starTimeStr price:[formValue objectForKey:kPrice] from:[formValue objectForKey:kFrom] note:[formValue objectForKey:kNote]];
-    [self postEventToFirebase:newEvent inStartTime:starTimeStr];
+    
+    NSString *destinationStr = [formValue objectForKey:kDestination];
+    NSString *fromLocation = [formValue objectForKey:kFrom];
+    
+    
+//    Event *newEvent = [[Event alloc] initWithUserId:user.uid andUserType:UserType destination:[formValue objectForKey:kDestination] startTime:starTimeStr price:[formValue objectForKey:kPrice] from:[formValue objectForKey:kFrom] note:[formValue objectForKey:kNote]];
+//    [self postEventToFirebase:newEvent inStartTime:starTimeStr];
 }
 
 -(void) closeClick

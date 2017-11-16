@@ -354,7 +354,7 @@ didAutocompleteWithPlace:(GMSPlace *)place {
     NSTimeInterval timeStampe = [[NSDate date] timeIntervalSince1970];
     NSString *starTimeStr = [NSString stringWithFormat:@"%f",timeStampe];
     NSLog(@"start time in string is %@",starTimeStr);
-    Event *newEvent = [[Event alloc] initWithUserId:user.uid andUserType:UserType destination:destination startTime:starTimeStr price:@"" from:currentLocatinInfo note:@""];
+//    Event *newEvent = [[Event alloc] initWithUserId:user.uid andUserType:UserType destination:destination startTime:starTimeStr price:@"" from:currentLocatinInfo note:@""];
 }
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController

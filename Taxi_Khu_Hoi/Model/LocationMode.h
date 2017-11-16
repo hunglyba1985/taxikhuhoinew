@@ -26,6 +26,8 @@
 +(LocationMode *) shareInstance;
 -(BOOL)checkLocationAuthorizationStatus;
 
+-(NSString *) getSearchKeyFromLocation:(NSString *) locationAddress;
+
 
 
 

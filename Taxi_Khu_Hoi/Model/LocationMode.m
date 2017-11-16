@@ -173,6 +173,18 @@ static LocationMode *_shareClient;
     
 }
 
+-(NSString *) getSearchKeyFromLocation:(NSString *) locationAddress
+{
+    NSString * searchKey;
+    
+    [ArrayProvince enumerateObjectsUsingBlock:^(NSString * province, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+    }];
+    
+    return searchKey;
+}
+
+
 
 @end
 

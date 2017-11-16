@@ -20,6 +20,8 @@
         self.price = [data objectForKey:UserPrice];
         self.from = [data objectForKey:UserFrom];
         self.note = [data objectForKey:UserNote];
+        self.searchKeyFrom = [data objectForKey:SearchKeyFrom];
+        self.searchKeyDestination = [data objectForKey:SearchKeyDestination];
     }
     return self;
     
@@ -32,6 +34,8 @@
                          price:(NSString*) price
                           from:(NSString *) from
                           note:(NSString *) note
+                 searchKeyFrom:(NSString *)searchKeyFrom
+          searchKeyDestination:(NSString *)searchKeyDestination
 {
     self = [super init];
     if (self) {
@@ -42,6 +46,8 @@
         self.price = price;
         self.from = from;
         self.note = note;
+        self.searchKeyDestination = searchKeyDestination;
+        self.searchKeyFrom = searchKeyFrom;
     }
     return self;
 }
@@ -54,7 +60,9 @@
                           UserStartTime:self.startTime,
                           UserPrice:self.price,
                           UserFrom:self.from,
-                          UserNote:self.note
+                          UserNote:self.note,
+                          SearchKeyDestination:self.searchKeyDestination,
+                          SearchKeyFrom:self.searchKeyFrom
                           };
     return dic;
 
