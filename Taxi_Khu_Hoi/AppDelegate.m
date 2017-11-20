@@ -45,8 +45,6 @@
     [FIRApp configure];
     // [END initialize_firebase]
     
-
-    
     [self registerForRemoteNotifications];
     [self checkUserSignIn];
     
