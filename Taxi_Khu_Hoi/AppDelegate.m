@@ -45,14 +45,10 @@
     [FIRApp configure];
     // [END initialize_firebase]
     
-
-    
     [self registerForRemoteNotifications];
-    
     [self checkUserSignIn];
     
     NSLog(@"number of provinces %i",(int)ArrayProvince.count);
-    
     
     return YES;
 }
