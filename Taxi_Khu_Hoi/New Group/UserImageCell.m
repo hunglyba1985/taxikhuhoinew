@@ -73,15 +73,15 @@ NSString * const UserImageCustomCellWithNib = @"UserImageCustomeCellWithNib";
     }];
     
     
-    FIRFirestore *defaultFirestore = [FIRFirestore firestore];
-    FIRDocumentReference *docRef= [[defaultFirestore collectionWithPath:UserCollectionData] documentWithPath:user.uid];
-    [docRef getDocumentWithCompletion:^(FIRDocumentSnapshot *snapshot, NSError *error) {
-        if (snapshot != nil) {
-            NSLog(@"Document data: %@", snapshot.data);
-        } else {
-            NSLog(@"Document does not exist");
-        }
-    }];
+//    FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+//    FIRDocumentReference *docRef= [[defaultFirestore collectionWithPath:UserCollectionData] documentWithPath:user.uid];
+//    [docRef getDocumentWithCompletion:^(FIRDocumentSnapshot *snapshot, NSError *error) {
+//        if (snapshot != nil) {
+//            NSLog(@"Document data: %@", snapshot.data);
+//        } else {
+//            NSLog(@"Document does not exist");
+//        }
+//    }];
 
 
     

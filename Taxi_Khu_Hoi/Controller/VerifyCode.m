@@ -118,18 +118,19 @@ NSString *const kVerifyCode = @"verifyCode";
                                   {
                                       // User successfully signed in. Get user data from the FIRUser object
                                       // ...
-                                      [self updateUserName];
+//                                      [self updateUserName];
 
-                                      
                                       FIRFirestore *defaultFirestore = [FIRFirestore firestore];
                                       FIRDocumentReference *docRef= [[defaultFirestore collectionWithPath:UserCollectionData] documentWithPath:user.uid];
+//                                      NSLog(@"user uid is --- %@",user.uid);
                                       [docRef getDocumentWithCompletion:^(FIRDocumentSnapshot *snapshot, NSError *error) {
-                                          if (snapshot != nil) {
-                                              NSLog(@"Document data: %@", snapshot.data);
+//                                          NSLog(@"snap shot data get is %@",snapshot);
+                                          if (snapshot.exists) {
+//                                              NSLog(@"Document data: %@", snapshot.data);
                                               [self updateUserName];
                                               [self goToMainView];
                                           } else {
-                                              NSLog(@"Document does not exist");
+//                                              NSLog(@"Document does not exist");
                                               [self letUserSetProfile];
                                           }
                                       }];
