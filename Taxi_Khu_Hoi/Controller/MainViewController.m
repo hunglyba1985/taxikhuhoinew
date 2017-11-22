@@ -348,6 +348,11 @@ didAutocompleteWithPlace:(GMSPlace *)place {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void) gettingSearchKeyFromAddress:(NSString *) address
+{
+    
+}
+
 -(void) postSearchingTripToFirebaseWithDestination:(NSString*) destination
 {
     FIRUser *user = [FIRAuth auth].currentUser;
