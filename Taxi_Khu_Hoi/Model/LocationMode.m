@@ -177,11 +177,25 @@ static LocationMode *_shareClient;
 {
     NSString * searchKey;
     
-    [ArrayProvince enumerateObjectsUsingBlock:^(NSString * province, NSUInteger idx, BOOL * _Nonnull stop) {
-        
+    [ProvinceWithoutAccented enumerateObjectsUsingBlock:^(NSString * province, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([locationAddress containsString:province]) {
+            
+        }
     }];
     
     return searchKey;
+}
+
+
+-(NSString *) convertStringToRomaria:(NSString *) originalStr
+{
+    NSString *standard = [originalStr stringByReplacingOccurrencesOfString:@"đ" withString:@"d"];
+    standard = [standard stringByReplacingOccurrencesOfString:@"Đ" withString:@"D"];
+    standard = [standard stringByReplacingOccurrencesOfString:@" " withString:@""];
+    standard = [standard stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    NSData *decode = [standard dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *ansi = [[NSString alloc] initWithData:decode encoding:NSASCIIStringEncoding];
+    return ansi;
 }
 
 

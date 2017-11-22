@@ -48,7 +48,9 @@
     [self registerForRemoteNotifications];
     [self checkUserSignIn];
     
-    NSLog(@"number of provinces %i",(int)ArrayProvince.count);
+    NSLog(@"number of provinces %i",(int)ProvinceWithoutAccented.count);
+    
+    
     
     return YES;
 }

@@ -27,7 +27,7 @@
 -(BOOL)checkLocationAuthorizationStatus;
 
 -(NSString *) getSearchKeyFromLocation:(NSString *) locationAddress;
-
+-(NSString *) convertStringToRomaria:(NSString *) originalStr;
 
 
 
