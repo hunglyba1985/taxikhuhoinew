@@ -343,15 +343,12 @@ didAutocompleteWithPlace:(GMSPlace *)place {
     NSLog(@"Place address %@", place.formattedAddress);
     NSLog(@"Place attributions %@", place.attributions.string);
     
+    [self postSearchingTripToFirebaseWithDestination:place.formattedAddress];
     [self setCameraForMap:place.coordinate];
     [self setMarkOnMap:place.coordinate];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void) gettingSearchKeyFromAddress:(NSString *) address
-{
-    
-}
 
 -(void) postSearchingTripToFirebaseWithDestination:(NSString*) destination
 {
@@ -359,7 +356,13 @@ didAutocompleteWithPlace:(GMSPlace *)place {
     NSTimeInterval timeStampe = [[NSDate date] timeIntervalSince1970];
     NSString *starTimeStr = [NSString stringWithFormat:@"%f",timeStampe];
     NSLog(@"start time in string is %@",starTimeStr);
-//    Event *newEvent = [[Event alloc] initWithUserId:user.uid andUserType:UserType destination:destination startTime:starTimeStr price:@"" from:currentLocatinInfo note:@""];
+    
+    NSString *searchKeyDestination = [[LocationMode shareInstance] getSearchKeyFromLocation:destination];
+    NSString *currentLocationAddress = [[NSUserDefaults standardUserDefaults] objectForKey:CurrentLocationInfo];
+    NSString *searchKeyFrom = [[LocationMode shareInstance] getSearchKeyFromLocation:currentLocationAddress];
+    
+    Event *newEvent = [[Event alloc] initWithUserId:user.uid andUserType:@"" destination:destination startTime:starTimeStr price:@"" from:currentLocationAddress note:@"" searchKeyFrom:searchKeyFrom searchKeyDestination:searchKeyDestination];
+    
 }
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController

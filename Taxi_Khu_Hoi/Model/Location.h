@@ -14,6 +14,8 @@
 @property(strong, nonatomic) NSString *userType;
 @property(strong, nonatomic) NSString *longtitude;
 @property(strong, nonatomic) NSString *lattitude;
+@property(nonatomic) BOOL status;
+
 
 
 
@@ -22,7 +24,8 @@
 -(instancetype) initWithUserId:(NSString*) userId
                    andUserType:(NSString*) userType
                  andLongtitude:(NSString *) longtitude
-                   andLatitude:(NSString*) latitude;
+                   andLatitude:(NSString*) latitude
+                     andStatus:(NSNumber*) status;
 
 
 -(NSDictionary *) convertToData;

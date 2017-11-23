@@ -18,7 +18,7 @@
         self.userType = [data objectForKey:UserType];
         self.longtitude = [data objectForKey:UserLongtitude];
         self.lattitude = [data objectForKey:UserLatitude];
-        
+        self.status = [[data objectForKey:LocationStatus] boolValue];
     }
     return self;
 }
@@ -27,6 +27,7 @@
                    andUserType:(NSString*) userType
                  andLongtitude:(NSString *) longtitude
                    andLatitude:(NSString*) latitude
+                     andStatus:(NSNumber *)status
 {
     self = [super init];
     if (self) {
@@ -34,13 +35,15 @@
         self.userType = userType;
         self.longtitude = longtitude;
         self.lattitude = latitude;
+        self.status = [status boolValue];
     }
     return self;
 }
 
 -(NSDictionary *) convertToData
 {
-    NSDictionary *dic = @{UserId:self.userId,UserType:self.userType,UserLatitude:self.lattitude,UserLongtitude:self.longtitude};
+    NSDictionary *dic = @{UserId:self.userId,UserType:self.userType,UserLatitude:self.lattitude,UserLongtitude:self.longtitude,LocationStatus:[NSNumber numberWithBool:self.status]};
+    
     return dic;
 }
 

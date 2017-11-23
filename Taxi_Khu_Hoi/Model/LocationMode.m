@@ -103,12 +103,28 @@ static LocationMode *_shareClient;
     _location = [locations lastObject];
     [self notifiLocationAndSaveToNextTime];
     
-    FIRUser *user = [FIRAuth auth].currentUser;
-    if (user) {
-        Location *currentLocation = [[Location alloc] initWithUserId:user.uid andUserType:TypeUser andLongtitude:[NSString stringWithFormat:@"%f",_location.coordinate.longitude] andLatitude:[NSString stringWithFormat:@"%f",_location.coordinate.latitude]];
-        [self updateLocationToFirebase:currentLocation];
-    }
     
+    
+    FIRUser *user = [FIRAuth auth].currentUser;
+    FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+    FIRDocumentReference *docRef= [[defaultFirestore collectionWithPath:UserCollectionData] documentWithPath:user.uid];
+    [docRef getDocumentWithCompletion:^(FIRDocumentSnapshot *snapshot, NSError *error) {
+        if (snapshot.exists) {
+            NSLog(@"Document data in location mode: %@", snapshot.data);
+            User *currentUser = [[User alloc] initWithData:snapshot.data];
+            Location *currentLocation = [[Location alloc] initWithUserId:currentUser.userId andUserType:currentUser.userType andLongtitude:[NSString stringWithFormat:@"%f",_location.coordinate.longitude] andLatitude:[NSString stringWithFormat:@"%f",_location.coordinate.latitude] andStatus:[NSNumber numberWithBool:true]];
+        
+            [self updateLocationToFirebase:currentLocation];
+
+            
+        } else {
+            NSLog(@"Document does not exist");
+        }
+    }];
+    
+    
+
+
     [_locationManager stopUpdatingLocation];
     
 }
@@ -175,10 +191,12 @@ static LocationMode *_shareClient;
 
 -(NSString *) getSearchKeyFromLocation:(NSString *) locationAddress
 {
+    NSString *convertStr = [self convertStringToRomaria:locationAddress];
     __block NSString * searchKey;
     [ProvinceWithoutAccented enumerateObjectsUsingBlock:^(NSString * province, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([locationAddress containsString:province]) {
-            searchKey = province;
+        NSString *lowcaseStr = [province lowercaseString];
+        if ([convertStr containsString:lowcaseStr]) {
+            searchKey = lowcaseStr;
         }
     }];
     return searchKey;
@@ -191,6 +209,7 @@ static LocationMode *_shareClient;
     standard = [standard stringByReplacingOccurrencesOfString:@"Đ" withString:@"D"];
     standard = [standard stringByReplacingOccurrencesOfString:@" " withString:@""];
     standard = [standard stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    standard = [standard lowercaseString];
     NSData *decode = [standard dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *ansi = [[NSString alloc] initWithData:decode encoding:NSASCIIStringEncoding];
     return ansi;

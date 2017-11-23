@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Location.h"
+#import "User.h"
 
 
 @interface LocationMode : NSObject <CLLocationManagerDelegate>
@@ -20,7 +22,7 @@
 @property (readonly, nonatomic) CLLocationDegrees longitude;
 @property (readonly, nonatomic) CLLocationDegrees latitude;
 @property (readonly, nonatomic) CLPlacemark *placemark;
-
+@property (strong,nonatomic) User *currentUserProfile;
 
 
 +(LocationMode *) shareInstance;
@@ -28,6 +30,8 @@
 
 -(NSString *) getSearchKeyFromLocation:(NSString *) locationAddress;
 -(NSString *) convertStringToRomaria:(NSString *) originalStr;
+-(void) updateLocationToFirebase:(Location *) currentLocation;
+
 
 
 

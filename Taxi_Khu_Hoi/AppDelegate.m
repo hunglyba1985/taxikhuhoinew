@@ -73,6 +73,21 @@
         MainViewController *mainView = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainView];
         self.window.rootViewController  = nav;
+        
+        FIRUser *user = [FIRAuth auth].currentUser;
+        FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+        FIRDocumentReference *docRef= [[defaultFirestore collectionWithPath:UserCollectionData] documentWithPath:user.uid];
+        [docRef getDocumentWithCompletion:^(FIRDocumentSnapshot *snapshot, NSError *error) {
+            if (snapshot.exists) {
+                NSLog(@"App delegate Document data: %@", snapshot.data);
+                NSDictionary *userProfile = snapshot.data;
+                User *currentUser = [[User alloc] initWithData:userProfile];
+                [LocationMode shareInstance].currentUserProfile = currentUser;
+            } else {
+                NSLog(@"Document does not exist");
+            }
+        }];
+        
     } else {
         // No user is signed in.
         // ...

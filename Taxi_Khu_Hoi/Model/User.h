@@ -19,6 +19,7 @@
 @property(strong, nonatomic) NSString *userType;
 
 
+
 -(instancetype) initWithData:(NSDictionary*) data;
 
 -(instancetype) initWithName:(NSString*) name
