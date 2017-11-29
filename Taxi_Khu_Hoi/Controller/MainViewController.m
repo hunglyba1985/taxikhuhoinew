@@ -356,14 +356,53 @@ didAutocompleteWithPlace:(GMSPlace *)place {
     NSTimeInterval timeStampe = [[NSDate date] timeIntervalSince1970];
     NSString *starTimeStr = [NSString stringWithFormat:@"%f",timeStampe];
     NSLog(@"start time in string is %@",starTimeStr);
+    NSNumber *startTime = [NSNumber numberWithDouble:timeStampe];
     
     NSString *searchKeyDestination = [[LocationMode shareInstance] getSearchKeyFromLocation:destination];
     NSString *currentLocationAddress = [[NSUserDefaults standardUserDefaults] objectForKey:CurrentLocationInfo];
     NSString *searchKeyFrom = [[LocationMode shareInstance] getSearchKeyFromLocation:currentLocationAddress];
     
-    Event *newEvent = [[Event alloc] initWithUserId:user.uid andUserType:@"" destination:destination startTime:starTimeStr price:@"" from:currentLocationAddress note:@"" searchKeyFrom:searchKeyFrom searchKeyDestination:searchKeyDestination];
+    NSLog(@"search key for destination is %@",searchKeyDestination);
+    NSLog(@"search key for from location is %@",searchKeyFrom);
+    
+    [self searchEventAroundWithSimilarDestination:searchKeyDestination andGreateTimeThan:startTime];
+    
+    NSString *userType = [LocationMode shareInstance].currentUserProfile.userType;
+    
+    Event *newEvent = [[Event alloc] initWithUserId:user.uid andUserType:userType destination:destination startTime:startTime price:@"" from:currentLocationAddress note:@"" searchKeyFrom:searchKeyFrom searchKeyDestination:searchKeyDestination];
+    
+    FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+    FIRCollectionReference* db= [defaultFirestore collectionWithPath:EventCollectionData];
+    [[db documentWithPath:starTimeStr] setData:[newEvent convertToData] completion:^(NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error adding document: %@", error);
+        } else {
+            NSLog(@"Document added with ID");
+//            [self dismissViewControllerAnimated:true completion:nil];
+        }
+    }];
     
 }
+
+-(void) searchEventAroundWithSimilarDestination:(NSString *) keyDestination andGreateTimeThan:(NSNumber*) compareTime
+{
+    NSLog(@"start searching");
+    FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+    FIRCollectionReference* db= [defaultFirestore collectionWithPath:EventCollectionData];
+    FIRQuery *query = [db queryWhereField:SearchKeyDestination isEqualTo:keyDestination] ;
+    
+    [query getDocumentsWithCompletion:^(FIRQuerySnapshot * _Nullable snapshot, NSError * _Nullable error) {
+        if (error == nil) {
+//            NSLog(@"get searching data is %@",snapshot.documents);
+            for (FIRDocumentSnapshot *data in snapshot.documents) {
+                NSLog(@"data info %@",data.data);
+            }
+        }
+        
+    }];
+  
+}
+
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController
 didFailAutocompleteWithError:(NSError *)error {

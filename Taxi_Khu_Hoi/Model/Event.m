@@ -27,10 +27,10 @@
     
 }
 
--(instancetype) initWithUserId:(NSString*) userId
+-(instancetype) initWithUserId:(NSNumber*) userId
                    andUserType:(NSString*) userType
                    destination:(NSString *) destination
-                     startTime:(NSString*) startTime
+                     startTime:(NSNumber*) startTime
                          price:(NSString*) price
                           from:(NSString *) from
                           note:(NSString *) note
@@ -54,6 +54,7 @@
 
 
 -(NSDictionary *) convertToData{
+    
     NSDictionary *dic = @{UserId:self.userId,
                           UserType:self.userType,
                           UserDestination:self.destination,

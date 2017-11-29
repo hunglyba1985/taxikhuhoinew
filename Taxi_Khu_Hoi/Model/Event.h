@@ -14,7 +14,7 @@
 @property (strong, nonatomic) NSString *userType;
 @property (strong, nonatomic) NSString *destination;
 @property (strong, nonatomic) NSString *from;
-@property (strong, nonatomic) NSString *startTime;
+@property (strong, nonatomic) NSNumber *startTime;
 @property (strong, nonatomic) NSString *price;
 @property (strong, nonatomic) NSString *note;
 @property (strong, nonatomic) NSString *searchKeyDestination;
@@ -28,7 +28,7 @@
 -(instancetype) initWithUserId:(NSString*) userId
                    andUserType:(NSString*) userType
                    destination:(NSString *) destination
-                     startTime:(NSString*) startTime
+                     startTime:(NSNumber*) startTime
                          price:(NSString*) price
                           from:(NSString*) from
                           note:(NSString*) note

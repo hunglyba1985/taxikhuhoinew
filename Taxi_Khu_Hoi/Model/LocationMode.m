@@ -100,10 +100,9 @@ static LocationMode *_shareClient;
 #pragma mark - CLLocationManager Delegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    NSLog(@"locationManager didUpdateLocations");
     _location = [locations lastObject];
     [self notifiLocationAndSaveToNextTime];
-    
-    
     
     FIRUser *user = [FIRAuth auth].currentUser;
     FIRFirestore *defaultFirestore = [FIRFirestore firestore];
@@ -113,10 +112,8 @@ static LocationMode *_shareClient;
             NSLog(@"Document data in location mode: %@", snapshot.data);
             User *currentUser = [[User alloc] initWithData:snapshot.data];
             Location *currentLocation = [[Location alloc] initWithUserId:currentUser.userId andUserType:currentUser.userType andLongtitude:[NSString stringWithFormat:@"%f",_location.coordinate.longitude] andLatitude:[NSString stringWithFormat:@"%f",_location.coordinate.latitude] andStatus:[NSNumber numberWithBool:true]];
-        
             [self updateLocationToFirebase:currentLocation];
 
-            
         } else {
             NSLog(@"Document does not exist");
         }

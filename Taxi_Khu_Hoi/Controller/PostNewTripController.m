@@ -147,13 +147,36 @@ NSString *const kNote = @"note";
     NSTimeInterval timeStampe = [startTime timeIntervalSince1970];
     NSString *starTimeStr = [NSString stringWithFormat:@"%f",timeStampe];
     NSLog(@"start time in string is %@",starTimeStr);
-    
+    NSNumber *startTimeNumber = [NSNumber numberWithDouble:timeStampe];
+
     NSString *destinationStr = [formValue objectForKey:kDestination];
     NSString *fromLocation = [formValue objectForKey:kFrom];
     
     
-//    Event *newEvent = [[Event alloc] initWithUserId:user.uid andUserType:UserType destination:[formValue objectForKey:kDestination] startTime:starTimeStr price:[formValue objectForKey:kPrice] from:[formValue objectForKey:kFrom] note:[formValue objectForKey:kNote]];
-//    [self postEventToFirebase:newEvent inStartTime:starTimeStr];
+    NSString *price = [formValue objectForKey:kPrice];
+    NSString *note = [formValue objectForKey:kNote];
+    
+    
+    NSString *searchKeyDestination = [[LocationMode shareInstance] getSearchKeyFromLocation:destinationStr];
+    NSString *searchKeyFrom = [[LocationMode shareInstance] getSearchKeyFromLocation:fromLocation];
+    
+    NSString *userType = [LocationMode shareInstance].currentUserProfile.userType;
+
+    Event *newEvent = [[Event alloc] initWithUserId:user.uid andUserType:userType destination:destinationStr startTime:startTimeNumber price:price from:fromLocation note:note searchKeyFrom:searchKeyFrom searchKeyDestination:searchKeyDestination];
+    
+   
+    FIRFirestore *defaultFirestore = [FIRFirestore firestore];
+    FIRCollectionReference* db= [defaultFirestore collectionWithPath:EventCollectionData];
+    [[db documentWithPath:starTimeStr] setData:[newEvent convertToData] completion:^(NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error adding document: %@", error);
+        } else {
+            NSLog(@"Document added with ID");
+            [self dismissViewControllerAnimated:true completion:nil];
+        }
+    }];
+    
+
 }
 
 -(void) closeClick
