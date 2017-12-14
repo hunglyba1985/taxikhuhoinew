@@ -31,6 +31,10 @@
     
 }
 
+-(void) testCommitToGit{
+    NSLog(@"test how to commit to git work");
+}
+
 - (IBAction)userRegister:(id)sender {
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
