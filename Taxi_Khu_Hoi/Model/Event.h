@@ -10,7 +10,7 @@
 
 @interface Event : NSObject
 
-@property (strong, nonatomic) NSString *userId;
+@property (strong, nonatomic) NSNumber *userId;
 @property (strong, nonatomic) NSString *userType;
 @property (strong, nonatomic) NSString *destination;
 @property (strong, nonatomic) NSString *from;
@@ -25,7 +25,7 @@
 
 -(instancetype) initWithData:(NSDictionary*) data;
 
--(instancetype) initWithUserId:(NSString*) userId
+-(instancetype) initWithUserId:(NSNumber*) userId
                    andUserType:(NSString*) userType
                    destination:(NSString *) destination
                      startTime:(NSNumber*) startTime

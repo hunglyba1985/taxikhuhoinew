@@ -92,7 +92,6 @@
     self.mapView.myLocationEnabled = YES;
     [_mapView setCamera:camera];
 
-
 }
 
 #pragma mark - Add Compoments
@@ -346,7 +345,54 @@ didAutocompleteWithPlace:(GMSPlace *)place {
     [self postSearchingTripToFirebaseWithDestination:place.formattedAddress];
     [self setCameraForMap:place.coordinate];
     [self setMarkOnMap:place.coordinate];
+    CLLocation *destinationLocaiton = [[CLLocation alloc] initWithLatitude:place.coordinate.latitude longitude:place.coordinate.longitude];
+    [self fetchPolylineWithOrigin:[LocationMode shareInstance].location destination:destinationLocaiton completionHandler:^(GMSPolyline *polyline) {
+        
+    }];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)fetchPolylineWithOrigin:(CLLocation *)origin destination:(CLLocation *)destination completionHandler:(void (^)(GMSPolyline * polyline))completionHandler
+{
+    NSString *originString = [NSString stringWithFormat:@"%f,%f", origin.coordinate.latitude, origin.coordinate.longitude];
+    NSString *destinationString = [NSString stringWithFormat:@"%f,%f", destination.coordinate.latitude, destination.coordinate.longitude];
+    NSString *directionsAPI = @"https://maps.googleapis.com/maps/api/directions/json?";
+    NSString *directionsUrlString = [NSString stringWithFormat:@"%@&origin=%@&destination=%@&mode=driving", directionsAPI, originString, destinationString];
+    NSURL *directionsUrl = [NSURL URLWithString:directionsUrlString];
+    
+    
+    NSURLSessionDataTask *fetchDirectionsTask = [[NSURLSession sharedSession] dataTaskWithURL:directionsUrl completionHandler:
+                                                 ^(NSData *data, NSURLResponse *response, NSError *error)
+                                                 {
+                                                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                                     if(error)
+                                                     {
+                                                         if(completionHandler)
+                                                             completionHandler(nil);
+                                                         return;
+                                                     }
+                                                     NSLog(@"data get from direction is %@",json);
+                                                     
+                                                     NSArray *routesArray = [json objectForKey:@"routes"];
+                                                     
+                                                     if ([routesArray count] > 0)
+                                                     {
+                                                         // run completionHandler on main thread
+                                                         dispatch_sync(dispatch_get_main_queue(), ^{
+                                                             NSDictionary *routeDict = [routesArray objectAtIndex:0];
+                                                             NSDictionary *routeOverviewPolyline = [routeDict objectForKey:@"overview_polyline"];
+                                                             NSString *points = [routeOverviewPolyline objectForKey:@"points"];
+                                                             GMSPath *path = [GMSPath pathFromEncodedPath:points];
+                                                             GMSPolyline *polyline  = [GMSPolyline polylineWithPath:path];
+                                                             polyline.strokeWidth = 4;
+                                                             polyline.strokeColor = [UIColor blueColor];
+                                                             polyline.map = self.mapView;
+                                                         });
+                                                     }
+
+                                                
+                                                 }];
+    [fetchDirectionsTask resume];
 }
 
 

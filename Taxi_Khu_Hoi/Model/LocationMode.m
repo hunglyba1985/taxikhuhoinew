@@ -106,22 +106,20 @@ static LocationMode *_shareClient;
     
     FIRUser *user = [FIRAuth auth].currentUser;
     FIRFirestore *defaultFirestore = [FIRFirestore firestore];
-    FIRDocumentReference *docRef= [[defaultFirestore collectionWithPath:UserCollectionData] documentWithPath:user.uid];
-    [docRef getDocumentWithCompletion:^(FIRDocumentSnapshot *snapshot, NSError *error) {
-        if (snapshot.exists) {
-            NSLog(@"Document data in location mode: %@", snapshot.data);
-            User *currentUser = [[User alloc] initWithData:snapshot.data];
-            Location *currentLocation = [[Location alloc] initWithUserId:currentUser.userId andUserType:currentUser.userType andLongtitude:[NSString stringWithFormat:@"%f",_location.coordinate.longitude] andLatitude:[NSString stringWithFormat:@"%f",_location.coordinate.latitude] andStatus:[NSNumber numberWithBool:true]];
-            [self updateLocationToFirebase:currentLocation];
-
-        } else {
-            NSLog(@"Document does not exist");
-        }
-    }];
-    
-    
-
-
+    if (user) {
+        FIRDocumentReference *docRef= [[defaultFirestore collectionWithPath:UserCollectionData] documentWithPath:user.uid];
+        [docRef getDocumentWithCompletion:^(FIRDocumentSnapshot *snapshot, NSError *error) {
+            if (snapshot.exists) {
+                NSLog(@"Document data in location mode: %@", snapshot.data);
+                User *currentUser = [[User alloc] initWithData:snapshot.data];
+                Location *currentLocation = [[Location alloc] initWithUserId:currentUser.userId andUserType:currentUser.userType andLongtitude:[NSString stringWithFormat:@"%f",_location.coordinate.longitude] andLatitude:[NSString stringWithFormat:@"%f",_location.coordinate.latitude] andStatus:[NSNumber numberWithBool:true]];
+                [self updateLocationToFirebase:currentLocation];
+                
+            } else {
+                NSLog(@"Document does not exist");
+            }
+        }];
+    }
     [_locationManager stopUpdatingLocation];
     
 }
