@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIView *menuView;
 @property (strong,nonatomic) GMSPlacesClient *currentPlaceInfo;
+@property (strong,nonatomic) GeoFire *geoFire;
 
 @end
 
@@ -43,7 +44,10 @@
     // Do any additional setup after loading the view.
     listMarkers = [NSMutableArray new];
     [self showGoogleMapView];
-    [self getLocationOfAllUsers];
+//    [self getLocationOfAllUsers];
+    
+    FIRDatabaseReference *geofireRef = [[FIRDatabase database] reference];
+    self.geoFire = [[GeoFire alloc] initWithFirebaseRef:geofireRef];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -71,6 +75,9 @@
     [self.view addSubview:self.menuView];
     self.menuView.hidden = true;
     self.currentPlaceInfo = [GMSPlacesClient sharedClient];
+    
+    [self postLocationUsingGeoFire];
+//    [self getLocationByUsingGeoFire];
 }
 
 -(void) addObserverForView
@@ -222,11 +229,29 @@
 #pragma mark - Private Method
 -(void)showPostTripView
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    PostNewTripController *postTrip = [storyboard instantiateViewControllerWithIdentifier:@"PostNewTripController"];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:postTrip];
-    [self presentViewController:nav animated:YES completion:nil];
+    // TODO: TEST SEARCH NEAREST LOCATION AFTER DONE REMOVE IT
+    NSLog(@"show post trip view");
+    //21.010107, 105.793799
+    CLLocation *center = [[CLLocation alloc] initWithLatitude:21.010107 longitude:105.793799];
+    // Query locations at [37.7832889, -122.4056973] with a radius of 600 meters
+    GFCircleQuery *circleQuery = [self.geoFire queryAtLocation:center withRadius:1.0];
     
+    [circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
+        NSLog(@"GFEventTypeKeyEntered %@",key);
+        [self setMarkLocationOnMap:location.coordinate];
+    }];
+    
+    [circleQuery observeEventType:GFEventTypeKeyExited withBlock:^(NSString *key, CLLocation *location) {
+        NSLog(@"GFEventTypeKeyExited %@",key);
+        [self setMarkLocationOnMap:location.coordinate];
+        
+    }];
+    
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    PostNewTripController *postTrip = [storyboard instantiateViewControllerWithIdentifier:@"PostNewTripController"];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:postTrip];
+//    [self presentViewController:nav animated:YES completion:nil];
+//
 }
 
 -(void) showSearchView
@@ -285,6 +310,18 @@
 //        marker.snippet = @"Hello World";
         marker.appearAnimation = kGMSMarkerAnimationPop;
         marker.map = _mapView;
+    [listMarkers addObject:marker];
+}
+
+-(void) setMarkLocationOnMap:(CLLocationCoordinate2D ) coordinate
+{
+    NSLog(@"set mark on map");
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = coordinate;
+    //        marker.snippet = @"Hello World";
+    marker.appearAnimation = kGMSMarkerAnimationPop;
+    marker.icon = [UIImage imageNamed:@"location"];
+    marker.map = _mapView;
     [listMarkers addObject:marker];
 }
 
@@ -467,6 +504,59 @@ didFailAutocompleteWithError:(NSError *)error {
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark - SEARCHING NEAR BY LOCATION USING GEOFIRE
+-(void) postLocationUsingGeoFire{
+    NSLog(@"test post location using Geofire ");
+ 
+    // 21.009807, 105.793798
+    NSArray *arrayLocation = @[
+                               @[@"21.025415",@"105.772068"],
+                               @[@"21.010447",@"105.792553"],
+                               @[@"21.013131",@"105.792725"],
+                               @[@"21.008050",@"105.795632"],
+                               @[@"21.008250",@"105.787178"],
+                               @[@"21.025235",@"105.788852"],
+                               
+                               @[@"21.016840",@"105.780917"],
+                               @[@"21.007064",@"105.781818"],
+                               @[@"21.016117",@"105.805443"],
+                               @[@"21.028975",@"105.801151"],
+                               @[@"20.997446",@"105.804026"],
+
+                               
+                               ];
+    [arrayLocation enumerateObjectsUsingBlock:^(NSArray* location, NSUInteger idx, BOOL * _Nonnull stop) {
+//        NSString *keyLocation = [NSString stringWithFormat:@"test %lu",idx];
+//        [self.geoFire setLocation:[[CLLocation alloc] initWithLatitude:[[location objectAtIndex:0] floatValue] longitude:[[location objectAtIndex:1] floatValue]] forKey:keyLocation withCompletionBlock:^(NSError * _Nullable error) {
+//            if (error != nil) {
+//                NSLog(@"an error occured: %@",error);
+//            }else{
+//                NSLog(@"save location successfully");
+//            }
+//        }];
+        
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[location objectAtIndex:0] floatValue], [[location objectAtIndex:1] floatValue]);
+        [self setMarkOnMap:coordinate];
+        
+    }];
+   
+    
+}
+
+-(void) getLocationByUsingGeoFire{
+    NSLog(@"get location by using GeoFire");
+    [self.geoFire getLocationForKey:@"test post location using Geofire" withCallback:^(CLLocation *location, NSError *error) {
+        if (error != nil) {
+            NSLog(@"An error occurred getting the location for \"firebase-hq\": %@", [error localizedDescription]);
+        } else if (location != nil) {
+            NSLog(@"Location for \"firebase-hq\" is [%f, %f]",
+                  location.coordinate.latitude,
+                  location.coordinate.longitude);
+        } else {
+            NSLog(@"GeoFire does not contain a location for \"firebase-hq\"");
+        }
+    }];
 }
 
 #pragma mark - Navigation

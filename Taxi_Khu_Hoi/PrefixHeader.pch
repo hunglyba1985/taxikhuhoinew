@@ -21,6 +21,8 @@
 #import "XLFormViewController.h"
 #import "UserImageCell.h"
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "GeoFire.h"
+
 
 @import Firebase;
 @import FirebaseAuth;

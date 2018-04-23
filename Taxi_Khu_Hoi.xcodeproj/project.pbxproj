@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041FA52C208D84F20098508F /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FA521208D84F20098508F /* GFBase32Utils.m */; };
+		041FA52D208D84F30098508F /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FA523208D84F20098508F /* GeoFire.m */; };
+		041FA52E208D84F30098508F /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FA524208D84F20098508F /* GFGeoHashQuery.m */; };
+		041FA52F208D84F30098508F /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FA525208D84F20098508F /* GFQuery.m */; };
+		041FA530208D84F30098508F /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FA526208D84F20098508F /* GFGeoHash.m */; };
 		52CD459F1F98F13800B815DC /* UserImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CD459D1F98F13800B815DC /* UserImageCell.m */; };
 		52CD45A01F98F13800B815DC /* UserImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CD459E1F98F13800B815DC /* UserImageCell.xib */; };
 		52CD45A51F9F792800B815DC /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CD45A41F9F792800B815DC /* ProfileViewController.m */; };
@@ -42,6 +47,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041FA51B208D84F20098508F /* GeoFire-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire-Prefix.pch"; sourceTree = "<group>"; };
+		041FA51D208D84F20098508F /* GFBase32Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFBase32Utils.h; sourceTree = "<group>"; };
+		041FA51E208D84F20098508F /* GFGeoHashQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHashQuery.h; sourceTree = "<group>"; };
+		041FA51F208D84F20098508F /* GFGeoHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHash.h; sourceTree = "<group>"; };
+		041FA520208D84F20098508F /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
+		041FA521208D84F20098508F /* GFBase32Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFBase32Utils.m; sourceTree = "<group>"; };
+		041FA522208D84F20098508F /* GeoFire+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire+Private.h"; sourceTree = "<group>"; };
+		041FA523208D84F20098508F /* GeoFire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFire.m; sourceTree = "<group>"; };
+		041FA524208D84F20098508F /* GFGeoHashQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHashQuery.m; sourceTree = "<group>"; };
+		041FA525208D84F20098508F /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
+		041FA526208D84F20098508F /* GFGeoHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHash.m; sourceTree = "<group>"; };
+		041FA528208D84F20098508F /* GFRegionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRegionQuery.h; sourceTree = "<group>"; };
+		041FA529208D84F20098508F /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
+		041FA52A208D84F20098508F /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
+		041FA52B208D84F20098508F /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
 		2E987D8C3263BA38C5014EF0 /* libPods-Taxi_Khu_Hoi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Taxi_Khu_Hoi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52CD459C1F98F13800B815DC /* UserImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserImageCell.h; sourceTree = "<group>"; };
 		52CD459D1F98F13800B815DC /* UserImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserImageCell.m; sourceTree = "<group>"; };
@@ -118,6 +138,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		041FA519208D84D20098508F /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				041FA51A208D84F20098508F /* GeoFire */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		041FA51A208D84F20098508F /* GeoFire */ = {
+			isa = PBXGroup;
+			children = (
+				041FA51B208D84F20098508F /* GeoFire-Prefix.pch */,
+				041FA51C208D84F20098508F /* Implementation */,
+				041FA527208D84F20098508F /* API */,
+			);
+			path = GeoFire;
+			sourceTree = "<group>";
+		};
+		041FA51C208D84F20098508F /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				041FA51D208D84F20098508F /* GFBase32Utils.h */,
+				041FA51E208D84F20098508F /* GFGeoHashQuery.h */,
+				041FA51F208D84F20098508F /* GFGeoHash.h */,
+				041FA520208D84F20098508F /* GFQuery+Private.h */,
+				041FA521208D84F20098508F /* GFBase32Utils.m */,
+				041FA522208D84F20098508F /* GeoFire+Private.h */,
+				041FA523208D84F20098508F /* GeoFire.m */,
+				041FA524208D84F20098508F /* GFGeoHashQuery.m */,
+				041FA525208D84F20098508F /* GFQuery.m */,
+				041FA526208D84F20098508F /* GFGeoHash.m */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		041FA527208D84F20098508F /* API */ = {
+			isa = PBXGroup;
+			children = (
+				041FA528208D84F20098508F /* GFRegionQuery.h */,
+				041FA529208D84F20098508F /* GeoFire.h */,
+				041FA52A208D84F20098508F /* GFQuery.h */,
+				041FA52B208D84F20098508F /* GFCircleQuery.h */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		4176757786BA09CF4B6A25BC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +243,7 @@
 				B2A4E6791F971259008B7596 /* PrefixHeader.pch */,
 				B21A1D3E1F9DA7B000444293 /* GoogleService-Info.plist */,
 				B2A4E6531F95B5FB008B7596 /* main.m */,
+				041FA519208D84D20098508F /* Lib */,
 				B2A4E6751F9702C0008B7596 /* Model */,
 				B2A4E6671F9610A8008B7596 /* CustomView */,
 				B2A4E65D1F95C892008B7596 /* Controller */,
@@ -393,12 +460,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2A4E66D1F961170008B7596 /* ImageCustomCell.m in Sources */,
+				041FA530208D84F30098508F /* GFGeoHash.m in Sources */,
 				B2A4E6491F95B5FB008B7596 /* ViewController.m in Sources */,
 				52CD45A81FA0065900B815DC /* User.m in Sources */,
 				B2A4E65C1F95B6A7008B7596 /* UserRegister.m in Sources */,
 				B2A4E6711F961FB9008B7596 /* MainViewController.m in Sources */,
+				041FA52D208D84F30098508F /* GeoFire.m in Sources */,
 				B2A4E6601F95F727008B7596 /* DriverRegister.m in Sources */,
 				52CD45B11FA006AB00B815DC /* Event.m in Sources */,
+				041FA52E208D84F30098508F /* GFGeoHashQuery.m in Sources */,
 				52CD45AE1FA0069800B815DC /* Location.m in Sources */,
 				B22B81661F99B5340020C27F /* ScheduleViewController.m in Sources */,
 				B2A4E67F1F975A15008B7596 /* PostNewTripController.m in Sources */,
@@ -409,11 +479,13 @@
 				52CD45A51F9F792800B815DC /* ProfileViewController.m in Sources */,
 				B2A4E6741F9702B7008B7596 /* LocationMode.m in Sources */,
 				B22B81691F99B5490020C27F /* HelpViewController.m in Sources */,
+				041FA52C208D84F20098508F /* GFBase32Utils.m in Sources */,
 				52CD459F1F98F13800B815DC /* UserImageCell.m in Sources */,
 				B2A4E6631F95FCAD008B7596 /* VerifyCode.m in Sources */,
 				B2A4E6541F95B5FB008B7596 /* main.m in Sources */,
 				B2A4E6461F95B5FB008B7596 /* AppDelegate.m in Sources */,
 				B22B816C1F99B55A0020C27F /* SettingViewController.m in Sources */,
+				041FA52F208D84F30098508F /* GFQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
